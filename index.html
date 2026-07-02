@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTER EXAM | Beyond NEET & JEE - Explore Premium Career Paths</title>
+  <meta name="description"
+    content="Did not qualify NEET or JEE? Explore high-impact alternative careers like BAMS, BHMS, Veterinary Science, Nursing, Biotech, BCA, and more. Find your perfect career fit.">
+  <link rel="stylesheet" href="css/style.css?v=14">
+</head>
+
+<body>
+
+  <!-- Starry Night Sky Canvas -->
+  <canvas id="stars-canvas"></canvas>
+
+  <!-- Floating Background Blobs -->
+  <div class="bg-gradients">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+    <div class="gradient-blob blob-3"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <!-- Vector Logo with inline gradients -->
+    <a href="#" class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <defs>
+          <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8b5cf6" />
+            <stop offset="100%" stop-color="#06b6d4" />
+          </linearGradient>
+        </defs>
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </svg>
+      AFTER EXAM
+    </a>
+
+    <nav>
+      <a href="index.html#hero" class="nav-link">Home</a>
+      <a href="index.html#streams" class="nav-link">Explore Streams</a>
+      <a href="index.html#compare" class="nav-link">Compare Paths</a>
+      <a href="index.html#faq" class="nav-link">FAQs</a>
+      <a href="community.html" class="nav-link">Community</a>
+      <a href="index.html#streams" class="btn btn-primary">Find Your Path</a>
+    </nav>
+
+    <!-- Mobile menu toggle button -->
+    <button class="menu-toggle" aria-label="Toggle Navigation">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">One exam measured your score. <br><span>It didn't measure your future.</span></h1>
+      <p class="hero-desc">Discover premium, high-paying career alternatives in Health Sciences, Biotechnology, and
+        Computing without standard competitive exam roadblocks.</p>
+
+      <div class="hero-ctas">
+        <a href="explore.html" class="btn btn-usp">
+          Explore Possibilities
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </a>
+        <a href="#streams" class="btn btn-primary">
+          Explore Career Streams
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a href="#compare" class="btn btn-secondary">Compare Paths</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Streams Section -->
+  <section id="streams" class="streams-section">
+
+    <!-- Horizontal Header Block -->
+    <div class="streams-header">
+      <div class="streams-title-area">
+        <span class="section-tag">Career Paths</span>
+        <h2 class="section-title">Explore High-Growth <span>Alternative Fields</span></h2>
+        <p class="section-subtitle">Delve into structured fields mapped out specifically for students who want high
+          professional value without NEET/JEE stress.</p>
+      </div>
+
+      <!-- Capsule Tab Selector aligned to top right -->
+      <div class="domain-tabs">
+        <button class="domain-tab active" data-domain="medical">
+          Medical & Allied
+        </button>
+        <button class="domain-tab" data-domain="biotech">
+          Biotech & Applied
+        </button>
+        <button class="domain-tab" data-domain="others">
+          Others (Computing & Tech)
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards Grid Below Header -->
+    <div class="streams-display">
+
+      <!-- Domain: Medical & Allied -->
+      <div class="domain-group active" id="domain-medical">
+        <div class="stream-block medical-card reveal">
+          <div class="block-header">
+            <span class="block-title">B.V.Sc (Veterinary Science)</span>
+            <button class="block-arrow" aria-label="Explore Veterinary Science">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="block-desc">Practice animal medicine, diagnostics, and surgery. Excellent career paths in wildlife
+            conservation, corporate dairy, pet care clinics, and research.</p>
+        </div>
+
+        <div class="stream-block medical-card reveal reveal-delay-1">
+          <div class="block-header">
+            <span class="block-title">BSc Nursing</span>
+            <button class="block-arrow" aria-label="Explore BSc Nursing">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="block-desc">Join premium clinical healthcare operations. Highest international job placement and
+            fast migration routes to UK/US.</p>
+        </div>
+
+        <div class="stream-block medical-card reveal reveal-delay-2">
+          <div class="block-header">
+            <span class="block-title">BAMS & BHMS</span>
+            <button class="block-arrow" aria-label="Explore BAMS & BHMS">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="block-desc">Practice alternative medicine systems. License to run clinics, consult in government
+            hospitals, and lead herbal pharma.</p>
+        </div>
+      </div>
+
+      <!-- Domain: Biotech & Applied -->
+      <div class="domain-group" id="domain-biotech">
+        <div class="stream-block biotech-card">
+          <div class="block-header">
+            <span class="block-title">B.Tech Biotech</span>
+            <button class="block-arrow" aria-label="Explore B.Tech Biotech">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="block-desc">Design vaccines, therapeutic proteins, and bioreactor pipelines. High-tech labs and
+            biopharma corporations.</p>
+        </div>
+
+        <div class="stream-block biotech-card">
+          <div class="block-header">
+            <span class="block-title">B.Pharm</span>
+            <button class="block-arrow" aria-label="Explore B.Pharm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="block-desc">Master pharmacology and drug chemistry. Work in clinical trials, formulation R&D, patent
+            filings, or run medical enterprises.</p>
+        </div>
+
+        <div class="stream-block biotech-card">
+          <div class="block-header">
+            <span class="block-title">B.Tech Bioinformatics</span>
+            <button class="block-arrow" aria-label="Explore Bioinformatics">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="block-desc">Merge biology with data science. Build software models to parse genomic data and drive
+            computational healthcare.</p>
+        </div>
+      </div>
+
+      <!-- Domain: Others -->
+      <div class="domain-group" id="domain-others">
+        <div class="stream-block others-card">
+          <div class="block-header">
+            <span class="block-title">BCA (Computer Apps)</span>
+            <button class="block-arrow" aria-label="Explore BCA">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="block-desc">Pivot to core software engineering, systems administration, and web development. No math
+            background required in most colleges.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Comparison Matrix Section -->
+  <section id="compare">
+    <span class="section-tag">Comparison Table</span>
+    <h2 class="section-title">Direct Comparison: <span>NEET vs. Alternatives</span></h2>
+    <p class="section-subtitle">Review side-by-side criteria regarding admission pressure, duration, seats, and actual
+      salary benchmarks.</p>
+
+    <div class="comparison-container reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Parameters</th>
+            <th class="col-mbbs">MBBS (NEET Focus)</th>
+            <th>B.V.Sc (Veterinary)</th>
+            <th>BAMS (Ayurveda)</th>
+            <th>B.Tech Biotech</th>
+            <th>BCA (Tech Track)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Competitive Stress</strong></td>
+            <td><span class="badge badge-danger">Extremely High</span></td>
+            <td><span class="badge badge-info">Moderate</span></td>
+            <td><span class="badge badge-info">Moderate</span></td>
+            <td><span class="badge badge-success">Low</span></td>
+            <td><span class="badge badge-success">Minimal</span></td>
+          </tr>
+          <tr>
+            <td><strong>Admission Metric</strong></td>
+            <td>NEET Score (Top 1%)</td>
+            <td>State/NEET (Decent Rank)</td>
+            <td>NEET Score (Moderate Rank)</td>
+            <td>Class 12th Marks / Local Test</td>
+            <td>Class 12th Marks (Direct)</td>
+          </tr>
+          <tr>
+            <td><strong>Duration</strong></td>
+            <td>5.5 Years</td>
+            <td>5.5 Years</td>
+            <td>5.5 Years</td>
+            <td>4 Years</td>
+            <td>3 Years</td>
+          </tr>
+          <tr>
+            <td><strong>Average Starting Salary</strong></td>
+            <td>₹8,00,000 - ₹12,00,000</td>
+            <td>₹5,00,000 - ₹15,00,000</td>
+            <td>₹4,00,000 - ₹10,00,000</td>
+            <td>₹4,50,000 - ₹12,00,000</td>
+            <td>₹3,50,000 - ₹10,00,000</td>
+          </tr>
+          <tr>
+            <td><strong>Private College Fees</strong></td>
+            <td>₹60L - ₹1.2 Crore</td>
+            <td>₹15L - ₹30L</td>
+            <td>₹10L - ₹20L</td>
+            <td>₹6L - ₹12L</td>
+            <td>₹2L - ₹5L</td>
+          </tr>
+          <tr>
+            <td><strong>Global Scope</strong></td>
+            <td>Tough licensing exams</td>
+            <td>Excellent</td>
+            <td>Growing (WHO recognition)</td>
+            <td>Outstanding</td>
+            <td>Limitless</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials">
+    <span class="section-tag">Success Stories</span>
+    <h2 class="section-title">Thriving Beyond <span>Standard Exams</span></h2>
+    <p class="section-subtitle">Read how students built rewarding careers after deciding not to repeat NEET/JEE years.
+    </p>
+
+    <div class="testimonials-grid">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">"After missing NEET by 10 marks, I felt devastated. But choosing B.V.Sc
+          (Veterinary) was the best decision. Today, I run a thriving pet clinic and consult for premium dairy brands.
+          The return on investment is incredible."</p>
+        <div class="testimonial-profile">
+          <div class="avatar-placeholder">DK</div>
+          <div class="profile-info">
+            <h4>Dr. Devika Krishnan</h4>
+            <p>Veterinary Surgeon & Consultant</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card reveal reveal-delay-1">
+        <p class="testimonial-quote">"I wanted to build medical vaccines but couldn't get a government medical seat. I
+          took up B.Tech Biotechnology. Now, I'm working with a major international research firm on mRNA research."</p>
+        <div class="testimonial-profile">
+          <div class="avatar-placeholder">AS</div>
+          <div class="profile-info">
+            <h4>Aniket Sharma</h4>
+            <p>R&D Bio-Engineer, Serum Labs</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card reveal reveal-delay-2">
+        <p class="testimonial-quote">"I sat out two drop years for NEET and regretted it. I switched gears and enrolled
+          in BCA, specializing in Health-Tech products. I now develop clinical software earning twice as much as my MBBS
+          friends."</p>
+        <div class="testimonial-profile">
+          <div class="avatar-placeholder">RM</div>
+          <div class="profile-info">
+            <h4>Rohan Mehta</h4>
+            <p>Senior Product Manager, MedTech Corp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs Section -->
+  <section id="faq">
+    <span class="section-tag">Common Queries</span>
+    <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+    <p class="section-subtitle">Clear doubts about degrees, practice licenses, and eligibility rules.</p>
+
+    <div class="faq-list">
+      <!-- Q1 -->
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Can I prescribe medicines and practice clinic operations with BAMS?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Yes, BAMS graduates are licensed Ayurvedic doctors and are legally permitted to practice clinical medicine,
+          prescribe medication under Ayurvedic systems, and in several states in India, practice integrated general
+          medicine (with specific modern medicine drugs as per government norms).
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="faq-item reveal reveal-delay-1">
+        <button class="faq-question">
+          What is the scope of Veterinary Science (B.V.Sc) compared to MBBS?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Veterinary Science has very low competition compared to human medicine, yet offers massive scope. You can
+          start a private veterinary clinic, work in national wildlife sectors, work for corporate agricultural and food
+          brands, or pursue high-paying research roles internationally.
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="faq-item reveal reveal-delay-2">
+        <button class="faq-question">
+          Are coding careers like BCA suitable for biology students?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Absolutely. Most BCA programs do not require mathematics as a hard prerequisite in high school. Biology
+          students do exceptionally well in Bioinformatics, Healthcare Software Development, and medical data analysis
+          since they understand biological systems.
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="faq-item reveal reveal-delay-3">
+        <button class="faq-question">
+          Is Biotechnology a good alternative if I want a research career?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Biotechnology is one of the most exciting research fields. With a B.Tech or BSc in Biotechnology, you can work
+          on CRISPR gene editing, vaccine design, biological crop protection, and sustainable bio-fuels.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner Section -->
+  <section>
+    <div class="cta-banner">
+      <h2>Stop Repeating. Start Progressing.</h2>
+      <p>Your dream of contributing to science and society doesn't require a single specific seat. Find your alternative
+        career roadmap today.</p>
+      <a href="#streams" class="btn btn-primary">Explore Streams Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <a href="#" class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          AFTER EXAM
+        </a>
+        <p>Empowering young minds to navigate alternative professional career streams after high school competitive exam
+          roadblocks.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+              </path>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h4>Alternative Health</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#streams">B.V.Sc (Veterinary)</a></li>
+          <li><a href="index.html#streams">BAMS (Ayurveda)</a></li>
+          <li><a href="index.html#streams">BHMS (Homeopathy)</a></li>
+          <li><a href="index.html#streams">BSc Nursing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Applied Tech</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#streams">B.Tech Biotechnology</a></li>
+          <li><a href="index.html#streams">BSc Biotechnology</a></li>
+          <li><a href="index.html#streams">BCA (Computer Apps)</a></li>
+          <li><a href="index.html#streams">Bioinformatics</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#streams">Explore Streams</a></li>
+          <li><a href="index.html#compare">Comparison Table</a></li>
+          <li><a href="index.html#faq">Frequently Asked FAQs</a></li>
+          <li><a href="community.html">Student Q&A Community</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 AFTER EXAM. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

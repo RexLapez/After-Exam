@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTER EXAM | Community — Student Q&A</title>
+  <meta name="description" content="Join the AFTER EXAM community. Ask doubts, share experiences, and get answers about alternative career paths like BAMS, Veterinary Science, Biotech, and BCA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=15">
+  <style>
+    /* ─────────────────────────────────────────── */
+    /* Community Page Overrides & Layout           */
+    /* ─────────────────────────────────────────── */
+    :root {
+      --community-bg: #0a0b0f;
+      --card-bg: rgba(255,255,255,0.028);
+      --card-border: rgba(255,255,255,0.07);
+      --accent: #8b5cf6;
+      --accent-cyan: #06b6d4;
+      --text-muted: rgba(255,255,255,0.45);
+    }
+
+    body { background: var(--community-bg); }
+
+    .comm-layout {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 90px 16px 60px;
+    }
+
+    /* ── Page Hero Banner ── */
+    .comm-banner {
+      text-align: center;
+      padding: 0.75rem 0 1.25rem;
+    }
+    .comm-banner h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, #a78bfa 60%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .comm-banner p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ── Scroll Reveal Animation ── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    .scroll-reveal.visible {
+      animation: fadeSlideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* ── Compose Box ── */
+    @keyframes borderGlow {
+      0%   { border-color: rgba(139,92,246,0.35); box-shadow: 0 0 12px rgba(139,92,246,0.08); }
+      50%  { border-color: rgba(6,182,212,0.45);  box-shadow: 0 0 22px rgba(6,182,212,0.12); }
+      100% { border-color: rgba(139,92,246,0.35); box-shadow: 0 0 12px rgba(139,92,246,0.08); }
+    }
+    @keyframes shimmerLine {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .compose-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .compose-box.glow {
+      animation: borderGlow 3s ease-in-out infinite;
+    }
+    .compose-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #8b5cf6, #06b6d4, transparent);
+      background-size: 200% 100%;
+      animation: shimmerLine 3s linear infinite;
+    }
+    .compose-top {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .avatar-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .avatar-circle.guest {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .compose-box.glow .avatar-circle {
+      transform: scale(1.08);
+      box-shadow: 0 0 14px rgba(139,92,246,0.35);
+    }
+    #compose-textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      resize: none;
+      min-height: 72px;
+      outline: none;
+      line-height: 1.55;
+      transition: color 0.3s ease;
+    }
+    #compose-textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+      transition: color 0.3s ease;
+    }
+    .compose-box.glow #compose-textarea::placeholder {
+      color: rgba(196,181,253,0.55);
+    }
+    .compose-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .compose-category {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      padding: 0.45rem 1rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .compose-category option { background: #111; }
+    .post-btn {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.5rem;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+    }
+    .post-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+    }
+
+    /* ── Filter Row ── */
+    .filter-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .chip {
+      padding: 0.42rem 1.1rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chip:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+    .chip.active {
+      background: rgba(139, 92, 246, 0.12);
+      border-color: rgba(139, 92, 246, 0.4);
+      color: #c4b5fd;
+    }
+    .search-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 100px;
+      padding: 0.42rem 1rem;
+      max-width: 260px;
+      margin-left: auto;
+    }
+    .search-wrap input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.82rem;
+      width: 100%;
+    }
+    .search-wrap input::placeholder { color: var(--text-muted); }
+    .search-wrap svg { color: var(--text-muted); flex-shrink: 0; }
+
+    /* ── Post Card ── */
+    .post-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .post-card:hover { border-color: rgba(255,255,255,0.12); }
+    .post-card-header {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .post-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .post-meta {
+      flex: 1;
+    }
+    .post-author {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .mod-badge {
+      background: rgba(6,182,212,0.12);
+      color: #06b6d4;
+      border: 1px solid rgba(6,182,212,0.25);
+      border-radius: 4px;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .post-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+    .cat-pill {
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .cat-medical  { background: rgba(6,182,212,0.08); color:#06b6d4; border:1px solid rgba(6,182,212,0.2); }
+    .cat-biotech  { background: rgba(168,85,247,0.08); color:#a855f7; border:1px solid rgba(168,85,247,0.2); }
+    .cat-computing{ background: rgba(234,179,8,0.08);  color:#eab308; border:1px solid rgba(234,179,8,0.2); }
+
+    .post-body {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Post Actions ── */
+    .post-actions {
+      display: flex;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding-top: 1rem;
+    }
+    .act-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      transition: color 0.2s ease;
+      border-radius: 6px;
+    }
+    .act-btn:hover { color: #fff; }
+    .act-btn.upvoted { color: #06b6d4; }
+    .act-btn.reply-open { color: #a855f7; }
+
+    /* ── Replies Section ── */
+    .replies-section {
+      display: none;
+      padding-top: 1.25rem;
+      margin-top: 0.75rem;
+      border-top: 1px dashed rgba(255,255,255,0.06);
+    }
+    .replies-section.open { display: block; }
+    .reply-item {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .reply-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .reply-content { flex: 1; }
+    .reply-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .reply-author {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #fff;
+    }
+    .reply-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .reply-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.5;
+    }
+
+    /* ── Inline Reply Compose ── */
+    .reply-compose {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 0.75rem;
+      align-items: center;
+    }
+    .reply-compose input {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      padding: 0.6rem 1.1rem;
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .reply-compose input:focus { border-color: rgba(139,92,246,0.45); }
+    .reply-compose input::placeholder { color: var(--text-muted); }
+    .reply-submit {
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.3);
+      color: #c4b5fd;
+      padding: 0.55rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .reply-submit:hover {
+      background: rgba(139,92,246,0.25);
+      color: #fff;
+    }
+
+    /* ── Empty State ── */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+    .empty-state svg { margin-bottom: 1rem; opacity: 0.3; }
+    .empty-state h3 { font-size: 1.1rem; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
+
+    /* ── Auth Modal ── */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(5,5,10,0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .modal-bg.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-card {
+      background: rgba(13,14,20,0.95);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 24px;
+      width: 90%;
+      max-width: 390px;
+      padding: 3rem 2.25rem 2.5rem;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 40px rgba(139,92,246,0.12);
+      position: relative;
+      transform: translateY(20px) scale(0.96);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .modal-bg.show .modal-card {
+      transform: translateY(0) scale(1);
+    }
+    .modal-close-x {
+      position: absolute;
+      top: 18px; right: 18px;
+      background: rgba(255,255,255,0.06);
+      border: none;
+      color: rgba(255,255,255,0.5);
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .modal-close-x:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .modal-head {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .modal-icon {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.1));
+      border: 1px solid rgba(139,92,246,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .modal-head h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .modal-head p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .modal-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .modal-field label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.45);
+    }
+    .modal-field input {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .modal-field input:focus { border-color: rgba(139,92,246,0.5); }
+    .modal-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      border: none;
+      color: #fff;
+      padding: 0.9rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .modal-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .modal-toggle {
+      text-align: center;
+      margin-top: 1.25rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .modal-toggle a {
+      color: #a78bfa;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .modal-toggle a:hover { text-decoration: underline; }
+
+    /* ── Profile Pill in Header ── */
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(139,92,246,0.08);
+      border: 1px solid rgba(139,92,246,0.25);
+      border-radius: 100px;
+      padding: 0.4rem 1rem 0.4rem 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .user-pill:hover { background: rgba(139,92,246,0.15); }
+    .user-pill .pill-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .logout-text { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .comm-banner h1 { font-size: 1.8rem; }
+      .filter-row { gap: 0.4rem; }
+      .search-wrap { max-width: none; margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none;overflow:hidden;">
+    <canvas id="starfield" style="position:absolute;top:0;left:0;width:100%;height:100%;"></canvas>
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+    <div class="gradient-blob blob-3"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </svg>
+      AFTER EXAM
+    </a>
+    <nav>
+      <a href="index.html#hero" class="nav-link">Home</a>
+      <a href="index.html#streams" class="nav-link">Explore Streams</a>
+      <a href="index.html#compare" class="nav-link">Compare Paths</a>
+      <a href="index.html#faq" class="nav-link">FAQs</a>
+      <a href="community.html" class="nav-link" style="color:#a78bfa; font-weight:600;">Community</a>
+      <div id="auth-zone"></div>
+    </nav>
+    <button class="menu-toggle" aria-label="Toggle Navigation">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Main Community Layout -->
+  <div class="comm-layout">
+
+
+    <!-- Compose Post Box -->
+    <div class="compose-box">
+      <div class="compose-top">
+        <div class="avatar-circle guest" id="compose-avatar">?</div>
+        <textarea id="compose-textarea" placeholder="What's your question or doubt? (e.g. Is BCA possible without a math background?)"></textarea>
+      </div>
+      <div class="compose-footer">
+        <select class="compose-category" id="compose-cat">
+          <option value="medical">🩺 Medical &amp; Allied</option>
+          <option value="biotech">🔬 Biotech &amp; Applied</option>
+          <option value="computing">💻 Computing &amp; Tech</option>
+        </select>
+        <button class="post-btn" id="post-btn">Post Question</button>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-row">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="medical">Medical &amp; Allied</button>
+      <button class="chip" data-filter="biotech">Biotech &amp; Applied</button>
+      <button class="chip" data-filter="computing">Computing &amp; Tech</button>
+      <div class="search-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search-input" type="text" placeholder="Search posts...">
+      </div>
+    </div>
+
+    <!-- Feed -->
+    <div id="feed"></div>
+
+  </div>
+
+  <!-- Login / Register Modal -->
+  <div class="modal-bg" id="auth-modal">
+    <div class="modal-card">
+      <button class="modal-close-x" id="modal-close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-head">
+        <div class="modal-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h2 id="modal-title">Join the Community</h2>
+        <p id="modal-sub">Sign in to post questions and reply to discussions.</p>
+      </div>
+      <form id="auth-form">
+        <div class="modal-field">
+          <label>Username</label>
+          <input type="text" id="field-username" placeholder="e.g. Priya_NEET2025" required autocomplete="username">
+        </div>
+        <div class="modal-field">
+          <label>Password</label>
+          <input type="password" id="field-password" placeholder="Enter password..." required autocomplete="current-password">
+        </div>
+        <button type="submit" class="modal-submit" id="auth-btn">Log In</button>
+      </form>
+      <div class="modal-toggle">
+        <span id="toggle-text">Don't have an account?</span>
+        <a id="toggle-link">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <a href="index.html" class="logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          AFTER EXAM
+        </a>
+        <p>Discover premium career alternatives in Health Sciences, Biotechnology, and Computing.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Alternative Health</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#streams">B.V.Sc (Veterinary)</a></li>
+          <li><a href="index.html#streams">BAMS (Ayurveda)</a></li>
+          <li><a href="index.html#streams">BSc Nursing</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Applied Tech</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#streams">B.Tech Biotechnology</a></li>
+          <li><a href="index.html#streams">BCA (Computer Apps)</a></li>
+          <li><a href="index.html#streams">Bioinformatics</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#streams">Explore Streams</a></li>
+          <li><a href="index.html#compare">Compare Paths</a></li>
+          <li><a href="community.html">Community Q&amp;A</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AFTER EXAM. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/community.js"></script>
+</body>
+</html>
