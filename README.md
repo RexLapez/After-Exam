@@ -52,7 +52,7 @@ npm run dev
 npm run build
 ```
 
-The dev server runs at **http://localhost:8080**.
+The dev server runs at **https://afterexam.in/**.
 
 ## 📄 Pages
 
