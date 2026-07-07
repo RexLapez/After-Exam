@@ -230,6 +230,7 @@ async function fetchAndRenderFeed() {
         content,
         community_id,
         created_at,
+        author_id,
         author:profiles!community_posts_author_id_fkey(username, display_name, is_moderator),
         community:communities!community_posts_community_id_fkey(name, slug, color, icon),
         post_comments(
@@ -265,6 +266,7 @@ async function fetchAndRenderFeed() {
         id: p.id,
         title: p.title || 'Untitled Discussion',
         author: authorName,
+        authorId: p.author_id,
         isMod: p.author?.is_moderator || false,
         category: p.community?.slug || 'medical',
         categoryLabel: p.community ? `${p.community.icon} ${p.community.name}` : '🩺 Medical & Allied',
@@ -309,6 +311,7 @@ function renderFeed() {
 
   feed.innerHTML = filtered.map(p => {
     const voted = sessionUser && p.voters && p.voters.includes(sessionUser.id);
+    const isAuthor = sessionUser && p.authorId === sessionUser.id;
     return `
     <div class="post-card" id="card-${p.id}">
       <div class="post-card-header">
@@ -333,6 +336,16 @@ function renderFeed() {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           ${p.replies.length} ${p.replies.length === 1 ? 'Reply' : 'Replies'}
         </button>
+        ${isAuthor ? `
+          <button class="act-btn" data-edit="${p.id}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"/></svg>
+            Edit
+          </button>
+          <button class="act-btn" data-delete="${p.id}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Delete
+          </button>
+        ` : ''}
       </div>
       <div class="replies-section" id="replies-${p.id}">
         <div class="replies-list">
@@ -373,6 +386,12 @@ function renderFeed() {
       const inp = feed.querySelector(`[data-reply-for="${id}"]`);
       handleReply(id, inp);
     });
+  });
+  feed.querySelectorAll('[data-edit]').forEach(btn => {
+    btn.addEventListener('click', () => startInlineEdit(btn.dataset.edit));
+  });
+  feed.querySelectorAll('[data-delete]').forEach(btn => {
+    btn.addEventListener('click', () => handleDeletePost(btn.dataset.delete));
   });
   feed.querySelectorAll('.reply-input').forEach(inp => {
     inp.addEventListener('keydown', (e) => {
@@ -443,6 +462,100 @@ async function handleReply(id, inp) {
     if (sec) sec.classList.add('open');
   } catch (err) {
     alert('Failed to reply: ' + err.message);
+  }
+}
+
+/* ── Edit / Delete Post ── */
+function startInlineEdit(id) {
+  const card = document.getElementById(`card-${id}`);
+  if (!card) return;
+
+  const post = posts.find(x => x.id == id);
+  if (!post) return;
+
+  const titleEl = card.querySelector('.post-title');
+  const bodyEl = card.querySelector('.post-body');
+  const actionsEl = card.querySelector('.post-actions');
+
+  if (card.classList.contains('editing')) return;
+  card.classList.add('editing');
+
+  const titleInp = document.createElement('input');
+  titleInp.type = 'text';
+  titleInp.className = 'edit-title-input';
+  titleInp.value = post.title;
+
+  const bodyText = document.createElement('textarea');
+  bodyText.className = 'edit-body-textarea';
+  bodyText.value = post.text;
+
+  const editActions = document.createElement('div');
+  editActions.className = 'edit-actions';
+
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'edit-save-btn';
+  saveBtn.textContent = 'Save';
+  saveBtn.addEventListener('click', () => handleSaveEdit(id, titleInp.value.trim(), bodyText.value.trim(), saveBtn));
+
+  const cancelBtn = document.createElement('button');
+  cancelBtn.className = 'edit-cancel-btn';
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.addEventListener('click', () => {
+    card.classList.remove('editing');
+    renderFeed();
+  });
+
+  editActions.appendChild(saveBtn);
+  editActions.appendChild(cancelBtn);
+
+  titleEl.style.display = 'none';
+  bodyEl.style.display = 'none';
+  actionsEl.style.display = 'none';
+
+  card.insertBefore(titleInp, actionsEl);
+  card.insertBefore(bodyText, actionsEl);
+  card.insertBefore(editActions, actionsEl);
+}
+
+async function handleSaveEdit(id, newTitle, newContent, saveBtn) {
+  if (!newTitle) { alert('Title cannot be empty'); return; }
+  if (!newContent) { alert('Content cannot be empty'); return; }
+
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Saving...';
+
+  try {
+    const { error } = await supabase
+      .from('community_posts')
+      .update({
+        title: newTitle,
+        content: newContent,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', id);
+
+    if (error) throw error;
+    await fetchAndRenderFeed();
+  } catch (err) {
+    alert('Failed to save changes: ' + err.message);
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Save';
+  }
+}
+
+async function handleDeletePost(id) {
+  if (!confirm('Are you sure you want to delete this discussion? This action cannot be undone.')) return;
+
+  try {
+    const { error } = await supabase
+      .from('community_posts')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+    await fetchAndRenderFeed();
+  } catch (err) {
+    alert('Failed to delete post: ' + err.message);
   }
 }
 
