@@ -1,381 +1,543 @@
 /* ─────────────────────────────────────────────────────────────
-   community.js  –  After Exam Community Q&A Engine
+   community.js  –  After Exam Community Q&A Engine (Supabase Relational version)
    ─────────────────────────────────────────────────────────── */
 
-(function () {
-  'use strict';
+import { supabase } from './supabase.js';
 
-  /* ── Starfield ── */
-  const canvas = document.getElementById('starfield');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array.from({ length: Math.min(Math.max(Math.floor(canvas.width * canvas.height / 9000), 60), 220) }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.4 + 0.2,
-        speed: Math.random() * 0.04 + 0.008,
-        op: Math.random() * 0.8 + 0.15,
-        dir: Math.random() > 0.5 ? 1 : -1
-      }));
-    };
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const s of stars) {
-        s.op += s.speed * s.dir;
-        if (s.op > 1 || s.op < 0.1) s.dir *= -1;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${s.op})`;
-        ctx.fill();
+/* ── Starfield ── */
+const canvas = document.getElementById('starfield');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  const resize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({ length: Math.min(Math.max(Math.floor(canvas.width * canvas.height / 9000), 60), 220) }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.4 + 0.2,
+      speed: Math.random() * 0.04 + 0.008,
+      op: Math.random() * 0.8 + 0.15,
+      dir: Math.random() > 0.5 ? 1 : -1
+    }));
+  };
+  const draw = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+      s.op += s.speed * s.dir;
+      if (s.op > 1 || s.op < 0.1) s.dir *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.op})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  };
+  window.addEventListener('resize', resize);
+  resize(); draw();
+}
+
+/* ── Auth State & Elements ── */
+let sessionUser = null;
+let profile = null;
+let signUpMode = false;
+let posts = [];
+let communitiesList = [];
+let activeFilter = 'all';
+let searchQuery = '';
+
+const authZone = document.getElementById('auth-zone');
+const authModal = document.getElementById('auth-modal');
+const authForm = document.getElementById('auth-form');
+const modalTitle = document.getElementById('modal-title');
+const modalSub = document.getElementById('modal-sub');
+const authBtn = document.getElementById('auth-btn');
+const toggleLink = document.getElementById('toggle-link');
+const toggleText = document.getElementById('toggle-text');
+
+const fieldUser = document.getElementById('field-username');
+const fieldEmail = document.getElementById('field-email');
+const fieldPass = document.getElementById('field-password');
+const composeAvatar = document.getElementById('compose-avatar');
+const usernameFieldGroup = document.getElementById('username-field-group');
+const authErrorMsg = document.getElementById('auth-error-msg');
+
+function renderAuthZone() {
+  if (sessionUser && profile) {
+    const dispName = profile.display_name || profile.username || 'User';
+    authZone.innerHTML = `
+      <div class="user-pill" id="user-pill">
+        <div class="pill-avatar">${dispName.charAt(0).toUpperCase()}</div>
+        <span>${dispName}</span>
+      </div>`;
+    document.getElementById('user-pill').addEventListener('click', async () => {
+      if (confirm('Log out from Community?')) {
+        const { error } = await supabase.auth.signOut();
+        if (error) alert(error.message);
       }
-      requestAnimationFrame(draw);
-    };
-    window.addEventListener('resize', resize);
-    resize(); draw();
+    });
+    composeAvatar.textContent = dispName.charAt(0).toUpperCase();
+    composeAvatar.classList.remove('guest');
+  } else {
+    authZone.innerHTML = `<button class="btn btn-primary" id="login-btn" style="padding:0.45rem 1.2rem;font-size:0.88rem;">Login / Register</button>`;
+    document.getElementById('login-btn').addEventListener('click', () => openModal());
+    composeAvatar.textContent = '?';
+    composeAvatar.classList.add('guest');
+  }
+}
+
+function openModal(isSignUp = false) {
+  signUpMode = isSignUp;
+  authErrorMsg.style.display = 'none';
+  authErrorMsg.textContent = '';
+  modalTitle.textContent = isSignUp ? 'Create Account' : 'Welcome Back';
+  modalSub.textContent = isSignUp
+    ? 'Sign up to post questions and reply to community discussions.'
+    : 'Log in to post questions and reply to discussions.';
+  authBtn.textContent = isSignUp ? 'Create Account' : 'Log In';
+  toggleText.textContent = isSignUp ? 'Already have an account?' : "Don't have an account?";
+  toggleLink.textContent = isSignUp ? 'Log In' : 'Sign Up';
+
+  if (isSignUp) {
+    usernameFieldGroup.style.display = 'flex';
+    fieldUser.required = true;
+  } else {
+    usernameFieldGroup.style.display = 'none';
+    fieldUser.required = false;
   }
 
-  /* ── Auth State ── */
-  let user = sessionStorage.getItem('ae_user') || null;
-
-  const authZone = document.getElementById('auth-zone');
-  const authModal = document.getElementById('auth-modal');
-  const authForm = document.getElementById('auth-form');
-  const modalTitle = document.getElementById('modal-title');
-  const modalSub = document.getElementById('modal-sub');
-  const authBtn = document.getElementById('auth-btn');
-  const toggleLink = document.getElementById('toggle-link');
-  const toggleText = document.getElementById('toggle-text');
-  const fieldUser = document.getElementById('field-username');
-  const fieldPass = document.getElementById('field-password');
-  const composeAvatar = document.getElementById('compose-avatar');
-
-  let signUpMode = false;
-
-  function renderAuthZone() {
-    if (user) {
-      authZone.innerHTML = `
-        <div class="user-pill" id="user-pill">
-          <div class="pill-avatar">${user.charAt(0).toUpperCase()}</div>
-          <span>${user}</span>
-        </div>`;
-      document.getElementById('user-pill').addEventListener('click', () => {
-        if (confirm('Log out from Community?')) { user = null; sessionStorage.removeItem('ae_user'); renderAuthZone(); renderFeed(); }
-      });
-      composeAvatar.textContent = user.charAt(0).toUpperCase();
-      composeAvatar.classList.remove('guest');
-    } else {
-      authZone.innerHTML = `<button class="btn btn-primary" id="login-btn" style="padding:0.45rem 1.2rem;font-size:0.88rem;">Login / Register</button>`;
-      document.getElementById('login-btn').addEventListener('click', () => openModal());
-      composeAvatar.textContent = '?';
-      composeAvatar.classList.add('guest');
-    }
-  }
-
-  function openModal(isSignUp = false) {
-    signUpMode = isSignUp;
-    modalTitle.textContent = isSignUp ? 'Create Account' : 'Welcome Back';
-    modalSub.textContent = isSignUp
-      ? 'Sign up to post questions and reply to community discussions.'
-      : 'Log in to post questions and reply to discussions.';
-    authBtn.textContent = isSignUp ? 'Create Account' : 'Log In';
-    toggleText.textContent = isSignUp ? 'Already have an account?' : "Don't have an account?";
-    toggleLink.textContent = isSignUp ? 'Log In' : 'Sign Up';
-    authModal.classList.add('show');
+  authModal.classList.add('show');
+  if (isSignUp) {
     fieldUser.focus();
+  } else {
+    fieldEmail.focus();
   }
+}
 
-  function closeModal() {
-    authModal.classList.remove('show');
-    authForm.reset();
-  }
+function closeModal() {
+  authModal.classList.remove('show');
+  authForm.reset();
+}
 
-  document.getElementById('modal-close').addEventListener('click', closeModal);
-  authModal.addEventListener('click', (e) => { if (e.target === authModal) closeModal(); });
-  toggleLink.addEventListener('click', () => openModal(!signUpMode));
+document.getElementById('modal-close').addEventListener('click', closeModal);
+authModal.addEventListener('click', (e) => { if (e.target === authModal) closeModal(); });
+toggleLink.addEventListener('click', () => openModal(!signUpMode));
 
-  authForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const u = fieldUser.value.trim();
-    if (!u) return;
-    user = u;
-    sessionStorage.setItem('ae_user', user);
-    closeModal();
-    renderAuthZone();
-    renderFeed();
-  });
+authForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  authErrorMsg.style.display = 'none';
+  authErrorMsg.textContent = '';
 
-  /* ── Seed Data ── */
-  const SEED = [
-    {
-      id: 'p1', author: 'Rahul_PCB', isMod: false, category: 'computing',
-      time: '2 hours ago', avatar: 'R', color: '#8b5cf6',
-      text: 'Is BCA possible without a math background? I completed 12th with PCB biology stream and want to shift to computer applications. Most of my friends say I need maths but is this really true?',
-      upvotes: 14, voters: [],
-      replies: [
-        { author: 'Prof. Arjun Mehta', isMod: true, color: '#06b6d4', time: '1 hr ago', text: 'Great question! In most Indian universities — IP University, Symbiosis, IGNOU, Amity — mathematics is NOT mandatory for BCA admission. Many colleges specifically welcome science students with Biology. A few private colleges may offer bridge courses in basics of computer math. Go for it!' },
-        { author: 'Sneha_BCA2023', isMod: false, color: '#a855f7', time: '45 min ago', text: 'Confirming this from personal experience. I cleared 12th with PCB, joined BCA at a top college in Pune and am now working as a junior developer. The course teaches programming from scratch.' }
-      ]
-    },
-    {
-      id: 'p2', author: 'Aisha_Vet', isMod: false, category: 'medical',
-      time: '5 hours ago', avatar: 'A', color: '#06b6d4',
-      text: 'What is the actual salary scope after completing B.V.Sc (Veterinary Science) in India? I am very passionate about animals but my parents feel it has no scope compared to MBBS. Please help!',
-      upvotes: 22, voters: [],
-      replies: [
-        { author: 'Dr. Kavita Rao (Govt. Vet Officer)', isMod: true, color: '#06b6d4', time: '3 hrs ago', text: 'B.V.Sc has excellent scope! Government Veterinary Officers start at ₹60,000–₹75,000/month with housing allowances. Corporate sector (Amul, Mother Dairy, Godrej Agrovet) offers 8–12 LPA starting packages. Premium pet clinics in metros can get you 7–10 LPA. Wildlife conservation positions are growing too. Don\'t let anyone underestimate this field!' },
-        { author: 'Vikram_VetStudent', isMod: false, color: '#eab308', time: '2 hrs ago', text: 'Also worth mentioning — if you pursue specialization (surgery, oncology), private practice can easily go into 30–50 LPA range. The field is booming with pet ownership rising across India.' }
-      ]
-    },
-    {
-      id: 'p3', author: 'Priya_Bio', isMod: false, category: 'biotech',
-      time: '1 day ago', avatar: 'P', color: '#a855f7',
-      text: 'Confused between B.Tech Biotechnology and B.Pharm. I got a decent NEET score (around 420) but didn\'t qualify for MBBS. Which one has better industry placements and long-term growth?',
-      upvotes: 18, voters: [],
-      replies: [
-        { author: 'Career Advisor (AFTER EXAM Team)', isMod: true, color: '#06b6d4', time: '20 hrs ago', text: 'Both are excellent! Here is a quick breakdown: B.Tech Biotech is ideal if you love lab work, research, and want to enter biopharma giants like Biocon, Dr. Reddy\'s, or startups. Starting salary: 4–8 LPA. B.Pharm is ideal for clinical settings, pharmacy retail chains, or drug approval roles with starting salary of 3.5–6 LPA. Long-term growth wise — B.Tech Biotech edges ahead if you pair it with M.Tech or MBA.' }
-      ]
-    },
-    {
-      id: 'p4', author: 'Arjun_NEET', isMod: false, category: 'medical',
-      time: '2 days ago', avatar: 'A', color: '#f97316',
-      text: 'Failed NEET twice. Parents are devastated. Honestly feeling lost. Should I try NEET a third time or look at BAMS/BHMS as alternatives? Is BAMS taken seriously as a doctor in society?',
-      upvotes: 31, voters: [],
-      replies: [
-        { author: 'Dr. Suresh Nair (BAMS, 15 yrs practice)', isMod: true, color: '#06b6d4', time: '1 day ago', text: 'I understand your frustration. BAMS is a legitimate 5.5-year medical degree that gives you the title of "Doctor" and a license to practice. You can open clinics, work in government hospitals, join pharma companies, or even research Ayurvedic medicine internationally. The social perception is changing rapidly — especially post-COVID where Ayurveda had a massive resurgence. Please do not feel this is a lesser path.' },
-        { author: 'NEETfailed_3rd_Success', isMod: false, color: '#8b5cf6', time: '22 hrs ago', text: 'I was in the exact same place 4 years ago. Took BAMS. Now running a thriving clinic. Zero regrets. Some of my batchmates who cracked NEET are still doing internships while I have been earning for 2 years already.' }
-      ]
-    },
-    {
-      id: 'p5', author: 'Neha_Bioinfo', isMod: false, category: 'biotech',
-      time: '3 days ago', avatar: 'N', color: '#22d3ee',
-      text: 'What exactly does a Bioinformatics graduate do in the industry? I see it listed under both Biotech and Computing. Is coding knowledge a must? Which colleges in India are best for this?',
-      upvotes: 9, voters: [],
-      replies: [
-        { author: 'Career Advisor (AFTER EXAM Team)', isMod: true, color: '#06b6d4', time: '2 days ago', text: 'Bioinformatics sits at the intersection of Biology, Data Science and Computer Science. You analyze genomic sequences, build computational models for drug discovery, work in AI health startups, or join research institutions like CDFD, NCBS, or MNCs like TCS Life Sciences. Coding (Python/R) is essential but you pick it up during the course. Top colleges: BITS Pilani (MSc), NIT Calicut (MSc), TERI University. Starting salary: 4–9 LPA growing fast.' }
-      ]
-    }
-  ];
+  const email = fieldEmail.value.trim();
+  const password = fieldPass.value.trim();
+  const username = fieldUser.value.trim();
 
-  /* ── LocalStorage DB ── */
-  const STORE = 'ae_community_v2';
-  function loadPosts() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORE));
-      return (saved && saved.length) ? saved : JSON.parse(JSON.stringify(SEED));
-    } catch { return JSON.parse(JSON.stringify(SEED)); }
-  }
-  function savePosts(posts) {
-    localStorage.setItem(STORE, JSON.stringify(posts));
-  }
+  authBtn.disabled = true;
+  authBtn.textContent = signUpMode ? 'Creating Account...' : 'Logging In...';
 
-  let posts = loadPosts();
-  let activeFilter = 'all';
-  let searchQuery = '';
-
-  /* ── Render Feed ── */
-  const feed = document.getElementById('feed');
-
-  function catClass(cat) {
-    return { medical: 'cat-medical', biotech: 'cat-biotech', computing: 'cat-computing' }[cat] || 'cat-medical';
-  }
-  function catLabel(cat) {
-    return { medical: '🩺 Medical & Allied', biotech: '🔬 Biotech & Applied', computing: '💻 Computing & Tech' }[cat] || cat;
-  }
-
-  function renderFeed() {
-    const filtered = posts.filter(p => {
-      const matchCat = activeFilter === 'all' || p.category === activeFilter;
-      const matchSearch = !searchQuery || p.text.toLowerCase().includes(searchQuery) || p.author.toLowerCase().includes(searchQuery);
-      return matchCat && matchSearch;
-    });
-
-    if (!filtered.length) {
-      feed.innerHTML = `<div class="empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <h3>No discussions found</h3>
-        <p>Try a different filter or be the first to ask!</p>
-      </div>`;
-      return;
-    }
-
-    feed.innerHTML = filtered.map(p => {
-      const voted = user && p.voters && p.voters.includes(user);
-      return `
-      <div class="post-card" id="card-${p.id}">
-        <div class="post-card-header">
-          <div class="post-avatar" style="background:${p.color}20;border:1.5px solid ${p.color}40;color:${p.color};">${p.avatar}</div>
-          <div class="post-meta">
-            <div class="post-author">
-              ${esc(p.author)}
-              ${p.isMod ? '<span class="mod-badge">Moderator</span>' : ''}
-            </div>
-            <div class="post-time">${p.time}</div>
-          </div>
-          <span class="cat-pill ${catClass(p.category)}">${catLabel(p.category)}</span>
-        </div>
-        <p class="post-body">${esc(p.text)}</p>
-        <div class="post-actions">
-          <button class="act-btn ${voted ? 'upvoted' : ''}" data-upvote="${p.id}">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="${voted ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-            <span class="upvote-count">${p.upvotes}</span>
-          </button>
-          <button class="act-btn" data-toggle="${p.id}">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            ${p.replies.length} ${p.replies.length === 1 ? 'Reply' : 'Replies'}
-          </button>
-        </div>
-        <div class="replies-section" id="replies-${p.id}">
-          <div class="replies-list">
-            ${p.replies.map(r => `
-              <div class="reply-item">
-                <div class="reply-avatar" style="background:${r.color}22;border:1.5px solid ${r.color}40;color:${r.color};">${r.author.charAt(0)}</div>
-                <div class="reply-content">
-                  <div class="reply-meta">
-                    <span class="reply-author">${esc(r.author)}</span>
-                    ${r.isMod ? '<span class="mod-badge">Moderator</span>' : ''}
-                    <span class="reply-time">${r.time}</span>
-                  </div>
-                  <p class="reply-text">${esc(r.text)}</p>
-                </div>
-              </div>`).join('')}
-          </div>
-          <div class="reply-compose">
-            <input type="text" class="reply-input" placeholder="${user ? 'Write a reply…' : 'Login to reply…'}" data-reply-for="${p.id}">
-            <button class="reply-submit" data-reply-btn="${p.id}">Reply</button>
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-
-    // Bind events
-    feed.querySelectorAll('[data-upvote]').forEach(btn => {
-      btn.addEventListener('click', () => handleUpvote(btn.dataset.upvote));
-    });
-    feed.querySelectorAll('[data-toggle]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const sec = document.getElementById(`replies-${btn.dataset.toggle}`);
-        if (sec) { sec.classList.toggle('open'); btn.classList.toggle('reply-open'); }
-      });
-    });
-    feed.querySelectorAll('[data-reply-btn]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.dataset.replyBtn;
-        const inp = feed.querySelector(`[data-reply-for="${id}"]`);
-        handleReply(id, inp);
-      });
-    });
-    feed.querySelectorAll('.reply-input').forEach(inp => {
-      inp.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          handleReply(inp.dataset.replyFor, inp);
+  try {
+    if (signUpMode) {
+      if (!username) throw new Error('Username is required.');
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            username: username
+          }
         }
       });
-      inp.addEventListener('focus', () => {
-        if (!user) { inp.blur(); openModal(); }
+      if (error) throw error;
+      if (data.user && !data.session) {
+        alert('Registration successful! Please check your inbox to confirm your email.');
+        closeModal();
+        return;
+      }
+    } else {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
       });
+      if (error) throw error;
+    }
+    closeModal();
+  } catch (err) {
+    authErrorMsg.textContent = err.message;
+    authErrorMsg.style.display = 'block';
+  } finally {
+    authBtn.disabled = false;
+    authBtn.textContent = signUpMode ? 'Create Account' : 'Log In';
+  }
+});
+
+/* ── Supabase Loader Functions ── */
+function stringToColor(str) {
+  const colors = ['#8b5cf6', '#06b6d4', '#a855f7', '#eab308', '#f97316', '#22d3ee'];
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % colors.length;
+  return colors[index];
+}
+
+function formatTimeAgo(dateStr) {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const seconds = Math.floor((now - date) / 1000);
+
+  if (seconds < 60) return 'Just now';
+
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes} min${minutes === 1 ? '' : 's'} ago`;
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+
+  const days = Math.floor(hours / 24);
+  if (days === 1) return '1 day ago';
+  return `${days} days ago`;
+}
+
+async function fetchCommunities() {
+  try {
+    const { data, error } = await supabase
+      .from('communities')
+      .select('*')
+      .eq('is_active', true);
+
+    if (error) throw error;
+    communitiesList = data || [];
+
+    const composeCat = document.getElementById('compose-cat');
+    if (composeCat) {
+      composeCat.innerHTML = communitiesList.map(c => `
+        <option value="${c.id}">${c.icon} ${c.name}</option>
+      `).join('');
+    }
+  } catch (err) {
+    console.error('Error fetching communities:', err);
+  }
+}
+
+async function fetchAndRenderFeed() {
+  try {
+    const { data, error } = await supabase
+      .from('community_posts')
+      .select(`
+        id,
+        title,
+        content,
+        community_id,
+        created_at,
+        author:profiles!community_posts_author_id_fkey(username, display_name, is_moderator),
+        community:communities!community_posts_community_id_fkey(name, slug, color, icon),
+        post_comments(
+          id,
+          content,
+          created_at,
+          author:profiles!post_comments_author_id_fkey(username, display_name, is_moderator)
+        ),
+        post_reactions(
+          user_id
+        )
+      `)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    posts = (data || []).map(p => {
+      const replies = (p.post_comments || [])
+        .map(r => ({
+          id: r.id,
+          author: r.author?.display_name || r.author?.username || 'Anonymous',
+          isMod: r.author?.is_moderator || false,
+          color: stringToColor(r.author?.username || 'anon'),
+          time: formatTimeAgo(r.created_at),
+          text: r.content
+        }))
+        .sort((a, b) => a.id - b.id); // oldest replies first
+
+      const voters = (p.post_reactions || []).map(v => v.user_id);
+      const authorName = p.author?.display_name || p.author?.username || 'Anonymous';
+
+      return {
+        id: p.id,
+        title: p.title || 'Untitled Discussion',
+        author: authorName,
+        isMod: p.author?.is_moderator || false,
+        category: p.community?.slug || 'medical',
+        categoryLabel: p.community ? `${p.community.icon} ${p.community.name}` : '🩺 Medical & Allied',
+        color: p.community?.color || '#06b6d4',
+        avatar: authorName.charAt(0).toUpperCase(),
+        avatarColor: stringToColor(p.author?.username || 'anon'),
+        text: p.content,
+        upvotes: voters.length,
+        voters: voters,
+        replies: replies
+      };
     });
+
+    renderFeed();
+  } catch (err) {
+    console.error('Error fetching community feed:', err);
+    feed.innerHTML = `<div class="empty-state">
+      <h3 style="color:#ef4444;">Error loading community posts</h3>
+      <p>${err.message}</p>
+    </div>`;
+  }
+}
+
+/* ── Render Feed ── */
+const feed = document.getElementById('feed');
+
+function renderFeed() {
+  const filtered = posts.filter(p => {
+    const matchCat = activeFilter === 'all' || p.category === activeFilter;
+    const matchSearch = !searchQuery || p.text.toLowerCase().includes(searchQuery) || p.title.toLowerCase().includes(searchQuery) || p.author.toLowerCase().includes(searchQuery);
+    return matchCat && matchSearch;
+  });
+
+  if (!filtered.length) {
+    feed.innerHTML = `<div class="empty-state">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <h3>No discussions found</h3>
+      <p>Try a different filter or be the first to ask!</p>
+    </div>`;
+    return;
   }
 
-  /* ── Upvote ── */
-  function handleUpvote(id) {
-    if (!user) { openModal(); return; }
-    const p = posts.find(x => x.id === id);
-    if (!p) return;
-    if (!p.voters) p.voters = [];
-    const idx = p.voters.indexOf(user);
-    if (idx === -1) { p.voters.push(user); p.upvotes++; }
-    else { p.voters.splice(idx, 1); p.upvotes--; }
-    savePosts(posts);
-    renderFeed();
-    // Re-open replies if they were open
-    const sec = document.getElementById(`replies-${id}`);
-    if (sec && sec._wasOpen) sec.classList.add('open');
-  }
+  feed.innerHTML = filtered.map(p => {
+    const voted = sessionUser && p.voters && p.voters.includes(sessionUser.id);
+    return `
+    <div class="post-card" id="card-${p.id}">
+      <div class="post-card-header">
+        <div class="post-avatar" style="background:${p.avatarColor}20;border:1.5px solid ${p.avatarColor}40;color:${p.avatarColor};">${p.avatar}</div>
+        <div class="post-meta">
+          <div class="post-author">
+            ${esc(p.author)}
+            ${p.isMod ? '<span class="mod-badge">Moderator</span>' : ''}
+          </div>
+          <div class="post-time">${p.time}</div>
+        </div>
+        <span class="cat-pill" style="background:${p.color}08;color:${p.color};border:1px solid ${p.color}20;">${p.categoryLabel}</span>
+      </div>
+      <h3 class="post-title" style="font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;color:#fff;margin:0.75rem 0 0.5rem;line-height:1.4;">${esc(p.title)}</h3>
+      <p class="post-body" style="margin-top:0.25rem;">${esc(p.text)}</p>
+      <div class="post-actions">
+        <button class="act-btn ${voted ? 'upvoted' : ''}" data-upvote="${p.id}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="${voted ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          <span class="upvote-count">${p.upvotes}</span>
+        </button>
+        <button class="act-btn" data-toggle="${p.id}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          ${p.replies.length} ${p.replies.length === 1 ? 'Reply' : 'Replies'}
+        </button>
+      </div>
+      <div class="replies-section" id="replies-${p.id}">
+        <div class="replies-list">
+          ${p.replies.map(r => `
+            <div class="reply-item">
+              <div class="reply-avatar" style="background:${r.color}22;border:1.5px solid ${r.color}40;color:${r.color};">${r.author.charAt(0)}</div>
+              <div class="reply-content">
+                <div class="reply-meta">
+                  <span class="reply-author">${esc(r.author)}</span>
+                  ${r.isMod ? '<span class="mod-badge">Moderator</span>' : ''}
+                  <span class="reply-time">${r.time}</span>
+                </div>
+                <p class="reply-text">${esc(r.text)}</p>
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="reply-compose">
+          <input type="text" class="reply-input" placeholder="${sessionUser ? 'Write a reply…' : 'Login to reply…'}" data-reply-for="${p.id}">
+          <button class="reply-submit" data-reply-btn="${p.id}">Reply</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 
-  /* ── Reply ── */
-  function handleReply(id, inp) {
-    if (!user) { openModal(); return; }
-    const text = inp ? inp.value.trim() : '';
-    if (!text) return;
-    const p = posts.find(x => x.id === id);
-    if (!p) return;
-    const colors = ['#8b5cf6', '#06b6d4', '#a855f7', '#eab308', '#f97316', '#22d3ee'];
-    p.replies.push({
-      author: user,
-      isMod: false,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      time: 'Just now',
-      text
+  // Bind events
+  feed.querySelectorAll('[data-upvote]').forEach(btn => {
+    btn.addEventListener('click', () => handleUpvote(btn.dataset.upvote));
+  });
+  feed.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sec = document.getElementById(`replies-${btn.dataset.toggle}`);
+      if (sec) { sec.classList.toggle('open'); btn.classList.toggle('reply-open'); }
     });
-    savePosts(posts);
-    renderFeed();
-    // Reopen this card's replies
+  });
+  feed.querySelectorAll('[data-reply-btn]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.replyBtn;
+      const inp = feed.querySelector(`[data-reply-for="${id}"]`);
+      handleReply(id, inp);
+    });
+  });
+  feed.querySelectorAll('.reply-input').forEach(inp => {
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleReply(inp.dataset.replyFor, inp);
+      }
+    });
+    inp.addEventListener('focus', () => {
+      if (!sessionUser) { inp.blur(); openModal(); }
+    });
+  });
+}
+
+/* ── Upvote / React ── */
+async function handleUpvote(id) {
+  if (!sessionUser) { openModal(); return; }
+  const p = posts.find(x => x.id == id);
+  if (!p) return;
+
+  const voted = p.voters.includes(sessionUser.id);
+
+  try {
+    if (voted) {
+      const { error } = await supabase
+        .from('post_reactions')
+        .delete()
+        .eq('user_id', sessionUser.id)
+        .eq('post_id', id);
+      if (error) throw error;
+    } else {
+      const { error } = await supabase
+        .from('post_reactions')
+        .insert({
+          user_id: sessionUser.id,
+          post_id: id,
+          reaction_type: 'upvote'
+        });
+      if (error) throw error;
+    }
+    await fetchAndRenderFeed();
     const sec = document.getElementById(`replies-${id}`);
     if (sec) sec.classList.add('open');
+  } catch (err) {
+    alert('Action failed: ' + err.message);
   }
+}
 
-  /* ── Post New Question ── */
-  const postBtn = document.getElementById('post-btn');
-  const composeTa = document.getElementById('compose-textarea');
-  const composeCat = document.getElementById('compose-cat');
+/* ── Reply / Comment ── */
+async function handleReply(id, inp) {
+  if (!sessionUser) { openModal(); return; }
+  const text = inp ? inp.value.trim() : '';
+  if (!text) return;
 
-  postBtn.addEventListener('click', () => {
-    if (!user) { openModal(); return; }
-    const text = composeTa.value.trim();
-    if (!text) { composeTa.focus(); return; }
-    const colors = ['#8b5cf6', '#06b6d4', '#a855f7', '#eab308', '#f97316', '#22d3ee'];
-    const newPost = {
-      id: 'p' + Date.now(),
-      author: user,
-      isMod: false,
-      category: composeCat.value,
-      time: 'Just now',
-      avatar: user.charAt(0).toUpperCase(),
-      color: colors[Math.floor(Math.random() * colors.length)],
-      text,
-      upvotes: 0,
-      voters: [],
-      replies: []
-    };
-    posts.unshift(newPost);
-    savePosts(posts);
+  try {
+    const { error } = await supabase
+      .from('post_comments')
+      .insert({
+        post_id: id,
+        author_id: sessionUser.id,
+        content: text
+      });
+
+    if (error) throw error;
+    if (inp) inp.value = '';
+    await fetchAndRenderFeed();
+    const sec = document.getElementById(`replies-${id}`);
+    if (sec) sec.classList.add('open');
+  } catch (err) {
+    alert('Failed to reply: ' + err.message);
+  }
+}
+
+/* ── Post New Question ── */
+const postBtn = document.getElementById('post-btn');
+const composeTitle = document.getElementById('compose-title');
+const composeTa = document.getElementById('compose-textarea');
+const composeCat = document.getElementById('compose-cat');
+
+postBtn.addEventListener('click', async () => {
+  if (!sessionUser) { openModal(); return; }
+  const title = composeTitle.value.trim();
+  const text = composeTa.value.trim();
+  if (!title) { composeTitle.focus(); return; }
+  if (!text) { composeTa.focus(); return; }
+
+  postBtn.disabled = true;
+  postBtn.textContent = 'Posting...';
+
+  try {
+    const { error } = await supabase
+      .from('community_posts')
+      .insert({
+        author_id: sessionUser.id,
+        community_id: parseInt(composeCat.value),
+        title: title,
+        content: text
+      });
+
+    if (error) throw error;
+    composeTitle.value = '';
     composeTa.value = '';
-    renderFeed();
-    // Scroll to top of feed
+    await fetchAndRenderFeed();
     feed.scrollIntoView({ behavior: 'smooth' });
-  });
+  } catch (err) {
+    alert('Failed to post: ' + err.message);
+  } finally {
+    postBtn.disabled = false;
+    postBtn.textContent = 'Post Question';
+  }
+});
 
-  composeTa.addEventListener('focus', () => {
-    if (!user) { composeTa.blur(); openModal(); }
-  });
+composeTitle.addEventListener('focus', () => {
+  if (!sessionUser) { composeTitle.blur(); openModal(); }
+});
 
-  /* ── Search & Filter ── */
-  document.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeFilter = chip.dataset.filter;
-      renderFeed();
-    });
-  });
+composeTa.addEventListener('focus', () => {
+  if (!sessionUser) { composeTa.blur(); openModal(); }
+});
 
-  document.getElementById('search-input').addEventListener('input', (e) => {
-    searchQuery = e.target.value.trim().toLowerCase();
+/* ── Search & Filter ── */
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
     renderFeed();
   });
+});
 
-  /* ── HTML Escape ── */
-  function esc(str) {
-    return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  }
-
-  /* ── Initial Render ── */
-  renderAuthZone();
+document.getElementById('search-input').addEventListener('input', (e) => {
+  searchQuery = e.target.value.trim().toLowerCase();
   renderFeed();
+});
 
-})();
+/* ── HTML Escape ── */
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+/* ── Listen for Auth Changes & Persistent Session ── */
+supabase.auth.onAuthStateChange(async (event, session) => {
+  sessionUser = session?.user || null;
+  if (sessionUser) {
+    // Fetch profile details
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', sessionUser.id)
+      .single();
+
+    if (!error && data) {
+      profile = data;
+    } else {
+      profile = {
+        id: sessionUser.id,
+        username: sessionUser.user_metadata?.username || 'user',
+        display_name: sessionUser.user_metadata?.username || 'User',
+        is_moderator: false
+      };
+    }
+  } else {
+    profile = null;
+  }
+  renderAuthZone();
+  await fetchCommunities();
+  await fetchAndRenderFeed();
+});

@@ -515,9 +515,13 @@
       color: #fff;
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-    .modal-field input:focus { border-color: rgba(139,92,246,0.5); }
+    .modal-field input:focus {
+      border-color: rgba(139, 92, 246, 0.6);
+      transform: scale(1.015);
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.25), inset 0 0 6px rgba(139, 92, 246, 0.1);
+    }
     .modal-submit {
       width: 100%;
       background: linear-gradient(135deg, #8b5cf6, #7c3aed);
@@ -621,15 +625,16 @@
 
     <!-- Compose Post Box -->
     <div class="compose-box">
+      <div style="margin-bottom: 0.75rem; width: 100%;">
+        <input type="text" id="compose-title" placeholder="Title of your question..." required style="width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.06); color: #fff; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; padding: 0.5rem 0 0.5rem 56px; outline: none; box-sizing: border-box;">
+      </div>
       <div class="compose-top">
         <div class="avatar-circle guest" id="compose-avatar">?</div>
         <textarea id="compose-textarea" placeholder="What's your question or doubt? (e.g. Is BCA possible without a math background?)"></textarea>
       </div>
       <div class="compose-footer">
         <select class="compose-category" id="compose-cat">
-          <option value="medical">🩺 Medical &amp; Allied</option>
-          <option value="biotech">🔬 Biotech &amp; Applied</option>
-          <option value="computing">💻 Computing &amp; Tech</option>
+          <!-- Options populated dynamically from Supabase communities -->
         </select>
         <button class="post-btn" id="post-btn">Post Question</button>
       </div>
@@ -666,9 +671,14 @@
         <p id="modal-sub">Sign in to post questions and reply to discussions.</p>
       </div>
       <form id="auth-form">
-        <div class="modal-field">
+        <div id="auth-error-msg" style="color: #ef4444; font-size: 0.82rem; margin-bottom: 1rem; text-align: center; display: none; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.6rem; border-radius: 8px;"></div>
+        <div class="modal-field" id="username-field-group" style="display: none;">
           <label>Username</label>
-          <input type="text" id="field-username" placeholder="e.g. Priya_NEET2025" required autocomplete="username">
+          <input type="text" id="field-username" placeholder="e.g. Priya_NEET2025" autocomplete="username">
+        </div>
+        <div class="modal-field">
+          <label>Email Address</label>
+          <input type="email" id="field-email" placeholder="e.g. priya@example.com" required autocomplete="email">
         </div>
         <div class="modal-field">
           <label>Password</label>
