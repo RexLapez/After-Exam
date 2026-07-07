@@ -576,6 +576,83 @@
     }
     .logout-text { font-size: 0.72rem; color: var(--text-muted); }
 
+    /* ── Inline Edit Styles ── */
+    .edit-title-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1.15rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      padding: 0.5rem 0.75rem;
+      margin: 0.75rem 0 0.5rem;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .edit-title-input:focus {
+      border-color: var(--accent);
+    }
+    .edit-body-textarea {
+      width: 100%;
+      min-height: 120px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .edit-body-textarea:focus {
+      border-color: var(--accent);
+    }
+    .edit-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .edit-save-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: opacity 0.2s ease;
+    }
+    .edit-save-btn:hover {
+      opacity: 0.9;
+    }
+    .edit-save-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .edit-cancel-btn {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.5rem 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.2s ease;
+    }
+    .edit-cancel-btn:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
     /* ── Responsive ── */
     @media (max-width: 640px) {
       .comm-banner h1 { font-size: 1.8rem; }
