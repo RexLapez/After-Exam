@@ -11,8 +11,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: './index.html',
-        community: './community.html',
-        explore: './explore.html'
+        community: './community/index.html',
+        explore: './explore/index.html'
       }
     }
   }
