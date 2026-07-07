@@ -5,6 +5,6 @@ import '../css/explore.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <NeuralPathway onBack={() => { window.location.href = './index.html'; }} />
+    <NeuralPathway onBack={() => { window.location.href = '/'; }} />
   </React.StrictMode>
 );

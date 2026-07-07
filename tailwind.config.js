@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./explore.html",
+    "./explore/index.html",
     "./js/explore.jsx",
     "./components/pathfinder/PathFinder.tsx"
   ],
