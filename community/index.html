@@ -663,12 +663,8 @@
 </head>
 <body>
 
-  <div class="stars-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none;overflow:hidden;">
-    <canvas id="starfield" style="position:absolute;top:0;left:0;width:100%;height:100%;"></canvas>
-    <div class="gradient-blob blob-1"></div>
-    <div class="gradient-blob blob-2"></div>
-    <div class="gradient-blob blob-3"></div>
-  </div>
+  <!-- Custom Galaxy Background -->
+  <div id="galaxy"></div>
 
   <!-- Header -->
   <header>
@@ -818,6 +814,7 @@
     </div>
   </footer>
 
+  <script type="module" src="/js/galaxy.js"></script>
   <script type="module" src="/js/community.js"></script>
 </body>
 </html>

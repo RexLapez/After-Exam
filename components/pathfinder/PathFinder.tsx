@@ -117,142 +117,11 @@ export default function NeuralPathway({ onBack }: NeuralPathwayProps) {
     return () => clearTimeout(t);
   }, [selectedStream, selectedCategory, selectedDegree]);
 
-  const starsCanvasRef = useRef<HTMLCanvasElement>(null);
-
   useEffect(() => {
-    const canvas = starsCanvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let localStars: {
-      x: number;
-      y: number;
-      size: number;
-      opacity: number;
-      twinkleSpeed: number;
-      direction: number;
-    }[] = [];
-    
-    let shootingStar: {
-      x: number;
-      y: number;
-      length: number;
-      speed: number;
-      dx: number;
-      dy: number;
-      opacity: number;
-      fadeSpeed: number;
-    } | null = null;
-
-    let lastShootingStarTime = Date.now();
-    let nextSpawnDelay = Math.random() * 1000 + 4000;
-    let animationFrameId: number;
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initStars();
-    };
-
-    const initStars = () => {
-      localStars = [];
-      const count = Math.floor((canvas.width * canvas.height) / 7000);
-      for (let i = 0; i < count; i++) {
-        localStars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 1.5 + 0.5,
-          opacity: Math.random(),
-          twinkleSpeed: Math.random() * 0.015 + 0.005,
-          direction: Math.random() > 0.5 ? 1 : -1
-        });
-      }
-    };
-
-    const spawnShootingStar = () => {
-      shootingStar = {
-        x: Math.random() * canvas.width * 0.8,
-        y: Math.random() * canvas.height * 0.3,
-        length: Math.random() * 80 + 60,
-        speed: Math.random() * 10 + 15,
-        dx: Math.random() * 3 + 6,
-        dy: Math.random() * 2 + 4,
-        opacity: 1,
-        fadeSpeed: Math.random() * 0.02 + 0.01
-      };
-    };
-
-    const drawStars = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw normal stars
-      localStars.forEach(star => {
-        star.opacity += star.twinkleSpeed * star.direction;
-        if (star.opacity >= 1) {
-          star.opacity = 1;
-          star.direction = -1;
-        } else if (star.opacity <= 0) {
-          star.opacity = 0;
-          star.direction = 1;
-          star.x = Math.random() * canvas.width;
-          star.y = Math.random() * canvas.height;
-        }
-
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Draw shooting star
-      if (shootingStar) {
-        const grad = ctx.createLinearGradient(
-          shootingStar.x,
-          shootingStar.y,
-          shootingStar.x - shootingStar.dx * (shootingStar.length / shootingStar.speed),
-          shootingStar.y - shootingStar.dy * (shootingStar.length / shootingStar.speed)
-        );
-        grad.addColorStop(0, `rgba(255, 255, 255, ${shootingStar.opacity})`);
-        grad.addColorStop(1, "rgba(255, 255, 255, 0)");
-
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(shootingStar.x, shootingStar.y);
-        ctx.lineTo(
-          shootingStar.x - shootingStar.dx * (shootingStar.length / shootingStar.speed),
-          shootingStar.y - shootingStar.dy * (shootingStar.length / shootingStar.speed)
-        );
-        ctx.stroke();
-
-        shootingStar.x += shootingStar.dx;
-        shootingStar.y += shootingStar.dy;
-        shootingStar.opacity -= shootingStar.fadeSpeed;
-
-        if (shootingStar.opacity <= 0 || shootingStar.x > canvas.width || shootingStar.y > canvas.height) {
-          shootingStar = null;
-        }
-      } else {
-        const now = Date.now();
-        if (now - lastShootingStarTime > nextSpawnDelay) {
-          spawnShootingStar();
-          lastShootingStarTime = now;
-          nextSpawnDelay = Math.random() * 1000 + 4000;
-        }
-      }
-
-      animationFrameId = requestAnimationFrame(drawStars);
-    };
-
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-    drawStars();
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", resizeCanvas);
-    };
+    const container = document.getElementById("galaxy");
+    if (container && (window as any).initGalaxyBackground) {
+      (window as any).initGalaxyBackground(container);
+    }
   }, []);
 
   // Clean-Slate Reset Helper
@@ -919,8 +788,8 @@ export default function NeuralPathway({ onBack }: NeuralPathwayProps) {
       
       {/* Night Sky & Stars Backdrop */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Canvas for stars and shooting stars */}
-        <canvas ref={starsCanvasRef} className="absolute inset-0 z-0" />
+        {/* Custom WebGL Galaxy Background */}
+        <div id="galaxy" className="absolute inset-0 z-0" />
 
         {/* Subtle Constellation Grid Overlay */}
         <div 
@@ -1320,8 +1189,9 @@ export default function NeuralPathway({ onBack }: NeuralPathwayProps) {
                 <button
                   onClick={() => setActiveDetails(null)}
                   className="p-1.5 rounded-lg border border-white/5 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                  aria-label="Close details"
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
@@ -1424,6 +1294,18 @@ export default function NeuralPathway({ onBack }: NeuralPathwayProps) {
                 )}
 
               </motion.div>
+
+              {/* Sticky Bottom Actions Panel for mobile/desktop back traversal */}
+              <div className="p-4 border-t border-white/5 bg-[#030308]/95 backdrop-blur-md shrink-0">
+                <button
+                  onClick={() => setActiveDetails(null)}
+                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_20px_rgba(37,99,235,0.25)]"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  Back to Decision Map
+                </button>
+              </div>
+
             </motion.div>
           )}
         </AnimatePresence>
