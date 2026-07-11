@@ -4,38 +4,6 @@
 
 import { supabase } from './supabase.js';
 
-/* ── Starfield ── */
-const canvas = document.getElementById('starfield');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-  const resize = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    stars = Array.from({ length: Math.min(Math.max(Math.floor(canvas.width * canvas.height / 9000), 60), 220) }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.4 + 0.2,
-      speed: Math.random() * 0.04 + 0.008,
-      op: Math.random() * 0.8 + 0.15,
-      dir: Math.random() > 0.5 ? 1 : -1
-    }));
-  };
-  const draw = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (const s of stars) {
-      s.op += s.speed * s.dir;
-      if (s.op > 1 || s.op < 0.1) s.dir *= -1;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${s.op})`;
-      ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  };
-  window.addEventListener('resize', resize);
-  resize(); draw();
-}
 
 /* ── Auth State & Elements ── */
 let sessionUser = null;
@@ -654,3 +622,41 @@ supabase.auth.onAuthStateChange(async (event, session) => {
   await fetchCommunities();
   await fetchAndRenderFeed();
 });
+
+/* ── Header Sticky Scroll & Mobile Menu Toggles ── */
+{
+  const header = document.querySelector('header');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  // Sticky header on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile menu toggle
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      const isExpanded = nav.classList.contains('active');
+      menuToggle.innerHTML = isExpanded
+        ? `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`
+        : `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
+    });
+  }
+
+  // Close mobile menu on link click
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (nav && menuToggle) {
+        nav.classList.remove('active');
+        menuToggle.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
+      }
+    });
+  });
+}
