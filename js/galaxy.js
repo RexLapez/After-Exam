@@ -1,20 +1,37 @@
 window.initGalaxyBackground = function (container) {
 	if (!container) return
 	if (container.querySelector('canvas')) return
-	let opts = {
-		focal: [0.5, 0.5],
-		rotation: [1, 0],
-		starSpeed: 0.5,
-		density: 0.7,
-		hueShift: 140,
-		speed: 1,
-		glowIntensity: 0.18,
-		saturation: 0,
-		repulsionStrength: 1.6,
-		twinkleIntensity: 0.12,
-		rotationSpeed: 0.08,
-		autoCenterRepulsion: 0,
+	function getOpts() {
+		let isMobile = window.innerWidth <= 768;
+		return isMobile ? {
+			focal: [0.5, 0.5],
+			rotation: [1, 0],
+			starSpeed: 0.8,
+			density: 1.2,
+			hueShift: 140,
+			speed: 1.2,
+			glowIntensity: 0.28,
+			saturation: 0,
+			repulsionStrength: 0,
+			twinkleIntensity: 0.35,
+			rotationSpeed: 0.12,
+			autoCenterRepulsion: 0,
+		} : {
+			focal: [0.5, 0.5],
+			rotation: [1, 0],
+			starSpeed: 0.5,
+			density: 0.7,
+			hueShift: 140,
+			speed: 1,
+			glowIntensity: 0.18,
+			saturation: 0,
+			repulsionStrength: 1.6,
+			twinkleIntensity: 0.12,
+			rotationSpeed: 0.08,
+			autoCenterRepulsion: 0,
+		};
 	}
+	let opts = getOpts();
 	let canvas = document.createElement('canvas')
 	canvas.style.width = '100%'
 	canvas.style.height = '100%'
@@ -283,6 +300,9 @@ void main() {
 		canvas.height = h
 		gl.viewport(0, 0, w, h)
 		gl.uniform3fv(uResolutionLoc, new Float32Array([w, h, w / h]))
+		
+		opts = getOpts()
+		setUniformsOnce()
 	}
 	function setUniformsOnce() {
 		gl.uniform2fv(uFocalLoc, new Float32Array(opts.focal))
@@ -293,7 +313,7 @@ void main() {
 		gl.uniform1f(uSpeedLoc, opts.speed)
 		gl.uniform1f(uGlowIntensityLoc, opts.glowIntensity)
 		gl.uniform1f(uSaturationLoc, opts.saturation)
-		gl.uniform1i(uMouseRepulsionLoc, 1)
+		gl.uniform1i(uMouseRepulsionLoc, opts.repulsionStrength > 0 ? 1 : 0)
 		gl.uniform1f(uTwinkleIntensityLoc, opts.twinkleIntensity)
 		gl.uniform1f(uRotationSpeedLoc, opts.rotationSpeed)
 		gl.uniform1f(uRepulsionStrengthLoc, opts.repulsionStrength)
@@ -316,8 +336,21 @@ void main() {
 		window.addEventListener('mousemove', handleMouseMove)
 		document.addEventListener('mouseleave', handleMouseLeave)
 	}
+
+	// Performance optimization: Render loop is only active when the container is visible
+	let isVisible = true
+	let observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				isVisible = entry.isIntersecting
+			})
+		},
+		{ threshold: 0.01 }
+	)
+	observer.observe(container)
 	function loop(t) {
 		requestAnimationFrame(loop)
+		if (!isVisible) return
 		if (t - lastT < 42) return
 		lastT = t
 		{

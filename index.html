@@ -7,13 +7,10 @@
   <title>AFTER EXAM | Beyond NEET & JEE - Explore Premium Career Paths</title>
   <meta name="description"
     content="Did not qualify NEET or JEE? Explore high-impact alternative careers like BAMS, BHMS, Veterinary Science, Nursing, Biotech, BCA, and more. Find your perfect career fit.">
-  <link rel="stylesheet" href="/css/style.css?v=16">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-
-  <!-- Custom Galaxy Background -->
-  <div id="galaxy"></div>
 
   <!-- Header -->
   <header>
@@ -35,7 +32,6 @@
 
     <nav>
       <a href="/#hero" class="nav-link">Home</a>
-      <a href="/#streams" class="nav-link">Explore Streams</a>
       <a href="/#compare" class="nav-link">Compare Paths</a>
       <a href="/#faq" class="nav-link">FAQs</a>
       <a href="/community" class="nav-link">Community</a>
@@ -54,10 +50,13 @@
 
   <!-- Hero Section -->
   <section id="hero" class="hero">
+    <!-- Custom Galaxy Background -->
+    <div id="galaxy"></div>
     <div class="hero-content">
       <h1 class="hero-title">
         <span class="hero-line1">One exam measured your score.</span>
-        <span class="hero-line2">It didn't measure your&nbsp;<span class="hero-word-slot" id="word-slot"><span id="cycling-word" class="hero-cycling-word"></span></span></span>
+        <span class="hero-line2">It didn't measure your&nbsp;<span class="hero-word-slot" id="word-slot"><span
+              id="cycling-word" class="hero-cycling-word"></span></span></span>
       </h1>
       <p class="hero-desc">Discover premium, high-paying career alternatives in Health Sciences, Biotechnology, and
         Computing without standard competitive exam roadblocks.</p>
@@ -74,137 +73,197 @@
     </div>
   </section>
 
-  <!-- Streams Section -->
-  <section id="streams" class="streams-section">
 
-    <!-- Horizontal Header Block -->
-    <div class="streams-header">
-      <div class="streams-title-area">
-        <span class="section-tag">Career Paths</span>
-        <h2 class="section-title">Explore High-Growth <span>Alternative Fields</span></h2>
-        <p class="section-subtitle">Delve into structured fields mapped out specifically for students who want high
-          professional value without NEET/JEE stress.</p>
+  <!-- Student Journey Section -->
+  <section id="journey" class="journey-section">
+
+    <!-- Sticky viewport-height panel that stays fixed while outer section scrolls -->
+    <div id="journey-sticky" class="journey-sticky">
+
+      <!-- Section heading -->
+      <div class="journey-header">
+        <span class="section-tag">Your Roadmap</span>
+        <h2 class="section-title">From Lost to <span>Career Clarity</span></h2>
+        <p class="section-subtitle">Scroll to walk through every step AfterExam guides you through.</p>
       </div>
 
-      <!-- Capsule Tab Selector aligned to top right -->
-      <div class="domain-tabs">
-        <button class="domain-tab active" data-domain="medical">
-          Medical & Allied
-        </button>
-        <button class="domain-tab" data-domain="biotech">
-          Biotech & Applied
-        </button>
-        <button class="domain-tab" data-domain="others">
-          Others (Computing & Tech)
-        </button>
-      </div>
-    </div>
+      <!-- Timeline canvas -->
+      <div class="journey-canvas" aria-hidden="true">
 
-    <!-- Cards Grid Below Header -->
-    <div class="streams-display">
-
-      <!-- Domain: Medical & Allied -->
-      <div class="domain-group active" id="domain-medical">
-        <div class="stream-block medical-card reveal">
-          <div class="block-header">
-            <span class="block-title">B.V.Sc (Veterinary Science)</span>
-            <button class="block-arrow" aria-label="Explore Veterinary Science">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
+        <!-- Milestone labels (above path) -->
+        <div class="journey-labels">
+          <div class="journey-label" data-index="0">
+            <span class="journey-label-icon">😞</span>
+            <span>Feeling Lost</span>
           </div>
-          <p class="block-desc">Practice animal medicine, diagnostics, and surgery. Excellent career paths in wildlife
-            conservation, corporate dairy, pet care clinics, and research.</p>
+          <div class="journey-label" data-index="1">
+            <span class="journey-label-icon">🔍</span>
+            <span>Explore</span>
+          </div>
+          <div class="journey-label" data-index="2">
+            <span class="journey-label-icon">⚖️</span>
+            <span>Compare Courses</span>
+          </div>
+          <div class="journey-label" data-index="3">
+            <span class="journey-label-icon">🏫</span>
+            <span>Compare Colleges</span>
+          </div>
+          <div class="journey-label" data-index="4">
+            <span class="journey-label-icon">🏆</span>
+            <span>Your Career</span>
+          </div>
         </div>
 
-        <div class="stream-block medical-card reveal reveal-delay-1">
-          <div class="block-header">
-            <span class="block-title">BSc Nursing</span>
-            <button class="block-arrow" aria-label="Explore BSc Nursing">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-          <p class="block-desc">Join premium clinical healthcare operations. Highest international job placement and
-            fast migration routes to UK/US.</p>
+        <!-- SVG path layer -->
+        <div class="journey-svg-wrap">
+          <svg id="journey-svg" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMid meet" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- dim track -->
+            <path id="journey-track"
+              d="M 60 60 C 100 20, 180 100, 300 60 C 420 20, 480 100, 600 60 C 720 20, 780 100, 900 60 C 1020 20, 1080 100, 1140 60"
+              stroke="rgba(139,92,246,0.15)" stroke-width="3" stroke-linecap="round" fill="none" />
+            <!-- animated draw path (purple→cyan gradient) -->
+            <path id="journey-path"
+              d="M 60 60 C 100 20, 180 100, 300 60 C 420 20, 480 100, 600 60 C 720 20, 780 100, 900 60 C 1020 20, 1080 100, 1140 60"
+              stroke="url(#journey-grad)" stroke-width="3" stroke-linecap="round" fill="none" />
+            <!-- bright glow trail -->
+            <path id="journey-glow-path"
+              d="M 60 60 C 100 20, 180 100, 300 60 C 420 20, 480 100, 600 60 C 720 20, 780 100, 900 60 C 1020 20, 1080 100, 1140 60"
+              stroke="url(#journey-glow-grad)" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.4" />
+
+            <defs>
+              <linearGradient id="journey-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#8b5cf6" />
+                <stop offset="100%" stop-color="#06b6d4" />
+              </linearGradient>
+              <linearGradient id="journey-glow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#c084fc" />
+                <stop offset="100%" stop-color="#67e8f9" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
 
-        <div class="stream-block medical-card reveal reveal-delay-2">
-          <div class="block-header">
-            <span class="block-title">BAMS & BHMS</span>
-            <button class="block-arrow" aria-label="Explore BAMS & BHMS">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-          <p class="block-desc">Practice alternative medicine systems. License to run clinics, consult in government
-            hospitals, and lead herbal pharma.</p>
-        </div>
-      </div>
+        <!-- Milestone cards (below path) -->
+        <div class="journey-cards">
 
-      <!-- Domain: Biotech & Applied -->
-      <div class="domain-group" id="domain-biotech">
-        <div class="stream-block biotech-card">
-          <div class="block-header">
-            <span class="block-title">B.Tech Biotech</span>
-            <button class="block-arrow" aria-label="Explore B.Tech Biotech">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-          <p class="block-desc">Design vaccines, therapeutic proteins, and bioreactor pipelines. High-tech labs and
-            biopharma corporations.</p>
-        </div>
+          <a href="/#hero" class="journey-card" data-index="0">
+            <div class="journey-card-inner">
+              <div class="jcard-preview lost-preview">
+                <div class="jcard-preview-row">
+                  <span class="jpreview-dot red"></span>
+                  <span class="jpreview-line" style="width:60%"></span>
+                </div>
+                <div class="jcard-preview-row">
+                  <span class="jpreview-dot orange"></span>
+                  <span class="jpreview-line" style="width:80%"></span>
+                </div>
+                <div class="jcard-preview-row">
+                  <span class="jpreview-dot yellow"></span>
+                  <span class="jpreview-line" style="width:45%"></span>
+                </div>
+              </div>
+              <div class="jcard-body">
+                <p class="jcard-step">Step 1</p>
+                <h3 class="jcard-title">Feeling Lost</h3>
+                <p class="jcard-desc">Results are out. You don't know what comes next. You're not alone.</p>
+              </div>
+            </div>
+          </a>
 
-        <div class="stream-block biotech-card">
-          <div class="block-header">
-            <span class="block-title">B.Pharm</span>
-            <button class="block-arrow" aria-label="Explore B.Pharm">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-          <p class="block-desc">Master pharmacology and drug chemistry. Work in clinical trials, formulation R&D, patent
-            filings, or run medical enterprises.</p>
-        </div>
+          <a href="/explore" class="journey-card" data-index="1">
+            <div class="journey-card-inner">
+              <div class="jcard-preview explore-preview">
+                <div class="jpreview-tag">PCB After 12</div>
+                <div class="jpreview-branch">
+                  <span class="jpreview-pill violet">Medical</span>
+                  <span class="jpreview-pill cyan">Biotech</span>
+                  <span class="jpreview-pill indigo">Tech</span>
+                </div>
+              </div>
+              <div class="jcard-body">
+                <p class="jcard-step">Step 2</p>
+                <h3 class="jcard-title">Explore Possibilities</h3>
+                <p class="jcard-desc">Browse every career path available after PCB — no NEET required.</p>
+              </div>
+            </div>
+          </a>
 
-        <div class="stream-block biotech-card">
-          <div class="block-header">
-            <span class="block-title">B.Tech Bioinformatics</span>
-            <button class="block-arrow" aria-label="Explore Bioinformatics">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-          <p class="block-desc">Merge biology with data science. Build software models to parse genomic data and drive
-            computational healthcare.</p>
-        </div>
-      </div>
+          <a href="/#compare" class="journey-card" data-index="2">
+            <div class="journey-card-inner">
+              <div class="jcard-preview compare-preview">
+                <div class="jpreview-row-compare">
+                  <span class="jpreview-label">Duration</span>
+                  <span class="jpreview-bar" style="width:60%"></span>
+                </div>
+                <div class="jpreview-row-compare">
+                  <span class="jpreview-label">Salary</span>
+                  <span class="jpreview-bar" style="width:85%"></span>
+                </div>
+                <div class="jpreview-row-compare">
+                  <span class="jpreview-label">Stress</span>
+                  <span class="jpreview-bar" style="width:30%"></span>
+                </div>
+              </div>
+              <div class="jcard-body">
+                <p class="jcard-step">Step 3</p>
+                <h3 class="jcard-title">Compare Courses</h3>
+                <p class="jcard-desc">Side-by-side metrics — duration, salary ceiling, admission pressure.</p>
+              </div>
+            </div>
+          </a>
 
-      <!-- Domain: Others -->
-      <div class="domain-group" id="domain-others">
-        <div class="stream-block others-card">
-          <div class="block-header">
-            <span class="block-title">BCA (Computer Apps)</span>
-            <button class="block-arrow" aria-label="Explore BCA">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-          <p class="block-desc">Pivot to core software engineering, systems administration, and web development. No math
-            background required in most colleges.</p>
-        </div>
-      </div>
+          <a href="/#compare" class="journey-card" data-index="3">
+            <div class="journey-card-inner">
+              <div class="jcard-preview college-preview">
+                <div class="jpreview-college-row">
+                  <span class="jpreview-rank">#1</span>
+                  <span class="jpreview-college-name">ABC</span>
+                  <span class="jpreview-badge">Gov</span>
+                </div>
+                <div class="jpreview-college-row">
+                  <span class="jpreview-rank">#2</span>
+                  <span class="jpreview-college-name">XYZ</span>
+                  <span class="jpreview-badge">Gov</span>
+                </div>
+                <div class="jpreview-college-row">
+                  <span class="jpreview-rank">#3</span>
+                  <span class="jpreview-college-name">PQR</span>
+                  <span class="jpreview-badge private">Pvt</span>
+                </div>
+              </div>
+              <div class="jcard-body">
+                <p class="jcard-step">Step 4</p>
+                <h3 class="jcard-title">Compare Colleges</h3>
+                <p class="jcard-desc">Rank, fees, placement records — everything to make the right choice.</p>
+              </div>
+            </div>
+          </a>
 
-    </div>
-  </section>
+          <a href="/community" class="journey-card" data-index="4">
+            <div class="journey-card-inner">
+              <div class="jcard-preview career-preview">
+                <div class="jpreview-career-icon">🎉</div>
+                <div class="jpreview-career-text">
+                  <div class="jpreview-career-title">B.Tech Biotech</div>
+                  <div class="jpreview-career-sub">Class of 2028</div>
+                </div>
+              </div>
+              <div class="jcard-body">
+                <p class="jcard-step">Step 5</p>
+                <h3 class="jcard-title">Build Your Career</h3>
+                <p class="jcard-desc">Enrolled. Confident. Join the AfterExam community.</p>
+              </div>
+            </div>
+          </a>
+
+        </div><!-- /.journey-cards -->
+      </div><!-- /.journey-canvas -->
+    </div><!-- /#journey-sticky -->
+  </section><!-- /#journey -->
+
+
+
 
   <!-- Comparison Matrix Section -->
   <section id="compare">
@@ -487,6 +546,11 @@
     </div>
   </footer>
 
+  <!-- GSAP for journey animation -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+  <script type="module" src="/js/journey.js"></script>
+
   <script type="module" src="/js/galaxy.js"></script>
   <script type="module" src="/js/main.js"></script>
   <script type="module">
@@ -495,9 +559,9 @@
     const slotEl = document.getElementById('word-slot');
     if (wordEl && slotEl) {
       initWordCycler(wordEl, slotEl, {
-        words:   ['future', 'potential', 'curiosity', 'creativity', 'resilience', 'ambition', 'worth'],
-        holdMs:  2800,
-        exitMs:  350,
+        words: ['future', 'potential', 'curiosity', 'creativity', 'resilience', 'ambition', 'worth'],
+        holdMs: 2800,
+        exitMs: 350,
         enterMs: 450,
       });
     }
