@@ -228,6 +228,7 @@ nav {
   0% {
     box-shadow: 0 0 15px rgba(167, 139, 250, 0.4), 0 0 25px rgba(6, 182, 212, 0.15);
   }
+
   100% {
     box-shadow: 0 0 25px rgba(167, 139, 250, 0.6), 0 0 45px rgba(6, 182, 212, 0.3);
   }
@@ -297,16 +298,48 @@ section {
   margin-bottom: 3rem;
 }
 
-/* Hero Section */
+/* Hero Section — full-width, starts below the fixed header */
 .hero {
-  min-height: 100vh;
+  /* Break out of the generic 'section' max-width constraint */
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  min-height: calc(100vh - 88px);
+  margin-top: 88px;
+  /* push the section below the fixed header (~88px tall) */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-top: 10rem;
+  padding-top: 4rem;
   padding-bottom: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(to bottom, transparent, var(--bg-color));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Galaxy canvas fills the full hero area */
+#galaxy {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .hero-content {
@@ -315,6 +348,8 @@ section {
   align-items: center;
   z-index: 10;
   max-width: 800px;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .hero-badge {
@@ -399,41 +434,43 @@ section {
 /* ── Cycling word — theme gradient + blur-fade transitions ──────────────── */
 .hero-cycling-word {
   display: inline-block;
-  background: var(--primary-glow); /* linear-gradient(135deg, #8b5cf6, #06b6d4) */
+  background: var(--primary-glow);
+  /* linear-gradient(135deg, #8b5cf6, #06b6d4) */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
   /* Transition applies to all three properties simultaneously */
   transition:
-    opacity    var(--exit-ms, 350ms) ease,
-    transform  var(--exit-ms, 350ms) ease,
-    filter     var(--exit-ms, 350ms) ease;
+    opacity var(--exit-ms, 350ms) ease,
+    transform var(--exit-ms, 350ms) ease,
+    filter var(--exit-ms, 350ms) ease;
   will-change: opacity, transform, filter;
 }
 
 /* Fully visible — resting state */
 .hero-cycling-word[data-state="visible"] {
-  opacity:   1;
+  opacity: 1;
   transform: translateY(0px);
-  filter:    blur(0px);
+  filter: blur(0px);
   transition-duration: var(--enter-ms, 450ms);
 }
 
 /* Exiting — lifts up and blurs away */
 .hero-cycling-word[data-state="exit"] {
-  opacity:   0;
+  opacity: 0;
   transform: translateY(-14px);
-  filter:    blur(6px);
+  filter: blur(6px);
   transition-duration: var(--exit-ms, 350ms);
 }
 
 /* Entering — arrives from below (instant, then transitions to visible) */
 .hero-cycling-word[data-state="enter"] {
-  opacity:   0;
+  opacity: 0;
   transform: translateY(14px);
-  filter:    blur(6px);
-  transition: none; /* snap to entry position without animation */
+  filter: blur(6px);
+  transition: none;
+  /* snap to entry position without animation */
 }
 
 
@@ -479,14 +516,15 @@ section {
 
 /* Custom Galaxy Background */
 #galaxy {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -2;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
   pointer-events: none;
   background: radial-gradient(circle at center, #0f1016 0%, #050508 100%);
+  overflow: hidden;
 }
 
 #galaxy canvas {
@@ -738,18 +776,778 @@ section {
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
-  flex-grow: 1;
 }
+/* ═══════════════════════════════════════════════════════
+   Student Journey — scroll-driven vertical spotlight roadmap
+   ═══════════════════════════════════════════════════════ */
 
-.result-cta {
+.journey-spotlight {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   width: 100%;
-  padding: 0.65rem;
-  font-size: 0.85rem;
+  padding: 8rem 2rem;
+  gap: 160px;
+  background: var(--bg-color);
+  z-index: 10;
 }
 
-.restart-container {
+.journey-intro {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.journey-intro .section-tag {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--primary-color);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.journey-intro .section-title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.journey-intro .section-title span {
+  background: var(--primary-glow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.journey-intro .section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.jrow {
+  display: flex;
+  gap: 64px;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  z-index: 2;
+  position: relative;
+}
+
+.jrow-center {
+  justify-content: center;
+}
+
+.jrow-center .jcard {
+  width: 100%;
+  max-width: 580px;
+}
+
+.jrow-split {
+  justify-content: space-between;
+}
+
+.jcol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.jcol-visual {
+  align-items: center;
+  justify-content: center;
+}
+
+.jcard {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.jcard:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+  transform: translateY(-4px);
+}
+
+.jcard-preview {
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  min-height: 90px;
+}
+
+.jcard-body {
+  padding: 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.jcard-step {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: var(--font-display);
+}
+
+.jcard-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  font-family: var(--font-display);
+}
+
+.jcard-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.jvisual {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 260px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.01);
+}
+
+.jvisual-tree {
+  width: 100%;
+}
+
+.jvtree-root {
+  padding: 0.75rem 1.5rem;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: #c084fc;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1);
+}
+
+.jvtree-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.jvtree-branch {
+  padding: 0.65rem 1.2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.jvtree-branch.violet {
+  color: #c084fc;
+  border-color: rgba(139, 92, 246, 0.25);
+}
+
+.jvtree-branch.cyan {
+  color: #67e8f9;
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+.jvtree-branch.indigo {
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.jvisual-bars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jvbar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.jvbar-label {
+  width: 70px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.jvbar-track {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.jvbar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.jvisual-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.jvtable-header, .jvtable-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 0.65rem 1rem;
+  font-size: 0.8rem;
+  align-items: center;
+  gap: 8px;
+}
+
+.jvtable-header {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+}
+
+.jvtable-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  font-weight: 500;
+  text-align: left;
+}
+
+.jvtable-row:last-child {
+  border-bottom: none;
+}
+
+.jvtable-chip {
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+  justify-self: start;
+}
+
+.jvtable-chip.gov {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+
+.jvtable-chip.pvt {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Student Journey — horizontal scroll-driven sticky timeline
+   ═══════════════════════════════════════════════════════ */
+
+/* Outer scroll container - tall enough to give 5 milestone activations room */
+.journey-section {
+  position: relative;
+  height: 500vh;
+  /* scrollable height - sticky inner stays 100vh */
+  width: 100%;
+  background: var(--bg-color);
+}
+
+/* Sticky inner panel - pinned by GSAP, always 100vh */
+.journey-sticky {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 4.5rem 0 2rem 0;
+  /* subtle radial glow behind the timeline */
+  background: radial-gradient(ellipse 80% 60% at 50% 60%, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+}
+
+/* Section heading block */
+.journey-header {
+  text-align: center;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+
+.journey-header .section-title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  margin-bottom: 0.5rem;
+}
+
+.journey-header .section-subtitle {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* Timeline canvas - labels + SVG + cards stacked vertically */
+.journey-canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  gap: 0;
+}
+
+/* Labels row (above path) */
+.journey-labels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  padding: 0 2%;
+  /* align with SVG node positions */
+}
+
+.journey-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.4s ease;
+  text-align: center;
+}
+
+.journey-label-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Label becomes visible when node is active */
+.journey-label.active-label,
+.journey-node.active~.journey-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* SVG path wrapper */
+.journey-svg-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.journey-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Node dots - initially dim */
+.journey-node {
+  fill: rgba(139, 92, 246, 0.25);
+  stroke: rgba(139, 92, 246, 0.5);
+  stroke-width: 1.5;
+  transition: fill 0.4s ease, r 0.4s ease, filter 0.4s ease;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.journey-node.active {
+  fill: #a78bfa;
+  stroke: #c084fc;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px #8b5cf6) drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
+  animation: node-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    r: 7;
+    opacity: 1;
+  }
+  50% {
+    r: 9;
+    opacity: 0.8;
+  }
+}
+
+/* Glowing travel particle */
+#journey-particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e9d5ff 0%, #8b5cf6 50%, transparent 100%);
+  box-shadow: 0 0 12px 4px rgba(139, 92, 246, 0.8), 0 0 30px 8px rgba(139, 92, 246, 0.3);
+  transform: translate(0, 0);
+  margin-left: -7px;
+  margin-top: -7px;
+  pointer-events: none;
+  z-index: 10;
+  transition: none;
+  /* animated by JS only */
+}
+
+/* Cards row (below path) */
+.journey-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Individual milestone card */
+.journey-card {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.journey-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered reveal delays */
+.journey-card[data-index="1"] {
+  transition-delay: 0.05s;
+}
+
+.journey-card[data-index="2"] {
+  transition-delay: 0.10s;
+}
+
+.journey-card[data-index="3"] {
+  transition-delay: 0.15s;
+}
+
+.journey-card[data-index="4"] {
+  transition-delay: 0.20s;
+}
+
+.journey-card-inner {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-card:hover .journey-card-inner {
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Mini UI preview area */
+.jcard-preview {
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 80px;
+  justify-content: center;
+}
+
+/* Preview: Feeling Lost - coloured dot rows */
+.jcard-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jpreview-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.jpreview-dot.red {
+  background: #f87171;
+}
+
+.jpreview-dot.orange {
+  background: #fb923c;
+}
+
+.jpreview-dot.yellow {
+  background: #fbbf24;
+}
+
+.jpreview-line {
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+/* Preview: Explore - career branches */
+.explore-preview {
+  gap: 8px;
+}
+
+.jpreview-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.jpreview-branch {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.jpreview-pill {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 100px;
+}
+
+.jpreview-pill.violet {
+  background: rgba(139, 92, 246, 0.25);
+  color: #c084fc;
+}
+
+.jpreview-pill.cyan {
+  background: rgba(6, 182, 212, 0.2);
+  color: #67e8f9;
+}
+
+.jpreview-pill.indigo {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+}
+
+/* Preview: Compare Courses - bar chart rows */
+.compare-preview {
+  gap: 5px;
+}
+
+.jpreview-row-compare {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jpreview-label {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.35);
+  width: 38px;
+  flex-shrink: 0;
+}
+
+.jpreview-bar {
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+  display: block;
+}
+
+/* Preview: Compare Colleges - ranked list */
+.college-preview {
+  gap: 4px;
+}
+
+.jpreview-college-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+}
+
+.jpreview-rank {
+  color: rgba(139, 92, 246, 0.8);
+  font-weight: 700;
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.jpreview-college-name {
+  color: rgba(255, 255, 255, 0.6);
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.jpreview-badge {
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+  flex-shrink: 0;
+}
+
+.jpreview-badge.private {
+  background: rgba(251, 146, 60, 0.15);
+  color: #fdba74;
+}
+
+/* Preview: Career - celebration card */
+.career-preview {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.jpreview-career-icon {
+  font-size: 1.6rem;
+}
+
+.jpreview-career-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.jpreview-career-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.jpreview-career-sub {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Card body */
+.jcard-body {
+  padding: 0.75rem 1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.jcard-step {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(139, 92, 246, 0.8);
+}
+
+.jcard-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+.jcard-desc {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.5;
+}
+
+/* Mobile - stack vertically */
+@media (max-width: 768px) {
+  .journey-section {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .journey-sticky {
+    position: relative !important;
+    height: auto !important;
+    padding: 4rem 0 !important;
+    overflow: visible !important;
+  }
+
+  .journey-canvas {
+    overflow: visible !important;
+  }
+
+  .journey-labels {
+    display: none !important;
+  }
+
+  .journey-svg-wrap {
+    display: none !important;
+  }
+
+  .journey-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .journey-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Streams Section Redesign - Bento Grid & Capsule Tabs */
@@ -761,11 +1559,10 @@ section {
 
 .streams-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 2rem;
-  margin-bottom: 3.5rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .streams-title-area {
@@ -784,7 +1581,7 @@ section {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
-  margin-left: auto;
+  /* Left-aligned — removed margin-left: auto */
 }
 
 .domain-tab {
@@ -1539,13 +2336,36 @@ footer {
     display: flex;
   }
 
+  .hero {
+    /* On mobile the header is ~76px tall (24px top + ~52px height) */
+    margin-top: 76px;
+    min-height: calc(85vh - 76px);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    padding-left: 24px;
+    padding-right: 24px;
+    /* Reset the full-width margin trick — on mobile body has no side overflow */
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
   .hero-title {
-    /* clamp handles this already — override only if needed below 480px */
     font-size: clamp(1.6rem, 7vw, 2.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .hero-line2 {
+    white-space: normal !important;
   }
 
   .hero-desc {
     font-size: 1.05rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-ctas {
+    margin-bottom: 2rem;
   }
 
   .section-title {

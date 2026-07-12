@@ -12,6 +12,8 @@ export default defineConfig({
             req.url = '/community/';
           } else if (req.url === '/explore') {
             req.url = '/explore/';
+          } else if (req.url.startsWith('/courses') && !req.url.includes('.')) {
+            req.url = '/courses/';
           }
           next();
         });
@@ -27,7 +29,8 @@ export default defineConfig({
       input: {
         main: './index.html',
         community: './community/index.html',
-        explore: './explore/index.html'
+        explore: './explore/index.html',
+        courses: './courses/index.html'
       }
     }
   }

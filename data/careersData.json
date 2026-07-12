@@ -1,0 +1,168 @@
+{
+  "stream": "PCB",
+  "title": "PCB After Class 12",
+  "categories": [
+    {
+      "name": "Medical & Clinical Careers",
+      "emoji": "🩺",
+      "courses": [
+        { "name": "MBBS", "slug": "mbbs" },
+        { "name": "BDS", "slug": "bds" },
+        { "name": "BAMS", "slug": "bams" },
+        { "name": "BHMS", "slug": "bhms" },
+        { "name": "BUMS", "slug": "bums" },
+        { "name": "BNYS", "slug": "bnys" }
+      ]
+    },
+    {
+      "name": "Pharmacy",
+      "emoji": "💊",
+      "courses": [
+        { "name": "B.Pharm", "slug": "b-pharm" },
+        { "name": "Pharm D", "slug": "pharm-d" },
+        { "name": "D.Pharm", "slug": "d-pharm" }
+      ]
+    },
+    {
+      "name": "Nursing",
+      "emoji": "🩹",
+      "courses": [
+        { "name": "B.Sc Nursing", "slug": "bsc-nursing" },
+        { "name": "GNM", "slug": "gnm" },
+        { "name": "ANM", "slug": "anm" }
+      ]
+    },
+    {
+      "name": "Allied Health Sciences",
+      "emoji": "🏥",
+      "courses": [
+        { "name": "BPT", "slug": "bpt" },
+        { "name": "BOT", "slug": "bot" },
+        { "name": "BMLT", "slug": "bmlt" },
+        { "name": "Radiology Technology", "slug": "radiology-technology" },
+        { "name": "Optometry", "slug": "optometry" },
+        { "name": "Audiology", "slug": "audiology" },
+        { "name": "Operation Theatre Technology", "slug": "operation-theatre-technology" },
+        { "name": "Cardiac Technology", "slug": "cardiac-technology" },
+        { "name": "Dialysis Technology", "slug": "dialysis-technology" },
+        { "name": "Emergency Medical Technology", "slug": "emergency-medical-technology" },
+        { "name": "Respiratory Therapy", "slug": "respiratory-therapy" }
+      ]
+    },
+    {
+      "name": "Biotechnology & Bioinformatics",
+      "emoji": "🧬",
+      "courses": [
+        { "name": "B.Tech Biotechnology", "slug": "btech-biotechnology" },
+        { "name": "B.Sc Biotechnology", "slug": "bsc-biotechnology" },
+        { "name": "B.Tech Bioinformatics", "slug": "btech-bioinformatics" },
+        { "name": "B.Sc Bioinformatics", "slug": "bsc-bioinformatics" },
+        { "name": "Integrated MSc Biotechnology", "slug": "integrated-msc-biotechnology" }
+      ]
+    },
+    {
+      "name": "Life Sciences",
+      "emoji": "🔬",
+      "courses": [
+        { "name": "Microbiology", "slug": "microbiology" },
+        { "name": "Biochemistry", "slug": "biochemistry" },
+        { "name": "Genetics", "slug": "genetics" },
+        { "name": "Biomedical Science", "slug": "biomedical-science" },
+        { "name": "Botany", "slug": "botany" },
+        { "name": "Zoology", "slug": "zoology" },
+        { "name": "Molecular Biology", "slug": "molecular-biology" }
+      ]
+    },
+    {
+      "name": "Agriculture & Food Sciences",
+      "emoji": "🌾",
+      "courses": [
+        { "name": "B.Sc Agriculture", "slug": "bsc-agriculture" },
+        { "name": "Agricultural Engineering", "slug": "agricultural-engineering" },
+        { "name": "Food Technology", "slug": "food-technology" },
+        { "name": "Horticulture", "slug": "horticulture" },
+        { "name": "Forestry", "slug": "forestry" },
+        { "name": "Dairy Technology", "slug": "dairy-technology" },
+        { "name": "Fisheries", "slug": "fisheries" }
+      ]
+    },
+    {
+      "name": "Veterinary Sciences",
+      "emoji": "🐄",
+      "courses": [
+        { "name": "BVSc & AH", "slug": "bvsc-and-ah" },
+        { "name": "Animal Husbandry", "slug": "animal-husbandry" }
+      ]
+    },
+    {
+      "name": "Psychology",
+      "emoji": "🧠",
+      "courses": [
+        { "name": "BA Psychology", "slug": "ba-psychology" },
+        { "name": "B.Sc Psychology", "slug": "bsc-psychology" },
+        { "name": "Applied Psychology", "slug": "applied-psychology" }
+      ]
+    },
+    {
+      "name": "Nutrition & Dietetics",
+      "emoji": "🥗",
+      "courses": [
+        { "name": "Clinical Nutrition", "slug": "clinical-nutrition" },
+        { "name": "Nutrition & Dietetics", "slug": "nutrition-and-dietetics" }
+      ]
+    },
+    {
+      "name": "Forensic Sciences",
+      "emoji": "🧪",
+      "courses": [
+        { "name": "B.Sc Forensic Science", "slug": "bsc-forensic-science" }
+      ]
+    },
+    {
+      "name": "Environmental Sciences",
+      "emoji": "🌍",
+      "courses": [
+        { "name": "Environmental Science", "slug": "environmental-science" }
+      ]
+    },
+    {
+      "name": "Public Health",
+      "emoji": "🧫",
+      "courses": [
+        { "name": "Bachelor of Public Health", "slug": "bachelor-of-public-health" }
+      ]
+    },
+    {
+      "name": "Law",
+      "emoji": "⚖",
+      "courses": [
+        { "name": "Integrated LLB", "slug": "integrated-llb" }
+      ]
+    },
+    {
+      "name": "Management",
+      "emoji": "📊",
+      "courses": [
+        { "name": "BBA", "slug": "bba" }
+      ]
+    },
+    {
+      "name": "Design",
+      "emoji": "🎨",
+      "courses": [
+        { "name": "Bachelor of Design", "slug": "bachelor-of-design" }
+      ]
+    },
+    {
+      "name": "Government Career Paths",
+      "emoji": "🏛",
+      "courses": [
+        { "name": "Defence", "slug": "defence" },
+        { "name": "Civil Services", "slug": "civil-services" },
+        { "name": "SSC", "slug": "ssc" },
+        { "name": "Railways", "slug": "railways" },
+        { "name": "Banking", "slug": "banking" }
+      ]
+    }
+  ]
+}
