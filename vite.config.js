@@ -18,6 +18,18 @@ export default defineConfig({
           }
           next();
         });
+      },
+      configurePreviewServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url === '/community') {
+            req.url = '/community/';
+          } else if (req.url === '/explore') {
+            req.url = '/explore/';
+          } else if (req.url.startsWith('/courses') && !req.url.includes('.')) {
+            req.url = '/courses/';
+          }
+          next();
+        });
       }
     }
   ],
