@@ -1,0 +1,2 @@
+import type { CareerData } from '@/types/Career';
+export const clinical_research: CareerData = { id: 'clinical-research', title: 'Clinical Research Associate', field: 'Pharmaceutical & Healthcare', avgSalary: '₹6–18 LPA', growthOutlook: 'High', description: 'Monitor clinical trials, ensure regulatory compliance, and coordinate between pharmaceutical sponsors and hospital sites for new drug development.', requiredSkills: ['GCP/ICH Guidelines', 'Medical Terminology', 'Data Management', 'Regulatory Filings'] };

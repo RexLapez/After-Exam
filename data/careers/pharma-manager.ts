@@ -1,0 +1,2 @@
+import type { CareerData } from '@/types/Career';
+export const pharma_manager: CareerData = { id: 'pharma-manager', title: 'Pharma Product Manager', field: 'Pharmaceutical Business', avgSalary: '₹10–30 LPA', growthOutlook: 'High', description: 'Oversee product lifecycle from R&D to market launch, manage branding and strategy for pharmaceutical products across domestic and global markets.', requiredSkills: ['Product Strategy', 'Market Analysis', 'Regulatory Knowledge', 'Cross-functional Leadership'] };
