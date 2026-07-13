@@ -7,8 +7,11 @@ AFTER EXAM is a premium, interactive career guidance platform for students who d
 ## ✨ Features
 
 - **Interactive PathFinder** — A React-powered neural pathway engine that guides students through Streams → Domains → Degrees → Career Outcomes with smooth animations and detailed career profiles.
+- **50+ Course Detail Pages** — Rich career profiles (`/courses/[slug]`) explaining degrees, duration, eligibility, semester roadmap, good for / avoid if pointers, salary timelines in Indian Rupees, and FAQs, complete with a dynamic fallback generator.
 - **Career Comparison Matrix** — Side-by-side comparison of NEET vs alternative career paths (salary, duration, fees, global scope).
-- **Community Q&A** — Student discussion forum with upvoting, categories, and real-time interactions.
+- **Colleges & Exams Registry** — Mapped profiles of premium institutions (including top government universities like DU, BHU, CURAJ, and private ones like VIT, MAHE) linked dynamically to entrance criteria (NEET-UG, CUET-UG, etc.).
+- **Premium Landing Stats** — Beautiful, viewport-animated, minimalist counter statistics section above the footer tracking career paths, courses, and colleges.
+- **Community Q&A** — Student discussion forum with upvoting, categories, real-time Supabase interactions, and robust client-side fallbacks for offline safety.
 - **Night Sky Theme** — Twinkling stars, shooting star animations, glassmorphic UI design throughout.
 
 ## 🛠 Tech Stack
@@ -20,22 +23,23 @@ AFTER EXAM is a premium, interactive career guidance platform for students who d
 | Styling | Tailwind CSS + Custom CSS |
 | Build Tool | Vite |
 | Icons | Lucide React |
+| Database | Supabase (Auth & Realtime Database) |
 
 ## 📁 Project Structure
 
 ```
 AfterExam/
 ├── index.html              # Landing Page
-├── explore.html             # PathFinder
-├── community.html           # Community Q&A
-├── css/                     # Stylesheets
-├── js/                      # JavaScript & JSX entry points
-├── components/pathfinder/   # React PathFinder component
-├── assets/                  # Images, icons, fonts, videos
-├── data/                    # JSON data files
-├── public/                  # Static public assets
-├── vite.config.js
-├── tailwind.config.js
+├── explore/                # PathFinder page wrapper
+├── community/              # Community Q&A page wrapper
+├── courses/                # Course details page wrapper
+├── components/             # React UI components (pathfinder, course/page modules)
+├── css/                    # Stylesheets (main, course, explore)
+├── js/                     # JavaScript & JSX entry points
+├── data/                   # TSX registries (courses, colleges, exams, careers)
+├── public/                 # Static public assets
+├── vite.config.js          # Vite config with multi-page entrypoints
+├── tsconfig.json           # TypeScript configuration
 └── package.json
 ```
 
@@ -52,15 +56,14 @@ npm run dev
 npm run build
 ```
 
-The dev server runs at **https://afterexam.in/**.
-
 ## 📄 Pages
 
 | Page | URL | Description |
 |------|-----|-------------|
-| Landing Page | `/` | Hero, career streams, comparison table, testimonials, FAQs |
-| PathFinder | `/explore.html` | Interactive neural career pathway engine |
-| Community | `/community.html` | Student Q&A discussion forum |
+| Landing Page | `/` | Hero, career streams, comparison table, FAQs, premium stats |
+| PathFinder | `/explore` | Interactive neural career pathway engine |
+| Community | `/community` | Student Q&A discussion forum with local mock safety fallbacks |
+| Course Profile | `/courses/[slug]` | Premium career profile page (e.g. `/courses/mbbs`, `/courses/bams`) |
 
 ## 📜 License
 

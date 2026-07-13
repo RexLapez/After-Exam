@@ -42,7 +42,7 @@ export default function CoursePage() {
 
   return (
     <div className="min-h-screen bg-[#020205] text-slate-100 font-sans selection:bg-violet-500/30 selection:text-violet-200">
-      
+
       {/* Background Gradients */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-br from-violet-600/5 to-cyan-500/5 blur-[120px]" />
@@ -50,7 +50,7 @@ export default function CoursePage() {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between border-b border-white/5 bg-[#020205]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-50 w-full max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between border-b border-white/5 bg-[#020205]/80 backdrop-blur-md">
         <a href="/" className="flex items-center gap-2 text-xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent tracking-wide font-display">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" className="text-violet-500">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -67,55 +67,55 @@ export default function CoursePage() {
 
       {/* Main Layout */}
       <main className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-        
+
         {/* Sidebar Nav */}
         <StickySidebar />
 
         {/* Content Area */}
         <div className="flex-1 w-full max-w-4xl pb-32">
-          
+
           <CourseHero hero={course.hero} category={course.category} categoryEmoji={course.categoryEmoji} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <CourseQuickStats overview={course.overview} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <CourseSnapshot snapshot={course.snapshot} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <IsRightForYou goodFor={course.goodFor} avoidIf={course.avoidIf} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <CareerRoadmap roadmap={course.careerRoadmap} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <SalaryTimeline timeline={course.salaryTimeline} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <TopColleges collegeIds={course.topCollegeIds} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <AdmissionProcess process={course.admissionProcess} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <SemesterRoadmap semesters={course.semesterRoadmap} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <FutureScope scope={course.futureScope} />
-          
+
           <div className="premium-divider my-16" />
-          
+
           <CourseFAQ faqs={course.faq} />
-          
+
           {course.relatedCourseSlugs.length > 0 && (
             <>
               <div className="premium-divider my-16" />
@@ -125,7 +125,7 @@ export default function CoursePage() {
 
         </div>
       </main>
-      
+
     </div>
   );
 }

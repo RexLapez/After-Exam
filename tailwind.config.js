@@ -1,9 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
+    "./index.html",
     "./explore/index.html",
-    "./js/explore.jsx",
-    "./components/pathfinder/PathFinder.tsx"
+    "./community/index.html",
+    "./courses/index.html",
+    "./js/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {

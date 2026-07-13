@@ -40,8 +40,7 @@ export default function StickySidebar() {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
-      // Get the nav height for mobile offset
-      const navOffset = window.innerWidth < 1024 ? 70 : 32; 
+      const navOffset = window.innerWidth < 1024 ? 90 : 40; 
       const y = el.getBoundingClientRect().top + window.scrollY - navOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -50,9 +49,10 @@ export default function StickySidebar() {
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block sticky top-24 w-64 shrink-0 h-[calc(100vh-8rem)] overflow-y-auto pr-4 no-scrollbar border-r border-white/5">
-        <nav className="space-y-1.5 pr-2">
-          <h4 className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest px-3 mb-4">On This Page</h4>
+      <div className="hidden lg:block sticky top-28 w-64 shrink-0 h-[calc(100vh-10rem)] overflow-y-auto pr-4 no-scrollbar">
+        <nav className="relative pl-4 border-l border-white/5 space-y-2">
+          <h4 className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest mb-5 block">On This Page</h4>
+          
           {sections.map((s) => {
             const isActive = activeId === s.id;
             return (
@@ -60,26 +60,26 @@ export default function StickySidebar() {
                 key={s.id}
                 href={`#${s.id}`}
                 onClick={(e) => handleClick(e, s.id)}
-                className={`group flex items-center justify-between px-3 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 relative ${
+                className={`group flex items-center justify-between py-1.5 text-sm font-semibold transition-all duration-300 relative ${
                   isActive
-                    ? 'text-violet-400 bg-violet-500/5'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]'
+                    ? 'text-violet-400 font-bold'
+                    : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
                 <span>{s.label}</span>
-                {/* Active indicator dot */}
-                <div className={`w-1.5 h-1.5 rounded-full bg-violet-500 transition-all duration-300 ${
-                  isActive ? 'opacity-100 scale-100 shadow-[0_0_8px_rgba(139,92,246,0.8)]' : 'opacity-0 scale-50'
-                }`} />
+                {/* Custom sliding indicator bar on the left */}
+                {isActive && (
+                  <div className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-5 bg-gradient-to-b from-violet-500 to-cyan-500 rounded-full shadow-[0_0_8px_rgba(139,92,246,0.6)]" />
+                )}
               </a>
             );
           })}
         </nav>
       </div>
 
-      {/* Mobile Horizontal Tabs */}
-      <div className="lg:hidden sticky top-0 z-40 w-full bg-[#020205]/80 backdrop-blur-xl border-b border-white/5 py-3 overflow-x-auto no-scrollbar shadow-lg shadow-black/20">
-        <div className="flex px-4 gap-2 min-w-max">
+      {/* Mobile Horizontal Navigation Tabs */}
+      <div className="lg:hidden sticky top-[69px] z-40 w-full bg-[#020205]/90 backdrop-blur-xl border-b border-white/5 py-3 overflow-x-auto no-scrollbar shadow-lg shadow-black/20">
+        <div className="flex px-4 gap-2.5 min-w-max">
           {sections.map((s) => {
             const isActive = activeId === s.id;
             return (
@@ -87,10 +87,10 @@ export default function StickySidebar() {
                 key={s.id}
                 href={`#${s.id}`}
                 onClick={(e) => handleClick(e, s.id)}
-                className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap border transition-all duration-300 ${
+                className={`px-4 py-2 rounded-full text-xs font-black transition-all duration-300 border ${
                   isActive
-                    ? 'bg-violet-500/10 text-violet-400 border-violet-500/30'
-                    : 'bg-white/[0.02] text-slate-400 border-white/5 hover:bg-white/[0.05]'
+                    ? 'bg-violet-500/10 text-violet-400 border-violet-500/30 shadow-[0_0_15px_rgba(139,92,246,0.1)]'
+                    : 'bg-white/[0.02] text-slate-400 border-white/5 hover:bg-white/[0.04]'
                 }`}
               >
                 {s.label}

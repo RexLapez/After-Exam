@@ -163,6 +163,15 @@
         { "name": "Railways", "slug": "railways" },
         { "name": "Banking", "slug": "banking" }
       ]
+    },
+    {
+      "name": "Computing & Tech",
+      "emoji": "💻",
+      "courses": [
+        { "name": "BCA", "slug": "bca" },
+        { "name": "B.Sc Computer Science", "slug": "bsc-computer-science" },
+        { "name": "M.Sc Health Informatics", "slug": "msc-health-informatics" }
+      ]
     }
   ]
 }
