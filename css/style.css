@@ -3013,3 +3013,125 @@ textarea.ask-input {
     padding: 3rem 1.75rem 2.25rem 1.75rem;
   }
 }
+
+/* Premium Statistics Section */
+.stats-section {
+  position: relative;
+  background-color: #0A0A0A;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 10rem 2rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.stats-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.stats-divider {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06) 20%, rgba(255, 255, 255, 0.06) 80%, transparent);
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.stats-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6rem;
+  position: relative;
+  z-index: 3;
+}
+
+.stat-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-number-wrapper {
+  font-family: var(--font-sans);
+  font-size: clamp(70px, 8vw, 100px);
+  font-weight: 300;
+  color: #FFFFFF;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  transition: text-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-plus {
+  font-size: clamp(45px, 5vw, 65px);
+  font-weight: 300;
+  color: #FFFFFF;
+  margin-left: 0.1rem;
+}
+
+.stat-col:hover .stat-number-wrapper {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+}
+
+.stat-label {
+  font-size: 22px;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+}
+
+.stat-desc {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Animations for stats entry */
+.reveal-stat {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stat.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .stats-section {
+    padding: 8rem 1.5rem;
+  }
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 6rem;
+  }
+  .stat-number-wrapper {
+    margin-bottom: 1rem;
+  }
+}

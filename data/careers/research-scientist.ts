@@ -1,0 +1,2 @@
+import type { CareerData } from '@/types/Career';
+export const research_scientist: CareerData = { id: 'research-scientist', title: 'Research Scientist', field: 'Life Sciences & Biotech', avgSalary: '₹8–25 LPA', growthOutlook: 'High', description: 'Lead experimental research in genetics, molecular biology, or drug discovery at pharma labs, biotech startups, or government research institutes.', requiredSkills: ['Lab Protocols', 'Data Analysis', 'Scientific Writing', 'CRISPR/qPCR'] };

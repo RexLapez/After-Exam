@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Reset ─── */
+html, body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-x: hidden;
+  background-color: #020205;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { 
+  width: 6px; 
+  height: 6px; 
+}
+::-webkit-scrollbar-track { 
+  background: rgba(255, 255, 255, 0.01); 
+}
+::-webkit-scrollbar-thumb { 
+  background: rgba(139, 92, 246, 0.2); 
+  border-radius: 9999px; 
+  transition: all 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: rgba(139, 92, 246, 0.4); 
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* ─── Smooth Scroll ─── */
+html { 
+  scroll-behavior: smooth; 
+}
+
+/* ─── Premium Glassmorphism ─── */
+.premium-glass {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.premium-glass-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-glass-hover:hover {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.15),
+              0 0 20px 1px rgba(139, 92, 246, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ─── Glowing Dividers ─── */
+.premium-divider {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.05) 15%, 
+    rgba(139, 92, 246, 0.15) 50%, 
+    rgba(255, 255, 255, 0.05) 85%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* ─── Custom Animations & Keyframes ─── */
+@keyframes soft-glow {
+  0%, 100% {
+    opacity: 0.5;
+    filter: blur(60px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(80px);
+  }
+}
+
+.soft-glow-purple {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: soft-glow 6s ease-in-out infinite;
+}
+
+.soft-glow-cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: soft-glow 8s ease-in-out infinite;
+}
+
+/* ─── Horizontal Scroll Timeline ─── */
+.timeline-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 1.5rem 0.5rem;
+  scroll-snap-type: x mandatory;
+}
+
+.timeline-scroll-item {
+  scroll-snap-align: start;
+  flex: 0 0 300px;
+}
+
+@media (min-width: 768px) {
+  .timeline-scroll-item {
+    flex: 0 0 350px;
+  }
+}

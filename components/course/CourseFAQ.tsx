@@ -1,0 +1,76 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { MessageCircleQuestion, Plus, Minus } from 'lucide-react';
+import type { FAQ } from '@/types/Course';
+
+interface Props {
+  faqs: FAQ[];
+}
+
+export default function CourseFAQ({ faqs }: Props) {
+  if (!faqs || faqs.length === 0) return null;
+
+  return (
+    <section id="faq-section" className="py-12 scroll-mt-24">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="p-2.5 rounded-xl bg-slate-500/10 border border-slate-500/20 text-slate-400">
+          <MessageCircleQuestion className="w-5 h-5" />
+        </div>
+        <div>
+          <h2 className="text-2xl font-black text-white font-display tracking-tight">Frequently Asked Questions</h2>
+          <p className="text-xs text-slate-400 mt-1">Common queries regarding degree validation, eligibility, and clinical scope.</p>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        {faqs.map((faq, idx) => (
+          <FAQItem key={idx} faq={faq} idx={idx} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FAQItem({ faq, idx }: { faq: FAQ; idx: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3, delay: idx * 0.05 }}
+      className="premium-glass rounded-2xl overflow-hidden transition-all duration-300 border border-white/5 hover:border-violet-500/25"
+    >
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full p-5 flex items-center justify-between text-left hover:bg-white/[0.01] transition-colors gap-4"
+      >
+        <h3 className="text-sm md:text-base font-bold text-slate-200 leading-snug">{faq.question}</h3>
+        <div className={`w-7 h-7 shrink-0 rounded-xl border flex items-center justify-center transition-all duration-300 ${
+          isOpen 
+            ? 'bg-violet-500/10 border-violet-500/20 text-violet-400 rotate-180' 
+            : 'bg-white/[0.03] border-white/5 text-slate-400'
+        }`}>
+          {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 text-xs md:text-sm text-slate-400 leading-relaxed font-medium">
+              <div className="h-px bg-white/5 mb-4" />
+              {faq.answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
