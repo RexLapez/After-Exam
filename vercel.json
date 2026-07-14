@@ -1,10 +1,21 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/courses", "destination": "/explore", "permanent": true },
-    { "source": "/courses/:slug", "destination": "/explore/:slug", "permanent": true }
+    {
+      "source": "/courses",
+      "destination": "/explore",
+      "permanent": true
+    },
+    {
+      "source": "/courses/:slug",
+      "destination": "/explore/:slug",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/explore/:slug", "destination": "/explore/index.html" }
+    {
+      "source": "/explore/:slug",
+      "destination": "/explore/index.html"
+    }
   ]
 }
