@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | AfterExam</title>
+  <meta name="description" content="Oops! The page you are looking for does not exist on AfterExam. Discover alternative career options like MBBS, BDS, BAMS, and Biotech.">
+  <meta name="keywords" content="after exam, page not found, 404, neet alternative, career options">
+  <meta name="author" content="AfterExam">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://afterexam.in/404">
+  <meta property="og:title" content="Page Not Found | AfterExam">
+  <meta property="og:description" content="Oops! The page you are looking for does not exist on AfterExam. Discover alternative career options like MBBS, BDS, BAMS, and Biotech.">
+  <meta property="og:image" content="https://afterexam.in/assets/og-image.png">
+  <meta property="og:site_name" content="AfterExam">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://afterexam.in/404">
+  <meta name="twitter:title" content="Page Not Found | AfterExam">
+  <meta name="twitter:description" content="Oops! The page you are looking for does not exist on AfterExam. Discover alternative career options like MBBS, BDS, BAMS, and Biotech.">
+  <meta name="twitter:image" content="https://afterexam.in/assets/og-image.png">
+
+  <!-- Canonical Link -->
+  <link rel="canonical" href="https://afterexam.in/404">
+
+  <!-- Favicons and Web Manifest -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #020205;
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --card-border: rgba(255, 255, 255, 0.05);
+      --accent: #8b5cf6;
+      --accent-hover: #7c3aed;
+      --accent-cyan: #06b6d4;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Glow background */
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .glow-1 {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 60vw;
+      height: 60vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+      filter: blur(80px);
+    }
+    .glow-2 {
+      position: absolute;
+      bottom: -10%;
+      right: -10%;
+      width: 50vw;
+      height: 50vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
+      filter: blur(80px);
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 540px;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .svg-illustration {
+      width: 240px;
+      height: 240px;
+      margin-bottom: 24px;
+      opacity: 0.9;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .error-code {
+      font-family: 'Outfit', sans-serif;
+      font-size: 7rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      letter-spacing: -2px;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    @media(max-width: 480px) {
+      .btn-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(139, 92, 246, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      color: #fff;
+      border: 1px solid var(--card-border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="container">
+    <svg class="svg-illustration" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Abstract outer circle -->
+      <circle cx="100" cy="100" r="80" stroke="url(#paint0_linear)" stroke-width="2" stroke-dasharray="8 8" opacity="0.4" />
+      
+      <!-- Pulsing core -->
+      <circle cx="100" cy="100" r="40" fill="url(#paint1_radial)" opacity="0.15" />
+      
+      <!-- Lost path connection lines -->
+      <path d="M50 100H90" stroke="url(#paint2_linear)" stroke-width="3" stroke-linecap="round" />
+      <path d="M110 100H150" stroke="url(#paint3_linear)" stroke-width="3" stroke-linecap="round" />
+      <path d="M100 50V90" stroke="url(#paint4_linear)" stroke-width="3" stroke-linecap="round" />
+      
+      <!-- Interactive node points -->
+      <circle cx="50" cy="100" r="6" fill="#8b5cf6" />
+      <circle cx="150" cy="100" r="6" fill="#06b6d4" />
+      <circle cx="100" cy="50" r="6" fill="#ec4899" />
+      
+      <!-- Disconnected main center node -->
+      <circle cx="100" cy="100" r="10" stroke="#f43f5e" stroke-width="3" fill="#020205" />
+      <line x1="96" y1="96" x2="104" y2="104" stroke="#f43f5e" stroke-width="2" stroke-linecap="round" />
+      <line x1="104" y1="96" x2="96" y2="104" stroke="#f43f5e" stroke-width="2" stroke-linecap="round" />
+      
+      <defs>
+        <linearGradient id="paint0_linear" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8B5CF6" />
+          <stop offset="1" stop-color="#06B6D4" />
+        </linearGradient>
+        <radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(40)">
+          <stop stop-color="#8B5CF6" />
+          <stop offset="1" stop-color="#06B6D4" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="paint2_linear" x1="50" y1="100" x2="90" y2="100" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8B5CF6" />
+          <stop offset="1" stop-color="#8B5CF6" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="paint3_linear" x1="150" y1="100" x2="110" y2="100" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#06B6D4" />
+          <stop offset="1" stop-color="#06B6D4" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="paint4_linear" x1="100" y1="50" x2="100" y2="90" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#ec4899" />
+          <stop offset="1" stop-color="#ec4899" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div class="error-code">404</div>
+    <h1>Pathway Lost</h1>
+    <p>The page you are looking for doesn't exist, has been relocated, or is currently undergoing an exam review. Let's redirect you back to active streams.</p>
+    
+    <div class="btn-group">
+      <a href="/" class="btn btn-secondary">Return Home</a>
+      <a href="/explore" class="btn btn-primary">Explore Careers</a>
+    </div>
+  </div>
+</body>
+</html>

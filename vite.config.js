@@ -11,10 +11,8 @@ export default defineConfig({
         server.middlewares.use((req, res, next) => {
           if (req.url === '/community') {
             req.url = '/community/';
-          } else if (req.url === '/explore') {
+          } else if (req.url.startsWith('/explore') && !req.url.includes('.')) {
             req.url = '/explore/';
-          } else if (req.url.startsWith('/courses') && !req.url.includes('.')) {
-            req.url = '/courses/';
           }
           next();
         });
@@ -23,10 +21,8 @@ export default defineConfig({
         server.middlewares.use((req, res, next) => {
           if (req.url === '/community') {
             req.url = '/community/';
-          } else if (req.url === '/explore') {
+          } else if (req.url.startsWith('/explore') && !req.url.includes('.')) {
             req.url = '/explore/';
-          } else if (req.url.startsWith('/courses') && !req.url.includes('.')) {
-            req.url = '/courses/';
           }
           next();
         });
@@ -48,7 +44,7 @@ export default defineConfig({
         main: './index.html',
         community: './community/index.html',
         explore: './explore/index.html',
-        courses: './courses/index.html'
+        404: './404.html'
       }
     }
   }
