@@ -1,6 +1,6 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/courses/:slug", "destination": "/courses/index.html" }
+    { "source": "/explore/:slug", "destination": "/explore/index.html" }
   ]
 }

@@ -16,16 +16,164 @@ import CourseFAQ from '@/components/course/CourseFAQ';
 import RelatedCourses from '@/components/course/RelatedCourses';
 import StickySidebar from '@/components/course/StickySidebar';
 
-export default function CoursePage() {
-  const slug = window.location.pathname.split('/').filter(Boolean).pop() || '';
+function updateMetaTag(name: string, content: string) {
+  let element = document.querySelector(`meta[name="${name}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute('name', name);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', content);
+}
+
+function updateOgTag(property: string, content: string) {
+  let element = document.querySelector(`meta[property="${property}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute('property', property);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', content);
+}
+
+function updateTwitterTag(name: string, content: string) {
+  let element = document.querySelector(`meta[name="${name}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute('name', name);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', content);
+}
+
+function updateCanonical(url: string) {
+  let link = document.querySelector('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    document.head.appendChild(link);
+  }
+  link.setAttribute('href', url);
+}
+
+function updateJsonLd(course: any, title: string, description: string, url: string) {
+  // Remove existing dynamic json-ld
+  const existing = document.querySelectorAll('script[type="application/ld+json"].dynamic-seo');
+  existing.forEach(el => el.remove());
+
+  // Breadcrumb List
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://afterexam.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Explore",
+        "item": "https://afterexam.in/explore"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": course.title,
+        "item": url
+      }
+    ]
+  };
+
+  // EducationalOccupationalProgram Schema
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOccupationalProgram",
+    "name": course.title,
+    "description": description,
+    "educationalCredentialAwarded": course.overview.degreeType || "Degree",
+    "programDuration": {
+      "@type": "QuantitativeValue",
+      "value": parseInt(course.overview.duration) || 3,
+      "unitText": "YEAR"
+    },
+    "occupationalCredentialAwarded": {
+      "@type": "Credential",
+      "name": course.overview.recognition
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "AfterExam",
+      "url": "https://afterexam.in"
+    }
+  };
+
+  const script1 = document.createElement('script');
+  script1.type = 'application/ld+json';
+  script1.className = 'dynamic-seo';
+  script1.text = JSON.stringify(breadcrumbSchema);
+  document.head.appendChild(script1);
+
+  const script2 = document.createElement('script');
+  script2.type = 'application/ld+json';
+  script2.className = 'dynamic-seo';
+  script2.text = JSON.stringify(courseSchema);
+  document.head.appendChild(script2);
+}
+
+export default function CoursePage({ slug: propSlug }: { slug?: string }) {
+  const slug = propSlug || window.location.pathname.split('/').filter(Boolean).pop() || '';
   const course = getCourseBySlug(slug);
 
   useEffect(() => {
     if (course) {
-      document.title = `AFTER EXAM | ${course.title}`;
+      const titleText = `${course.title} After 12th PCB | Colleges, Fees, Salary & Career Guide | AfterExam`;
+      const entranceReq = course.overview.entranceExams.length > 0 
+        ? `${course.overview.entranceExams.join('/')} requirements` 
+        : 'eligibility';
+      const descText = `Complete guide to ${course.title} after 12th including eligibility, ${entranceReq}, colleges, fees, salary, career scope and future opportunities.`;
+      const urlText = `https://afterexam.in/explore/${course.slug}`;
+
+      document.title = titleText;
+      updateMetaTag('description', descText);
+      updateMetaTag('keywords', `${course.title.toLowerCase()}, ${course.category.toLowerCase()}, career after 12th, afterexam`);
+      updateCanonical(urlText);
+      
+      updateOgTag('og:title', titleText);
+      updateOgTag('og:description', descText);
+      updateOgTag('og:url', urlText);
+      updateOgTag('og:image', 'https://afterexam.in/assets/og-image.png');
+
+      updateTwitterTag('twitter:title', titleText);
+      updateTwitterTag('twitter:description', descText);
+      updateTwitterTag('twitter:image', 'https://afterexam.in/assets/og-image.png');
+
+      updateJsonLd(course, titleText, descText, urlText);
     } else {
       document.title = 'AFTER EXAM | Course Not Found';
     }
+
+    return () => {
+      // Revert to Explore Page Defaults on unmount
+      document.title = 'AFTER EXAM | After Exam Pathfinder';
+      updateMetaTag('description', 'Explore interactive neural career pathways mapped out specifically for science (PCB) students.');
+      updateMetaTag('keywords', 'after exam pathfinder, career map, neet career alternatives, biology student paths, pcb career exploration');
+      updateCanonical('https://afterexam.in/explore');
+      
+      updateOgTag('og:title', 'AFTER EXAM | After Exam Pathfinder');
+      updateOgTag('og:description', 'Explore interactive neural career pathways mapped out specifically for science (PCB) students.');
+      updateOgTag('og:url', 'https://afterexam.in/explore');
+      updateOgTag('og:image', 'https://afterexam.in/assets/og-image.png');
+
+      updateTwitterTag('twitter:title', 'AFTER EXAM | After Exam Pathfinder');
+      updateTwitterTag('twitter:description', 'Explore interactive neural career pathways mapped out specifically for science (PCB) students.');
+      updateTwitterTag('twitter:image', 'https://afterexam.in/assets/og-image.png');
+
+      const existing = document.querySelectorAll('script[type="application/ld+json"].dynamic-seo');
+      existing.forEach(el => el.remove());
+    };
   }, [course]);
 
   if (!course) {

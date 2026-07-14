@@ -291,7 +291,7 @@ export default function PathFinder({ onBack }: NeuralPathwayProps) {
                             {category.courses.map((course) => (
                               <a 
                                 key={course.slug}
-                                href={`/courses/${course.slug}`}
+                                href={`/explore/${course.slug}`}
                                 className="relative flex items-center justify-between p-3.5 bg-white/[0.01] hover:bg-violet-500/[0.04] border border-white/5 hover:border-violet-500/30 rounded-xl transition-all duration-[3000ms] ease-out group font-sans outline-none"
                               >
                                 {/* Horizontal Connection Tree Line (Desktop only) */}

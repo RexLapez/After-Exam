@@ -1,0 +1,15 @@
+{
+  "name": "AfterExam",
+  "short_name": "AfterExam",
+  "start_url": "/",
+  "theme_color": "#D14836",
+  "background_color": "#9C9C9C",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
