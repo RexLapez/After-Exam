@@ -875,6 +875,12 @@
       color: #fff !important;
     }
 
+    .filter-row-chips {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
     /* Mobile responsive split layout & community sidebars */
     @media (max-width: 1024px) {
       .comm-layout-grid {
@@ -891,6 +897,33 @@
     @media (max-width: 768px) {
       .comm-layout-grid {
         padding: 100px 1rem 60px 1rem;
+      }
+      .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        width: 100%;
+      }
+      .filter-row-chips {
+        display: flex;
+        overflow-x: auto;
+        width: 100%;
+        gap: 0.5rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        flex-wrap: nowrap;
+      }
+      .filter-row-chips::-webkit-scrollbar {
+        display: none;
+      }
+      .filter-row-chips .chip {
+        flex-shrink: 0;
+      }
+      .search-wrap {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-left: 0 !important;
       }
     }
   </style>
@@ -959,10 +992,12 @@
 
       <!-- Filter Bar -->
       <div class="filter-row">
-        <button class="chip active" data-filter="all">All</button>
-        <button class="chip" data-filter="medical">Medical &amp; Allied</button>
-        <button class="chip" data-filter="biotech">Biotech &amp; Applied</button>
-        <button class="chip" data-filter="computing">Computing &amp; Tech</button>
+        <div class="filter-row-chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="medical">Medical &amp; Allied</button>
+          <button class="chip" data-filter="biotech">Biotech &amp; Applied</button>
+          <button class="chip" data-filter="computing">Computing &amp; Tech</button>
+        </div>
         <div class="search-wrap">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input id="search-input" type="text" placeholder="Search posts...">

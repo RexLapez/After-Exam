@@ -187,11 +187,11 @@ export default function TopColleges({ collegeIds }: Props) {
             >
               <h3 className="text-xl font-black text-white font-display mb-6 border-b border-white/5 pb-4">Institution Comparison</h3>
               
-              <div className="grid grid-cols-3 gap-4 text-xs sm:text-sm font-semibold">
+              <div className="grid grid-cols-3 gap-4 text-[10px] sm:text-xs md:text-sm font-semibold">
                 {/* Headers */}
                 <div className="text-slate-500 font-bold">Metric</div>
-                <div className="text-brand-primary font-black leading-tight">{firstCollege.name}</div>
-                <div className="text-brand-accent font-black leading-tight">{secondCollege.name}</div>
+                <div className="text-brand-primary font-black leading-tight truncate" title={firstCollege.name}>{firstCollege.name}</div>
+                <div className="text-brand-accent font-black leading-tight truncate" title={secondCollege.name}>{secondCollege.name}</div>
 
                 <div className="border-t border-white/5 py-3 text-slate-500 font-bold">Type</div>
                 <div className="border-t border-white/5 py-3 text-slate-300">{firstCollege.type}</div>
