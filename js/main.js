@@ -47,6 +47,93 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // --- Career Preview Carousel ---
+  const careerTrack = document.getElementById('career-carousel-track');
+  const careerPrev = document.getElementById('career-carousel-prev');
+  const careerNext = document.getElementById('career-carousel-next');
+
+  if (careerTrack && careerPrev && careerNext) {
+    const scrollAmount = 340; // card width + gap
+    careerPrev.addEventListener('click', () => {
+      careerTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    careerNext.addEventListener('click', () => {
+      careerTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  // --- Testimonials Carousel Auto-scroll ---
+  const testimonialTrack = document.getElementById('testimonials-track');
+  const indicators = document.querySelectorAll('#testimonials-indicators .indicator');
+  let currentSlide = 0;
+  const slideCount = indicators.length;
+  let autoScrollTimer = null;
+
+  const goToSlide = (idx) => {
+    currentSlide = idx;
+    if (testimonialTrack) {
+      const slideWidth = testimonialTrack.clientWidth;
+      testimonialTrack.scrollTo({
+        left: slideWidth * idx,
+        behavior: 'smooth'
+      });
+    }
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle('active', i === idx);
+    });
+  };
+
+  indicators.forEach((ind, idx) => {
+    ind.addEventListener('click', () => {
+      goToSlide(idx);
+      resetAutoScroll();
+    });
+  });
+
+  const startAutoScroll = () => {
+    autoScrollTimer = setInterval(() => {
+      let nextSlide = (currentSlide + 1) % slideCount;
+      goToSlide(nextSlide);
+    }, 4500);
+  };
+
+  const resetAutoScroll = () => {
+    clearInterval(autoScrollTimer);
+    startAutoScroll();
+  };
+
+  if (slideCount > 0) {
+    startAutoScroll();
+    window.addEventListener('resize', () => {
+      goToSlide(currentSlide);
+    });
+  }
+
+  // --- FAQ Search Bar Logic ---
+  const faqSearchInput = document.getElementById('faq-search-input');
+  if (faqSearchInput) {
+    faqSearchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const items = document.querySelectorAll('#faq .faq-item');
+      
+      items.forEach(item => {
+        const questionText = item.querySelector('.faq-question').textContent.toLowerCase();
+        const answerText = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if (questionText.includes(query) || answerText.includes(query)) {
+          item.style.display = 'block';
+          if (query.length > 0) {
+            item.classList.add('active'); // auto-expand when searching
+          } else {
+            item.classList.remove('active');
+          }
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+
 
 
 

@@ -20,6 +20,7 @@
     let mm = gsap.matchMedia();
 
     // Desktop: width > 768px
+    // Desktop: width > 768px
     mm.add("(min-width: 769px)", () => {
       const pathLength = pathEl.getTotalLength();
 
@@ -32,7 +33,7 @@
 
       // Combined Progress-linked timeline that drives both path draws + pinning with spacing
       const proxyObj = { progress: 0 };
-      gsap.to(proxyObj, {
+      const scrollAnim = gsap.to(proxyObj, {
         progress: 1,
         ease: 'none',
         scrollTrigger: {
@@ -66,6 +67,41 @@
             });
           },
         },
+      });
+
+      const st = scrollAnim.scrollTrigger;
+      const thresholds = [0.04, 0.27, 0.50, 0.73, 0.94];
+
+      const navigateToStep = (index) => {
+        if (!st) return;
+        const progress = thresholds[index];
+        const start = st.start;
+        const end = st.end;
+        const targetScroll = start + progress * (end - start);
+        window.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+      };
+
+      labels.forEach((label, idx) => {
+        label.style.cursor = 'pointer';
+        label.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          navigateToStep(idx);
+        });
+      });
+
+      cards.forEach((card, idx) => {
+        card.addEventListener('click', (e) => {
+          // If width is desktop, we smooth scroll. Otherwise let it navigate to the href.
+          if (window.innerWidth > 768) {
+            e.preventDefault();
+            e.stopPropagation();
+            navigateToStep(idx);
+          }
+        });
       });
     });
 

@@ -62,14 +62,14 @@ export default function StickySidebar() {
                 onClick={(e) => handleClick(e, s.id)}
                 className={`group flex items-center justify-between py-1.5 text-sm font-semibold transition-all duration-300 relative ${
                   isActive
-                    ? 'text-violet-400 font-bold'
+                    ? 'text-brand-accent font-bold'
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
                 <span>{s.label}</span>
                 {/* Custom sliding indicator bar on the left */}
                 {isActive && (
-                  <div className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-5 bg-gradient-to-b from-violet-500 to-cyan-500 rounded-full shadow-[0_0_8px_rgba(139,92,246,0.6)]" />
+                  <div className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-[3px] h-5 bg-gradient-to-b from-brand-primary to-brand-accent rounded-full" />
                 )}
               </a>
             );
@@ -78,7 +78,7 @@ export default function StickySidebar() {
       </div>
 
       {/* Mobile Horizontal Navigation Tabs */}
-      <div className="lg:hidden sticky top-[69px] z-40 w-full bg-[#020205]/90 backdrop-blur-xl border-b border-white/5 py-3 overflow-x-auto no-scrollbar shadow-lg shadow-black/20">
+      <div className="lg:hidden sticky top-[69px] z-40 w-full bg-bg-primary/90 backdrop-blur-xl border-b border-border-primary py-3 overflow-x-auto no-scrollbar shadow-lg shadow-black/20">
         <div className="flex px-4 gap-2.5 min-w-max">
           {sections.map((s) => {
             const isActive = activeId === s.id;
@@ -89,7 +89,7 @@ export default function StickySidebar() {
                 onClick={(e) => handleClick(e, s.id)}
                 className={`px-4 py-2 rounded-full text-xs font-black transition-all duration-300 border ${
                   isActive
-                    ? 'bg-violet-500/10 text-violet-400 border-violet-500/30 shadow-[0_0_15px_rgba(139,92,246,0.1)]'
+                    ? 'bg-brand-primary/10 text-brand-primary border-brand-primary/30'
                     : 'bg-white/[0.02] text-slate-400 border-white/5 hover:bg-white/[0.04]'
                 }`}
               >

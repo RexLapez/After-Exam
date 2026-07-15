@@ -13,14 +13,12 @@ export default function CourseFAQ({ faqs }: Props) {
   return (
     <section id="faq-section" className="py-16 scroll-mt-24">
       {/* Section Header */}
-      <div className="flex items-center gap-4 mb-10">
-        <div className="p-3 rounded-2xl bg-slate-500/10 border border-slate-500/15 text-slate-400 shadow-[0_0_15px_rgba(255,255,255,0.02)]">
-          <MessageCircleQuestion className="w-5 h-5" />
+      <div className="space-y-2 mb-10">
+        <div className="inline-block">
+          <h2 className="text-2xl sm:text-3xl font-black text-white font-display tracking-tight pb-1.5">Frequently Asked Questions</h2>
+          <div className="h-[3px] w-12 bg-brand-primary rounded-full" />
         </div>
-        <div>
-          <h2 className="text-3xl font-black text-white font-display tracking-tight">Frequently Asked Questions</h2>
-          <p className="text-sm text-slate-400 mt-1">Common queries regarding degree validation, eligibility, and career pathways.</p>
-        </div>
+        <p className="text-xs sm:text-sm text-slate-400">Common queries regarding degree validation, eligibility, and career pathways.</p>
       </div>
 
       {/* FAQs List */}
@@ -42,7 +40,7 @@ function FAQItem({ faq, idx }: { faq: FAQ; idx: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.3, delay: idx * 0.05 }}
-      className="premium-glass rounded-2xl overflow-hidden border border-white/[0.03] bg-white/[0.01] hover:bg-[#07080f]/40 hover:border-violet-500/20 transition-all duration-300 shadow-sm"
+      className="premium-glass rounded-2xl overflow-hidden border border-white/[0.03] bg-white/[0.01] hover:bg-[#07080f]/40 hover:border-brand-primary/20 transition-all duration-300 shadow-sm"
     >
       <button 
         onClick={() => setIsOpen(!isOpen)}
@@ -51,7 +49,7 @@ function FAQItem({ faq, idx }: { faq: FAQ; idx: number }) {
         <h3 className="text-base font-extrabold text-slate-200 leading-snug">{faq.question}</h3>
         <div className={`w-8 h-8 shrink-0 rounded-xl border flex items-center justify-center transition-all duration-300 ${
           isOpen 
-            ? 'bg-violet-500/10 border-violet-500/20 text-violet-400 rotate-180' 
+            ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary rotate-180' 
             : 'bg-white/[0.03] border-white/5 text-slate-500'
         }`}>
           {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}

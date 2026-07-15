@@ -38,14 +38,14 @@
   
   <style>
     :root {
-      --bg: #020205;
-      --card-bg: rgba(255, 255, 255, 0.02);
-      --card-border: rgba(255, 255, 255, 0.05);
-      --accent: #8b5cf6;
-      --accent-hover: #7c3aed;
-      --accent-cyan: #06b6d4;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
+      --bg: #0B0B0B;
+      --card-bg: #181818;
+      --card-border: #2A2A2A;
+      --accent: #D14836;
+      --accent-hover: #EA580C;
+      --accent-cyan: #F97316;
+      --text: #FAFAFA;
+      --text-muted: #B0B0B0;
     }
     
     * {
@@ -81,7 +81,7 @@
       width: 60vw;
       height: 60vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(209, 72, 54, 0.08) 0%, transparent 70%);
       filter: blur(80px);
     }
     .glow-2 {
@@ -91,7 +91,7 @@
       width: 50vw;
       height: 50vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.06) 0%, transparent 70%);
       filter: blur(80px);
     }
 
@@ -125,7 +125,7 @@
       font-size: 7rem;
       font-weight: 900;
       line-height: 1;
-      background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-cyan) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 8px;
@@ -170,7 +170,7 @@
       font-family: 'Outfit', sans-serif;
       font-size: 0.95rem;
       font-weight: 700;
-      border-radius: 9999px;
+      border-radius: 12px;
       text-decoration: none;
       transition: all 0.3s ease;
       cursor: pointer;
@@ -180,12 +180,12 @@
       background: var(--accent);
       color: #fff;
       border: none;
-      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     .btn-primary:hover {
       background: var(--accent-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(139, 92, 246, 0.35);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
 
     .btn-secondary {
@@ -220,9 +220,9 @@
       <path d="M100 50V90" stroke="url(#paint4_linear)" stroke-width="3" stroke-linecap="round" />
       
       <!-- Interactive node points -->
-      <circle cx="50" cy="100" r="6" fill="#8b5cf6" />
-      <circle cx="150" cy="100" r="6" fill="#06b6d4" />
-      <circle cx="100" cy="50" r="6" fill="#ec4899" />
+      <circle cx="50" cy="100" r="6" fill="var(--accent)" />
+      <circle cx="150" cy="100" r="6" fill="var(--accent-cyan)" />
+      <circle cx="100" cy="50" r="6" fill="var(--accent)" />
       
       <!-- Disconnected main center node -->
       <circle cx="100" cy="100" r="10" stroke="#f43f5e" stroke-width="3" fill="#020205" />
@@ -231,24 +231,24 @@
       
       <defs>
         <linearGradient id="paint0_linear" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#8B5CF6" />
-          <stop offset="1" stop-color="#06B6D4" />
+          <stop stop-color="var(--accent)" />
+          <stop offset="1" stop-color="var(--accent-cyan)" />
         </linearGradient>
         <radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(40)">
-          <stop stop-color="#8B5CF6" />
-          <stop offset="1" stop-color="#06B6D4" stop-opacity="0" />
+          <stop stop-color="var(--accent)" />
+          <stop offset="1" stop-color="var(--accent-cyan)" stop-opacity="0" />
         </radialGradient>
         <linearGradient id="paint2_linear" x1="50" y1="100" x2="90" y2="100" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#8B5CF6" />
-          <stop offset="1" stop-color="#8B5CF6" stop-opacity="0" />
+          <stop stop-color="var(--accent)" />
+          <stop offset="1" stop-color="var(--accent)" stop-opacity="0" />
         </linearGradient>
         <linearGradient id="paint3_linear" x1="150" y1="100" x2="110" y2="100" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#06B6D4" />
-          <stop offset="1" stop-color="#06B6D4" stop-opacity="0" />
+          <stop stop-color="var(--accent-cyan)" />
+          <stop offset="1" stop-color="var(--accent-cyan)" stop-opacity="0" />
         </linearGradient>
         <linearGradient id="paint4_linear" x1="100" y1="50" x2="100" y2="90" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#ec4899" />
-          <stop offset="1" stop-color="#ec4899" stop-opacity="0" />
+          <stop stop-color="var(--accent)" />
+          <stop offset="1" stop-color="var(--accent)" stop-opacity="0" />
         </linearGradient>
       </defs>
     </svg>
