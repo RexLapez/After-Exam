@@ -78,8 +78,8 @@
         stroke-linecap="round" stroke-linejoin="round">
         <defs>
           <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#8b5cf6" />
-            <stop offset="100%" stop-color="#06b6d4" />
+            <stop offset="0%" stop-color="#D14836" />
+            <stop offset="100%" stop-color="#F97316" />
           </linearGradient>
         </defs>
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -128,6 +128,51 @@
           </svg>
         </a>
       </div>
+      <div class="hero-trust-badges">
+        <span class="trust-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          161+ Career Paths
+        </span>
+        <span class="trust-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          32+ Competitive Exams
+        </span>
+        <span class="trust-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          323+ Colleges
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid-overlay"></div>
+    <div class="stats-divider"></div>
+    <div class="stats-container">
+      <div class="stat-col reveal-stat" data-target="161">
+        <div class="stat-number-wrapper">
+          <span class="stat-number">0</span><span class="stat-plus">+</span>
+        </div>
+        <div class="stat-label">Career Paths</div>
+        <div class="stat-desc">explained with detailed roadmaps</div>
+      </div>
+
+      <div class="stat-col reveal-stat" data-target="32">
+        <div class="stat-number-wrapper">
+          <span class="stat-number">0</span><span class="stat-plus">+</span>
+        </div>
+        <div class="stat-label">Competitive Exams</div>
+        <div class="stat-desc">across PCB, PCMB & allied fields</div>
+      </div>
+
+      <div class="stat-col reveal-stat" data-target="323">
+        <div class="stat-number-wrapper">
+          <span class="stat-number">0</span><span class="stat-plus">+</span>
+        </div>
+        <div class="stat-label">Colleges Listed</div>
+        <div class="stat-desc">with eligibility, exams & opportunities</div>
+      </div>
     </div>
   </section>
 
@@ -140,7 +185,6 @@
 
       <!-- Section heading -->
       <div class="journey-header">
-        <span class="section-tag">Your Roadmap</span>
         <h2 class="section-title">From Lost to <span>Career Clarity</span></h2>
         <p class="section-subtitle">Scroll to walk through every step AfterExam guides you through.</p>
       </div>
@@ -179,8 +223,8 @@
             <!-- dim track -->
             <path id="journey-track"
               d="M 60 60 C 100 20, 180 100, 300 60 C 420 20, 480 100, 600 60 C 720 20, 780 100, 900 60 C 1020 20, 1080 100, 1140 60"
-              stroke="rgba(139,92,246,0.15)" stroke-width="3" stroke-linecap="round" fill="none" />
-            <!-- animated draw path (purple→cyan gradient) -->
+              stroke="rgba(209,72,54,0.15)" stroke-width="3" stroke-linecap="round" fill="none" />
+            <!-- animated draw path (burnt orange gradient) -->
             <path id="journey-path"
               d="M 60 60 C 100 20, 180 100, 300 60 C 420 20, 480 100, 600 60 C 720 20, 780 100, 900 60 C 1020 20, 1080 100, 1140 60"
               stroke="url(#journey-grad)" stroke-width="3" stroke-linecap="round" fill="none" />
@@ -191,12 +235,12 @@
 
             <defs>
               <linearGradient id="journey-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#8b5cf6" />
-                <stop offset="100%" stop-color="#06b6d4" />
+                <stop offset="0%" stop-color="#D14836" />
+                <stop offset="100%" stop-color="#F97316" />
               </linearGradient>
               <linearGradient id="journey-glow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#c084fc" />
-                <stop offset="100%" stop-color="#67e8f9" />
+                <stop offset="0%" stop-color="#EA580C" />
+                <stop offset="100%" stop-color="#F97316" />
               </linearGradient>
             </defs>
           </svg>
@@ -320,12 +364,84 @@
     </div><!-- /#journey-sticky -->
   </section><!-- /#journey -->
 
+  <!-- Alternating Split Layout Section -->
+  <section id="features-split" class="split-layout-section">
+    <!-- Row 1: Pathfinder (Text Left, Graphic Right) -->
+    <div class="split-row reveal">
+      <div class="split-text">
+        <span class="split-tag">01 / DISCOVER</span>
+        <h2 class="split-title">Explore Mapped <span>Career Pathways</span></h2>
+        <p class="split-desc">Our interactive Pathfinder tree maps out alternative careers in healthcare, biotechnology, computing, and pharmacy. Branch by branch, understand your options without standard exam roadblocks.</p>
+        <a href="/explore" class="btn btn-secondary">Open Pathfinder</a>
+      </div>
+      <div class="split-graphic">
+        <div class="feature-mockup pathfinder-mockup">
+          <div class="mockup-header">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot orange"></span>
+            <span class="mockup-dot green"></span>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-node active">
+              <span class="node-emoji">🩺</span>
+              <span class="node-title">Medical & Allied</span>
+            </div>
+            <div class="mockup-connector"></div>
+            <div class="mockup-branches">
+              <div class="mockup-node-child">B.V.Sc (Veterinary)</div>
+              <div class="mockup-node-child">BAMS (Ayurveda)</div>
+              <div class="mockup-node-child">BSc Nursing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
+    <!-- Row 2: Comparison Tools (Graphic Left, Text Right) -->
+    <div class="split-row reverse reveal">
+      <div class="split-graphic">
+        <div class="feature-mockup compare-mockup">
+          <div class="mockup-header">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot orange"></span>
+            <span class="mockup-dot green"></span>
+          </div>
+          <div class="mockup-body">
+            <div class="compare-card-preview">
+              <div class="card-p-header">
+                <span class="card-p-title">B.Tech Biotech</span>
+                <span class="card-p-badge">4 Years</span>
+              </div>
+              <div class="card-p-metric">
+                <span class="card-p-label">Average Salary</span>
+                <span class="card-p-val">₹8.5L /yr</span>
+              </div>
+            </div>
+            <div class="compare-vs">VS</div>
+            <div class="compare-card-preview second">
+               <div class="card-p-header">
+                 <span class="card-p-title">MBBS (NEET)</span>
+                 <span class="card-p-badge">5.5 Years</span>
+               </div>
+               <div class="card-p-metric">
+                 <span class="card-p-label">Average Salary</span>
+                 <span class="card-p-val">₹10L /yr</span>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="split-text">
+        <span class="split-tag">02 / COMPARE</span>
+        <h2 class="split-title">Side-by-Side <span>Course Matrices</span></h2>
+        <p class="split-desc">No more spreadsheets or messy notes. Compare average starting salaries, admission pressure, course durations, and tuition costs side-by-side to make the right choice immediately.</p>
+        <a href="#compare" class="btn btn-secondary">View Comparison Matrix</a>
+      </div>
+    </div>
+  </section>
 
   <!-- Comparison Matrix Section -->
   <section id="compare">
-    <span class="section-tag">Comparison Table</span>
     <h2 class="section-title">Direct Comparison: <span>NEET vs. Alternatives</span></h2>
     <p class="section-subtitle">Review side-by-side criteria regarding admission pressure, duration, seats, and actual
       salary benchmarks.</p>
@@ -396,52 +512,271 @@
     </div>
   </section>
 
+  <!-- Career Preview Carousel Section -->
+  <section id="career-preview" class="career-preview-section">
+    <h2 class="section-title">Explore Alternative <span>Careers</span></h2>
+    <p class="section-subtitle">A sneak peek of the top high-impact alternatives available for PCB students.</p>
+
+    <div class="carousel-container-outer">
+      <button class="carousel-btn prev" id="career-carousel-prev" aria-label="Previous Slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      
+      <div class="carousel-track" id="career-carousel-track">
+        <!-- Card 1: B.V.Sc (Veterinary) -->
+        <div class="career-preview-card">
+          <div class="card-visual visual-vet">
+            <span class="card-emoji">🩺</span>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Medical & Allied</span>
+            <h3>B.V.Sc & AH (Veterinary)</h3>
+            <div class="card-meta-grid">
+              <div class="meta-item">
+                <span class="m-label">Duration</span>
+                <span class="m-val">5.5 Years</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Avg Salary</span>
+                <span class="m-val">₹6L - ₹12L /yr</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Difficulty</span>
+                <span class="m-val text-hard font-semibold">Hard</span>
+              </div>
+            </div>
+            <a href="/explore/bvsc-and-ah" class="btn btn-card-cta">Explore Path</a>
+          </div>
+        </div>
+
+        <!-- Card 2: B.Tech Biotech -->
+        <div class="career-preview-card">
+          <div class="card-visual visual-biotech">
+            <span class="card-emoji">🧬</span>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Biotech & Applied</span>
+            <h3>B.Tech Biotechnology</h3>
+            <div class="card-meta-grid">
+              <div class="meta-item">
+                <span class="m-label">Duration</span>
+                <span class="m-val">4 Years</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Avg Salary</span>
+                <span class="m-val">₹5.5L - ₹12L /yr</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Difficulty</span>
+                <span class="m-val text-hard font-semibold">Hard</span>
+              </div>
+            </div>
+            <a href="/explore/btech-biotechnology" class="btn btn-card-cta">Explore Path</a>
+          </div>
+        </div>
+
+        <!-- Card 3: BAMS (Ayurveda) -->
+        <div class="career-preview-card">
+          <div class="card-visual visual-ayur">
+            <span class="card-emoji">🌱</span>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Medical & Allied</span>
+            <h3>BAMS (Ayurveda)</h3>
+            <div class="card-meta-grid">
+              <div class="meta-item">
+                <span class="m-label">Duration</span>
+                <span class="m-val">5.5 Years</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Avg Salary</span>
+                <span class="m-val">₹4L - ₹10L /yr</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Difficulty</span>
+                <span class="m-val text-mod font-semibold">Moderate</span>
+              </div>
+            </div>
+            <a href="/explore/bams" class="btn btn-card-cta">Explore Path</a>
+          </div>
+        </div>
+
+        <!-- Card 4: BCA (Computing) -->
+        <div class="career-preview-card">
+          <div class="card-visual visual-tech">
+            <span class="card-emoji">💻</span>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Computing & Tech</span>
+            <h3>BCA (Computer Apps)</h3>
+            <div class="card-meta-grid">
+              <div class="meta-item">
+                <span class="m-label">Duration</span>
+                <span class="m-val">3 Years</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Avg Salary</span>
+                <span class="m-val">₹3.5L - ₹10L /yr</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Difficulty</span>
+                <span class="m-val text-easy font-semibold">Moderate</span>
+              </div>
+            </div>
+            <a href="/explore/bca" class="btn btn-card-cta">Explore Path</a>
+          </div>
+        </div>
+
+        <!-- Card 5: BSc Nursing -->
+        <div class="career-preview-card">
+          <div class="card-visual visual-nurse">
+            <span class="card-emoji">🩹</span>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Nursing</span>
+            <h3>B.Sc Nursing</h3>
+            <div class="card-meta-grid">
+              <div class="meta-item">
+                <span class="m-label">Duration</span>
+                <span class="m-val">4 Years</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Avg Salary</span>
+                <span class="m-val">₹3L - ₹6.5L /yr</span>
+              </div>
+              <div class="meta-item">
+                <span class="m-label">Difficulty</span>
+                <span class="m-val text-mod font-semibold">Moderate</span>
+              </div>
+            </div>
+            <a href="/explore/bsc-nursing" class="btn btn-card-cta">Explore Path</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-btn next" id="career-carousel-next" aria-label="Next Slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
   <!-- Testimonials Section -->
-  <section id="testimonials">
-    <span class="section-tag">Success Stories</span>
+  <section id="testimonials" class="testimonials-section-wrapper">
     <h2 class="section-title">Thriving Beyond <span>Standard Exams</span></h2>
-    <p class="section-subtitle">Read how students built rewarding careers after deciding not to repeat NEET/JEE years.
-    </p>
+    <p class="section-subtitle">Read how students built rewarding careers after deciding not to repeat NEET/JEE years.</p>
 
-    <div class="testimonials-grid">
-      <!-- Testimonial 1 -->
-      <div class="testimonial-card reveal">
-        <p class="testimonial-quote">"After missing NEET by 10 marks, I felt devastated. But choosing B.V.Sc
-          (Veterinary) was the best decision. Today, I run a thriving pet clinic and consult for premium dairy brands.
-          The return on investment is incredible."</p>
-        <div class="testimonial-profile">
-          <div class="avatar-placeholder">DK</div>
-          <div class="profile-info">
-            <h4>Dr. Devika Krishnan</h4>
-            <p>Veterinary Surgeon & Consultant</p>
+    <div class="testimonials-carousel-outer">
+      <div class="testimonials-track" id="testimonials-track">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">"After missing NEET by 10 marks, I felt devastated. But choosing B.V.Sc (Veterinary) was the best decision. Today, I run a thriving pet clinic and consult for premium dairy brands. The return on investment is incredible."</p>
+          <div class="testimonial-profile">
+            <div class="avatar-placeholder" style="background: linear-gradient(135deg, #ea580c, #f97316); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;">DK</div>
+            <div class="profile-info">
+              <h4>Dr. Devika Krishnan</h4>
+              <p>Veterinary Surgeon & Consultant</p>
+              <span class="outcome-badge">Outcome: Clinic Owner</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">"I wanted to build medical vaccines but couldn't get a government medical seat. I took up B.Tech Biotechnology. Now, I'm working with a major international research firm on mRNA research."</p>
+          <div class="testimonial-profile">
+            <div class="avatar-placeholder" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;">AS</div>
+            <div class="profile-info">
+              <h4>Aniket Sharma</h4>
+              <p>R&D Bio-Engineer, Serum Labs</p>
+              <span class="outcome-badge">Outcome: mRNA R&D</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">"I sat out two drop years for NEET and regretted it. I switched gears and enrolled in BCA, specializing in Health-Tech products. I now develop clinical software earning twice as much as my MBBS friends."</p>
+          <div class="testimonial-profile">
+            <div class="avatar-placeholder" style="background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;">RM</div>
+            <div class="profile-info">
+              <h4>Rohan Mehta</h4>
+              <p>Senior Product Manager, MedTech Corp</p>
+              <span class="outcome-badge">Outcome: Product Manager</span>
+            </div>
           </div>
         </div>
       </div>
+      <div class="carousel-indicators" id="testimonials-indicators">
+        <span class="indicator active" data-slide="0"></span>
+        <span class="indicator" data-slide="1"></span>
+        <span class="indicator" data-slide="2"></span>
+      </div>
+    </div>
+  </section>
 
-      <!-- Testimonial 2 -->
-      <div class="testimonial-card reveal reveal-delay-1">
-        <p class="testimonial-quote">"I wanted to build medical vaccines but couldn't get a government medical seat. I
-          took up B.Tech Biotechnology. Now, I'm working with a major international research firm on mRNA research."</p>
-        <div class="testimonial-profile">
-          <div class="avatar-placeholder">AS</div>
-          <div class="profile-info">
-            <h4>Aniket Sharma</h4>
-            <p>R&D Bio-Engineer, Serum Labs</p>
+  <!-- Community Preview Section -->
+  <section id="community-preview" class="comm-preview-section">
+    <h2 class="section-title">Join a Thriving <span>Student Community</span></h2>
+    <p class="section-subtitle">Real students, real mentors. Ask doubts, share experiences, and explore together.</p>
+
+    <div class="comm-preview-grid">
+      <!-- Query 1 -->
+      <div class="comm-preview-card">
+        <div class="c-card-header">
+          <span class="c-card-avatar" style="background: rgba(209,72,54,0.1); color: #D14836;">P</span>
+          <div class="c-card-header-text">
+            <span class="c-card-user">Priya_NEET25</span>
+            <span class="c-card-tag">Computing</span>
           </div>
+        </div>
+        <h4>Can a PCB student do BCA? I don't have Maths in Class 12.</h4>
+        <p class="c-card-snippet">I took Biology in Class 12 and really want to get into software development. I read that some universities offer BCA for non-math students...</p>
+        <div class="c-card-footer">
+          <span class="c-card-stat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            2 Replies
+          </span>
+          <a href="/community" class="c-card-link">View Discussion &rarr;</a>
         </div>
       </div>
 
-      <!-- Testimonial 3 -->
-      <div class="testimonial-card reveal reveal-delay-2">
-        <p class="testimonial-quote">"I sat out two drop years for NEET and regretted it. I switched gears and enrolled
-          in BCA, specializing in Health-Tech products. I now develop clinical software earning twice as much as my MBBS
-          friends."</p>
-        <div class="testimonial-profile">
-          <div class="avatar-placeholder">RM</div>
-          <div class="profile-info">
-            <h4>Rohan Mehta</h4>
-            <p>Senior Product Manager, MedTech Corp</p>
+      <!-- Query 2 -->
+      <div class="comm-preview-card">
+        <div class="c-card-header">
+          <span class="c-card-avatar" style="background: rgba(34,197,94,0.1); color: #22C55E;">R</span>
+          <div class="c-card-header-text">
+            <span class="c-card-user">Rohan_S</span>
+            <span class="c-card-tag">Biotech</span>
           </div>
+        </div>
+        <h4>B.Tech Biotech vs B.Pharm - Which has better opportunities in India?</h4>
+        <p class="c-card-snippet">Confused between these two. I want a stable career after Class 12. Both sound interesting but I want to know about industrial placement packages...</p>
+        <div class="c-card-footer">
+          <span class="c-card-stat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            1 Reply
+          </span>
+          <a href="/community" class="c-card-link">View Discussion &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Query 3 -->
+      <div class="comm-preview-card">
+        <div class="c-card-header">
+          <span class="c-card-avatar" style="background: rgba(249,115,22,0.1); color: #F97316;">A</span>
+          <div class="c-card-header-text">
+            <span class="c-card-user">Ananya_K</span>
+            <span class="c-card-tag">Medical</span>
+          </div>
+        </div>
+        <h4>How difficult is BVSc (Veterinary Science) compared to MBBS?</h4>
+        <p class="c-card-snippet">I got a decent rank in NEET but might miss MBBS. I love animals and am considering BVSc. Is the course load similar to MBBS?...</p>
+        <div class="c-card-footer">
+          <span class="c-card-stat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            1 Reply
+          </span>
+          <a href="/community" class="c-card-link">View Discussion &rarr;</a>
         </div>
       </div>
     </div>
@@ -449,109 +784,97 @@
 
   <!-- FAQs Section -->
   <section id="faq">
-    <span class="section-tag">Common Queries</span>
     <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
     <p class="section-subtitle">Clear doubts about degrees, practice licenses, and eligibility rules.</p>
 
-    <div class="faq-list">
-      <!-- Q1 -->
-      <div class="faq-item reveal">
-        <button class="faq-question">
-          Can I prescribe medicines and practice clinic operations with BAMS?
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          Yes, BAMS graduates are licensed Ayurvedic doctors and are legally permitted to practice clinical medicine,
-          prescribe medication under Ayurvedic systems, and in several states in India, practice integrated general
-          medicine (with specific modern medicine drugs as per government norms).
+    <!-- FAQ Search Bar -->
+    <div class="faq-search-container">
+      <div class="faq-search-wrapper">
+        <svg class="faq-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="faq-search-input" placeholder="Search questions (e.g., prescribe, veterinary, coding)..." class="faq-search-field">
+      </div>
+    </div>
+
+    <div class="faq-grid-layout">
+      <div class="faq-column">
+        <!-- Q1 -->
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            Can I prescribe medicines and practice clinic operations with BAMS?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Yes, BAMS graduates are licensed Ayurvedic doctors and are legally permitted to practice clinical medicine,
+            prescribe medication under Ayurvedic systems, and in several states in India, practice integrated general
+            medicine (with specific modern medicine drugs as per government norms).
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question">
+            What is the scope of Veterinary Science (B.V.Sc) compared to MBBS?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Veterinary Science has very low competition compared to human medicine, yet offers massive scope. You can
+            start a private veterinary clinic, work in national wildlife sectors, work for corporate agricultural and food
+            brands, or pursue high-paying research roles internationally.
+          </div>
         </div>
       </div>
 
-      <!-- Q2 -->
-      <div class="faq-item reveal reveal-delay-1">
-        <button class="faq-question">
-          What is the scope of Veterinary Science (B.V.Sc) compared to MBBS?
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          Veterinary Science has very low competition compared to human medicine, yet offers massive scope. You can
-          start a private veterinary clinic, work in national wildlife sectors, work for corporate agricultural and food
-          brands, or pursue high-paying research roles internationally.
+      <div class="faq-column">
+        <!-- Q3 -->
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-question">
+            Are coding careers like BCA suitable for biology students?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Absolutely. Most BCA programs do not require mathematics as a hard prerequisite in high school. Biology
+            students do exceptionally well in Bioinformatics, Healthcare Software Development, and medical data analysis
+            since they understand biological systems.
+          </div>
         </div>
-      </div>
 
-      <!-- Q3 -->
-      <div class="faq-item reveal reveal-delay-2">
-        <button class="faq-question">
-          Are coding careers like BCA suitable for biology students?
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          Absolutely. Most BCA programs do not require mathematics as a hard prerequisite in high school. Biology
-          students do exceptionally well in Bioinformatics, Healthcare Software Development, and medical data analysis
-          since they understand biological systems.
-        </div>
-      </div>
-
-      <!-- Q4 -->
-      <div class="faq-item reveal reveal-delay-3">
-        <button class="faq-question">
-          Is Biotechnology a good alternative if I want a research career?
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          Biotechnology is one of the most exciting research fields. With a B.Tech or BSc in Biotechnology, you can work
-          on CRISPR gene editing, vaccine design, biological crop protection, and sustainable bio-fuels.
+        <!-- Q4 -->
+        <div class="faq-item reveal reveal-delay-3">
+          <button class="faq-question">
+            Is Biotechnology a good alternative if I want a research career?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Biotechnology is one of the most exciting research fields. With a B.Tech or BSc in Biotechnology, you can work
+            on CRISPR gene editing, vaccine design, biological crop protection, and sustainable bio-fuels.
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner Section -->
-  <section>
-    <div class="cta-banner">
-      <h2>Stop Repeating. Start Progressing.</h2>
-      <p>Your dream of contributing to science and society doesn't require a single specific seat. Find your alternative
-        career roadmap today.</p>
-      <a href="/explore" class="btn btn-primary">Explore Streams Now</a>
-    </div>
-  </section>
-
-  <!-- Premium Stats Section -->
-  <section class="stats-section">
-    <div class="stats-grid-overlay"></div>
-    <div class="stats-divider"></div>
-    <div class="stats-container">
-      <div class="stat-col reveal-stat" data-target="500">
-        <div class="stat-number-wrapper">
-          <span class="stat-number">0</span><span class="stat-plus">+</span>
+  <!-- Premium CTA Banner Section -->
+  <section class="cta-banner-wrapper">
+    <div class="cta-banner-card reveal">
+      <div class="cta-banner-mesh"></div>
+      <div class="cta-banner-content">
+        <h2>Stop Repeating. Start Progressing.</h2>
+        <p>Your dream of contributing to science and society doesn't require a single specific seat. Discover alternative professional career roadmaps today.</p>
+        <div class="cta-banner-actions">
+          <a href="/explore" class="btn btn-usp btn-cta-large">Explore Streams Now</a>
         </div>
-        <div class="stat-label">Career Paths</div>
-        <div class="stat-desc">explained with detailed roadmaps</div>
-      </div>
-
-      <div class="stat-col reveal-stat" data-target="100">
-        <div class="stat-number-wrapper">
-          <span class="stat-number">0</span><span class="stat-plus">+</span>
+        <div class="cta-banner-badge-row">
+          <span class="cta-badge">No NEET/JEE scores required</span>
+          <span class="cta-badge">100% Free Career Maps</span>
         </div>
-        <div class="stat-label">Courses Covered</div>
-        <div class="stat-desc">across PCB, PCMB & allied fields</div>
-      </div>
-
-      <div class="stat-col reveal-stat" data-target="1000">
-        <div class="stat-number-wrapper">
-          <span class="stat-number">0</span><span class="stat-plus">+</span>
-        </div>
-        <div class="stat-label">Colleges Listed</div>
-        <div class="stat-desc">with eligibility, exams & opportunities</div>
       </div>
     </div>
   </section>

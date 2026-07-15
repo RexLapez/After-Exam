@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=15">
+  <link rel="stylesheet" href="/css/style.css">
 
   <!-- Structured Data: JSON-LD Schemas -->
   <script type="application/ld+json">
@@ -64,12 +64,13 @@
     /* Community Page Overrides & Layout           */
     /* ─────────────────────────────────────────── */
     :root {
-      --community-bg: #0a0b0f;
-      --card-bg: rgba(255,255,255,0.028);
-      --card-border: rgba(255,255,255,0.07);
-      --accent: #8b5cf6;
-      --accent-cyan: #06b6d4;
-      --text-muted: rgba(255,255,255,0.45);
+      --community-bg: #0B0B0B;
+      --card-bg: #181818;
+      --card-border: #2A2A2A;
+      --accent: #D14836;
+      --accent-hover: #b93f30;
+      --accent-cyan: #F97316;
+      --text-muted: #8A8A8A;
     }
 
     body { background: var(--community-bg); }
@@ -89,7 +90,7 @@
       font-family: 'Outfit', sans-serif;
       font-size: 2rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #fff 0%, #a78bfa 60%, #06b6d4 100%);
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 60%, var(--accent-cyan) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -115,9 +116,9 @@
 
     /* ── Compose Box ── */
     @keyframes borderGlow {
-      0%   { border-color: rgba(139,92,246,0.35); box-shadow: 0 0 12px rgba(139,92,246,0.08); }
-      50%  { border-color: rgba(6,182,212,0.45);  box-shadow: 0 0 22px rgba(6,182,212,0.12); }
-      100% { border-color: rgba(139,92,246,0.35); box-shadow: 0 0 12px rgba(139,92,246,0.08); }
+      0%   { border-color: var(--card-border); box-shadow: none; }
+      50%  { border-color: rgba(209,72,54,0.4);  box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+      100% { border-color: var(--card-border); box-shadow: none; }
     }
     @keyframes shimmerLine {
       0%   { background-position: -200% 0; }
@@ -141,7 +142,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #8b5cf6, #06b6d4, transparent);
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-cyan), transparent);
       background-size: 200% 100%;
       animation: shimmerLine 3s linear infinite;
     }
@@ -154,7 +155,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -170,7 +171,7 @@
     }
     .compose-box.glow .avatar-circle {
       transform: scale(1.08);
-      box-shadow: 0 0 14px rgba(139,92,246,0.35);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     #compose-textarea {
       flex: 1;
@@ -214,20 +215,21 @@
     }
     .compose-category option { background: #111; }
     .post-btn {
-      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      background: var(--accent);
       border: none;
       color: #fff;
       padding: 0.6rem 1.5rem;
-      border-radius: 100px;
+      border-radius: 12px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
     .post-btn:hover {
+      background: var(--accent-hover);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     /* ── Filter Row ── */
@@ -250,9 +252,9 @@
     }
     .chip:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
     .chip.active {
-      background: rgba(139, 92, 246, 0.12);
-      border-color: rgba(139, 92, 246, 0.4);
-      color: #c4b5fd;
+      background: rgba(209, 72, 54, 0.12);
+      border-color: rgba(209, 72, 54, 0.4);
+      color: var(--accent);
     }
     .search-wrap {
       flex: 1;
@@ -321,9 +323,9 @@
       gap: 0.5rem;
     }
     .mod-badge {
-      background: rgba(6,182,212,0.12);
-      color: #06b6d4;
-      border: 1px solid rgba(6,182,212,0.25);
+      background: rgba(249, 115, 22, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(249, 115, 22, 0.25);
       border-radius: 4px;
       padding: 0.1rem 0.45rem;
       font-size: 0.65rem;
@@ -345,9 +347,9 @@
       letter-spacing: 0.05em;
       flex-shrink: 0;
     }
-    .cat-medical  { background: rgba(6,182,212,0.08); color:#06b6d4; border:1px solid rgba(6,182,212,0.2); }
-    .cat-biotech  { background: rgba(168,85,247,0.08); color:#a855f7; border:1px solid rgba(168,85,247,0.2); }
-    .cat-computing{ background: rgba(234,179,8,0.08);  color:#eab308; border:1px solid rgba(234,179,8,0.2); }
+    .cat-medical  { background: rgba(249, 115, 22, 0.08); color: var(--accent-cyan); border: 1px solid rgba(249, 115, 22, 0.2); }
+    .cat-biotech  { background: rgba(209, 72, 54, 0.08); color: var(--accent); border: 1px solid rgba(209, 72, 54, 0.2); }
+    .cat-computing{ background: rgba(245, 158, 11, 0.08); color: var(--accent-cyan); border: 1px solid rgba(245, 158, 11, 0.2); }
 
     .post-body {
       font-size: 1rem;
@@ -378,8 +380,8 @@
       border-radius: 6px;
     }
     .act-btn:hover { color: #fff; }
-    .act-btn.upvoted { color: #06b6d4; }
-    .act-btn.reply-open { color: #a855f7; }
+    .act-btn.upvoted { color: var(--accent-cyan); }
+    .act-btn.reply-open { color: var(--accent); }
 
     /* ── Replies Section ── */
     .replies-section {
@@ -568,13 +570,13 @@
       transition: border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     .modal-field input:focus {
-      border-color: rgba(139, 92, 246, 0.6);
+      border-color: var(--accent);
       transform: scale(1.015);
-      box-shadow: 0 0 18px rgba(139, 92, 246, 0.25), inset 0 0 6px rgba(139, 92, 246, 0.1);
+      box-shadow: 0 0 8px rgba(209, 72, 54, 0.25), inset 0 0 4px rgba(209, 72, 54, 0.05);
     }
     .modal-submit {
       width: 100%;
-      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      background: var(--accent);
       border: none;
       color: #fff;
       padding: 0.9rem;
@@ -584,8 +586,9 @@
       cursor: pointer;
       margin-top: 0.5rem;
       transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
-    .modal-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .modal-submit:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .modal-toggle {
       text-align: center;
       margin-top: 1.25rem;
@@ -593,7 +596,7 @@
       color: var(--text-muted);
     }
     .modal-toggle a {
-      color: #a78bfa;
+      color: var(--accent-cyan);
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
@@ -605,8 +608,8 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(139,92,246,0.08);
-      border: 1px solid rgba(139,92,246,0.25);
+      background: rgba(209,72,54,0.08);
+      border: 1px solid rgba(209,72,54,0.25);
       border-radius: 100px;
       padding: 0.4rem 1rem 0.4rem 0.5rem;
       cursor: pointer;
@@ -615,11 +618,11 @@
       font-size: 0.88rem;
       font-weight: 500;
     }
-    .user-pill:hover { background: rgba(139,92,246,0.15); }
+    .user-pill:hover { background: rgba(209,72,54,0.15); }
     .user-pill .pill-avatar {
       width: 26px; height: 26px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
       display: flex; align-items: center; justify-content: center;
       font-size: 0.7rem;
       font-weight: 700;
@@ -709,12 +712,192 @@
       .filter-row { gap: 0.4rem; }
       .search-wrap { max-width: none; margin-left: 0; }
     }
+
+    /* ── Community Grid & Sorter Styles ── */
+    .comm-layout-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2.25rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 130px 2rem 60px 2rem;
+    }
+    .comm-feed-col {
+      grid-column: span 8;
+    }
+    .comm-sidebar-col {
+      grid-column: span 4;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* Sidebar premium widgets */
+    .sidebar-widget {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .sidebar-widget h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      font-family: 'Outfit', sans-serif;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 0.75rem;
+    }
+    .widget-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .widget-item-link {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-weight: 500;
+      line-height: 1.4;
+      display: block;
+      transition: color 0.2s ease;
+    }
+    .widget-item-link:hover {
+      color: var(--accent-cyan);
+    }
+    .widget-tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .sidebar-contributor {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .contributor-rank {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      width: 20px;
+    }
+    .contributor-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .contributor-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .contributor-pts {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .mentor-online-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .mentor-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+      display: inline-block;
+    }
+
+    /* Badges updates */
+    .alumni-badge {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22C55E;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 4px;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .rep-badge {
+      background: rgba(6, 182, 212, 0.1);
+      color: #06B6D4;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 4px;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Post Sorters controls */
+    .feed-sort-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 0.75rem;
+    }
+    .sort-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .sort-select-wrapper {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .sort-btn {
+      background: none !important;
+      border: none !important;
+      color: var(--text-muted) !important;
+      font-size: 0.82rem !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      padding: 0.25rem 0.65rem !important;
+      border-radius: 6px !important;
+      outline: none !important;
+      box-shadow: none !important;
+      transition: all 0.2s ease !important;
+    }
+    .sort-btn:hover {
+      color: #fff !important;
+    }
+    .sort-btn.active {
+      background: rgba(255, 255, 255, 0.07) !important;
+      color: #fff !important;
+    }
+
+    /* Mobile responsive split layout & community sidebars */
+    @media (max-width: 1024px) {
+      .comm-layout-grid {
+        grid-template-columns: 1fr;
+        padding-top: 110px;
+      }
+      .comm-feed-col, .comm-sidebar-col {
+        grid-column: span 12;
+      }
+      .comm-sidebar-col {
+        margin-top: 2rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .comm-layout-grid {
+        padding: 100px 1rem 60px 1rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Custom Galaxy Background -->
-  <div id="galaxy"></div>
+
 
   <!-- Header -->
   <header>
@@ -742,42 +925,109 @@
     </button>
   </header>
 
-  <!-- Main Community Layout -->
-  <div class="comm-layout">
+  <!-- Main Community Grid Layout -->
+  <div class="comm-layout-grid">
+    <!-- Left Column: Feed -->
+    <div class="comm-feed-col">
+      <!-- Compose Post Box -->
+      <div class="compose-box">
+        <div style="margin-bottom: 0.75rem; width: 100%;">
+          <input type="text" id="compose-title" placeholder="Title of your question..." required style="width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.06); color: #fff; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; padding: 0.5rem 0 0.5rem 56px; outline: none; box-sizing: border-box;">
+        </div>
+        <div class="compose-top">
+          <div class="avatar-circle guest" id="compose-avatar">?</div>
+          <textarea id="compose-textarea" placeholder="What's your question or doubt? (e.g. Is BCA possible without a math background?)"></textarea>
+        </div>
+        <div class="compose-footer">
+          <select class="compose-category" id="compose-cat">
+            <!-- Options populated dynamically from Supabase communities -->
+          </select>
+          <button class="post-btn" id="post-btn">Post Question</button>
+        </div>
+      </div>
 
+      <!-- Feed Sorters Bar -->
+      <div class="feed-sort-row">
+        <span class="sort-title">Sort Discussions</span>
+        <div class="sort-select-wrapper" id="feed-sort-wrapper">
+          <button class="sort-btn active" data-sort="newest">Newest</button>
+          <button class="sort-btn" data-sort="trending">Trending</button>
+          <button class="sort-btn" data-sort="helpful">Most Helpful</button>
+          <button class="sort-btn" data-sort="answered">Most Answered</button>
+        </div>
+      </div>
 
-    <!-- Compose Post Box -->
-    <div class="compose-box">
-      <div style="margin-bottom: 0.75rem; width: 100%;">
-        <input type="text" id="compose-title" placeholder="Title of your question..." required style="width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.06); color: #fff; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; padding: 0.5rem 0 0.5rem 56px; outline: none; box-sizing: border-box;">
+      <!-- Filter Bar -->
+      <div class="filter-row">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="medical">Medical &amp; Allied</button>
+        <button class="chip" data-filter="biotech">Biotech &amp; Applied</button>
+        <button class="chip" data-filter="computing">Computing &amp; Tech</button>
+        <div class="search-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search-input" type="text" placeholder="Search posts...">
+        </div>
       </div>
-      <div class="compose-top">
-        <div class="avatar-circle guest" id="compose-avatar">?</div>
-        <textarea id="compose-textarea" placeholder="What's your question or doubt? (e.g. Is BCA possible without a math background?)"></textarea>
-      </div>
-      <div class="compose-footer">
-        <select class="compose-category" id="compose-cat">
-          <!-- Options populated dynamically from Supabase communities -->
-        </select>
-        <button class="post-btn" id="post-btn">Post Question</button>
-      </div>
+
+      <!-- Feed -->
+      <div id="feed"></div>
     </div>
 
-    <!-- Filter Bar -->
-    <div class="filter-row">
-      <button class="chip active" data-filter="all">All</button>
-      <button class="chip" data-filter="medical">Medical &amp; Allied</button>
-      <button class="chip" data-filter="biotech">Biotech &amp; Applied</button>
-      <button class="chip" data-filter="computing">Computing &amp; Tech</button>
-      <div class="search-wrap">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input id="search-input" type="text" placeholder="Search posts...">
+    <!-- Right Column: Sidebar -->
+    <div class="comm-sidebar-col">
+      <!-- Trending Discussions Widget -->
+      <div class="sidebar-widget">
+        <h3>Trending Topics</h3>
+        <div class="widget-list">
+          <a href="#" class="widget-item-link">Is math mandatory for BCA admission?</a>
+          <a href="#" class="widget-item-link">B.Tech Biotech vs BAMS salary details</a>
+          <a href="#" class="widget-item-link">Scope of Veterinary in wildlife conservation</a>
+        </div>
+      </div>
+
+      <!-- Leaderboard Widget -->
+      <div class="sidebar-widget">
+        <h3>Top Contributors</h3>
+        <div class="widget-list">
+          <div class="sidebar-contributor">
+            <span class="contributor-rank">#1</span>
+            <div class="contributor-info">
+              <span class="contributor-name">Dr. Devika K. <span class="alumni-badge">✨ Mentor</span></span>
+              <span class="contributor-pts">2,480 points • 42 Answers</span>
+            </div>
+          </div>
+          <div class="sidebar-contributor">
+            <span class="contributor-rank">#2</span>
+            <div class="contributor-info">
+              <span class="contributor-name">Rohan Mehta <span class="alumni-badge">🎓 Alumni</span></span>
+              <span class="contributor-pts">1,950 points • 29 Answers</span>
+            </div>
+          </div>
+          <div class="sidebar-contributor">
+            <span class="contributor-rank">#3</span>
+            <div class="contributor-info">
+              <span class="contributor-name">Aarav Patel <span class="rep-badge">🏛️ Rep</span></span>
+              <span class="contributor-pts">1,520 points • 18 Answers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Mentors Widget -->
+      <div class="sidebar-widget">
+        <h3>Active Mentors</h3>
+        <div class="widget-list">
+          <div class="mentor-online-row">
+            <span class="mentor-status-dot"></span>
+            <span class="contributor-name">Dr. Devika Krishnan</span>
+          </div>
+          <div class="mentor-online-row">
+            <span class="mentor-status-dot"></span>
+            <span class="contributor-name">Aniket Sharma</span>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Feed -->
-    <div id="feed"></div>
-
   </div>
 
   <!-- Login / Register Modal -->
@@ -864,7 +1114,7 @@
     </div>
   </footer>
 
-  <script type="module" src="/js/galaxy.js"></script>
+
   <script type="module" src="/js/community.js"></script>
 </body>
 </html>

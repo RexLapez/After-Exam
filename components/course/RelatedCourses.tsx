@@ -14,14 +14,13 @@ export default function RelatedCourses({ courseSlugs }: Props) {
 
   return (
     <section id="related-section" className="py-12 scroll-mt-24">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="p-2.5 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400">
-          <Layers className="w-5 h-5" />
+      {/* Section Header */}
+      <div className="space-y-2 mb-10">
+        <div className="inline-block">
+          <h2 className="text-2xl sm:text-3xl font-black text-white font-display tracking-tight pb-1.5">Similar Career Paths</h2>
+          <div className="h-[3px] w-12 bg-brand-primary rounded-full" />
         </div>
-        <div>
-          <h2 className="text-2xl font-black text-white font-display tracking-tight">Similar Career Paths</h2>
-          <p className="text-xs text-slate-400 mt-1">Other alternative academic paths that match your streams and interest profile.</p>
-        </div>
+        <p className="text-xs sm:text-sm text-slate-400">Other alternative academic paths that match your streams and interest profile.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -37,12 +36,12 @@ export default function RelatedCourses({ courseSlugs }: Props) {
           >
             <div>
               <div className="flex items-center gap-3.5 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-xl shrink-0">
-                  {course!.categoryEmoji || '🩺'}
+                <div className="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xl shrink-0">
+                  {course!.categoryEmoji || '📚'}
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest">{course!.category}</span>
-                  <h3 className="text-sm md:text-base font-bold text-slate-100 group-hover:text-violet-400 transition-colors leading-snug mt-0.5">{course!.title}</h3>
+                  <h3 className="text-sm md:text-base font-bold text-slate-100 group-hover:text-brand-accent transition-colors leading-snug mt-0.5">{course!.title}</h3>
                 </div>
               </div>
               
@@ -53,7 +52,7 @@ export default function RelatedCourses({ courseSlugs }: Props) {
             
             <div className="flex justify-between items-center text-xs font-bold pt-4 border-t border-white/5">
               <span className="text-slate-500 font-mono">{course!.hero.duration}</span>
-              <span className="text-cyan-400 flex items-center gap-1">
+              <span className="text-brand-accent flex items-center gap-1">
                 <span>View Details</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </span>
