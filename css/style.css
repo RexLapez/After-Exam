@@ -40,11 +40,13 @@
   scroll-behavior: smooth;
 }
 
-body {
+html, body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
   line-height: 1.6;
 }
 
@@ -4258,6 +4260,10 @@ section {
   }
   .faq-grid-layout {
     grid-template-columns: 1fr;
+  }
+  .comm-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   .cta-banner-card {
     padding: 4rem 1.5rem;
