@@ -365,7 +365,7 @@ export default function PathFinder({ onBack }: NeuralPathwayProps) {
                             <a
                               key={course.slug}
                               href={`/explore/${course.slug}`}
-                              className="flex items-center justify-between px-3 py-2 hover:bg-brand-primary/10 rounded-lg group transition-colors"
+                              className="flex items-center justify-between px-3 py-3 hover:bg-brand-primary/10 rounded-lg group transition-colors"
                             >
                               <span className="text-xs font-semibold text-slate-200 group-hover:text-white">{course.name}</span>
                               <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-brand-primary transition-transform group-hover:translate-x-0.5" />
@@ -390,7 +390,7 @@ export default function PathFinder({ onBack }: NeuralPathwayProps) {
                                   document.getElementById(`category-${cat.replace(/\s+/g, '-').toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                                 }, 100);
                               }}
-                              className="w-full flex items-center justify-between px-3 py-2 hover:bg-[#22C55E]/10 rounded-lg group text-left transition-colors"
+                              className="w-full flex items-center justify-between px-3 py-3 hover:bg-[#22C55E]/10 rounded-lg group text-left transition-colors"
                             >
                               <span className="text-xs font-semibold text-slate-200 group-hover:text-white">{cat}</span>
                               <span className="text-[10px] font-bold text-[#22C55E] opacity-0 group-hover:opacity-100 transition-opacity">Expand Group &darr;</span>
@@ -408,7 +408,7 @@ export default function PathFinder({ onBack }: NeuralPathwayProps) {
                             <a
                               key={coll.name}
                               href={`/explore/${coll.slug}`}
-                              className="flex items-center justify-between px-3 py-2 hover:bg-brand-accent/10 rounded-lg group transition-colors"
+                              className="flex items-center justify-between px-3 py-3 hover:bg-brand-accent/10 rounded-lg group transition-colors"
                             >
                               <div className="flex items-center gap-2">
                                 <Building2 className="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-accent" />

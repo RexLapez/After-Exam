@@ -62,7 +62,7 @@ export default function CourseHero({ hero, category, categoryEmoji }: Props) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-6 gap-6 pt-2 w-full items-stretch"
+          className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 pt-2 w-full items-stretch"
         >
           <OverviewCard 
             icon={<Clock className="w-8 h-8" />} 
