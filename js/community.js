@@ -840,25 +840,37 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     }
   });
 
+  const backdrop = document.getElementById('nav-backdrop');
+
+  const closeMenu = () => {
+    if (nav) nav.classList.remove('active');
+    if (backdrop) backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+    if (menuToggle) {
+      menuToggle.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
+    }
+  };
+
   // Mobile menu toggle
   if (menuToggle && nav) {
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
       const isExpanded = nav.classList.contains('active');
+      if (backdrop) backdrop.classList.toggle('active', isExpanded);
+      document.body.style.overflow = isExpanded ? 'hidden' : '';
       menuToggle.innerHTML = isExpanded
         ? `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`
         : `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
     });
   }
 
+  if (backdrop) {
+    backdrop.addEventListener('click', closeMenu);
+  }
+
   // Close mobile menu on link click
   navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (nav && menuToggle) {
-        nav.classList.remove('active');
-        menuToggle.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
-      }
-    });
+    link.addEventListener('click', closeMenu);
   });
 
   // Bind Sorters click event listeners

@@ -3294,7 +3294,10 @@ textarea.ask-input {
 
 @media (max-width: 768px) {
   .stats-section {
-    padding: 8rem 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    padding: 5rem 1.25rem 3rem 1.25rem;
   }
   .stats-container {
     grid-template-columns: 1fr;
