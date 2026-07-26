@@ -10,6 +10,101 @@
       "source": "/courses/:slug",
       "destination": "/explore/:slug",
       "permanent": true
+    },
+    {
+      "source": "/explore/genetic-engineering",
+      "destination": "/explore/btech-biotechnology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/molecular-biology",
+      "destination": "/explore/bsc-biology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/cell-biology",
+      "destination": "/explore/bsc-biology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/medical-biotechnology",
+      "destination": "/explore/bsc-biotechnology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/industrial-biotechnology",
+      "destination": "/explore/bsc-biotechnology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/plant-biotechnology",
+      "destination": "/explore/bsc-biotechnology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/agricultural-biotechnology",
+      "destination": "/explore/bsc-biotechnology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/integrated-msc-biotechnology",
+      "destination": "/explore/bsc-biotechnology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/agricultural-engineering",
+      "destination": "/explore/bsc-agriculture",
+      "permanent": true
+    },
+    {
+      "source": "/explore/seed-technology",
+      "destination": "/explore/bsc-agriculture",
+      "permanent": true
+    },
+    {
+      "source": "/explore/sericulture",
+      "destination": "/explore/bsc-agriculture",
+      "permanent": true
+    },
+    {
+      "source": "/explore/silk-technology",
+      "destination": "/explore/bsc-agriculture",
+      "permanent": true
+    },
+    {
+      "source": "/explore/animal-husbandry",
+      "destination": "/explore/bvsc-and-ah",
+      "permanent": true
+    },
+    {
+      "source": "/explore/applied-psychology",
+      "destination": "/explore/ba-psychology",
+      "permanent": true
+    },
+    {
+      "source": "/explore/clinical-nutrition",
+      "destination": "/explore/nutrition-and-dietetics",
+      "permanent": true
+    },
+    {
+      "source": "/explore/cardiac-technology",
+      "destination": "/explore/other-allied-health",
+      "permanent": true
+    },
+    {
+      "source": "/explore/audiology",
+      "destination": "/explore/other-allied-health",
+      "permanent": true
+    },
+    {
+      "source": "/explore/anm",
+      "destination": "/explore/gnm",
+      "permanent": true
+    },
+    {
+      "source": "/explore/msc-health-informatics",
+      "destination": "/explore/bca",
+      "permanent": true
     }
   ],
   "rewrites": [

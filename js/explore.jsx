@@ -5,6 +5,28 @@ import CoursePage from '../pages/CoursePage';
 import '../css/explore.css';
 import '../css/course.css';
 
+const COURSE_REDIRECTS = {
+  'genetic-engineering': 'btech-biotechnology',
+  'molecular-biology': 'bsc-biology',
+  'cell-biology': 'bsc-biology',
+  'medical-biotechnology': 'bsc-biotechnology',
+  'industrial-biotechnology': 'bsc-biotechnology',
+  'plant-biotechnology': 'bsc-biotechnology',
+  'agricultural-biotechnology': 'bsc-biotechnology',
+  'integrated-msc-biotechnology': 'bsc-biotechnology',
+  'agricultural-engineering': 'bsc-agriculture',
+  'seed-technology': 'bsc-agriculture',
+  'sericulture': 'bsc-agriculture',
+  'silk-technology': 'bsc-agriculture',
+  'animal-husbandry': 'bvsc-and-ah',
+  'applied-psychology': 'ba-psychology',
+  'clinical-nutrition': 'nutrition-and-dietetics',
+  'cardiac-technology': 'other-allied-health',
+  'audiology': 'other-allied-health',
+  'anm': 'gnm',
+  'msc-health-informatics': 'bca'
+};
+
 function ExploreApp() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
@@ -45,7 +67,13 @@ function ExploreApp() {
 
   const segments = currentPath.split('/').filter(Boolean);
   const isCoursePage = segments.length > 1 && segments[0] === 'explore';
-  const slug = isCoursePage ? segments[1] : '';
+  let slug = isCoursePage ? segments[1] : '';
+
+  if (slug && COURSE_REDIRECTS[slug]) {
+    const newSlug = COURSE_REDIRECTS[slug];
+    window.history.replaceState(null, '', `/explore/${newSlug}`);
+    slug = newSlug;
+  }
 
   if (isCoursePage) {
     return (

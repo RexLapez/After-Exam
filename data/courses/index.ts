@@ -2,9 +2,10 @@ import type { CourseData } from '@/types/Course';
 import { mbbs } from './mbbs';
 import { btechBiotechnology } from './btech-biotechnology';
 import { bPharm } from './b-pharm';
+import { biomedicalEngineering } from './biomedical-engineering';
 import careersData from '../careersData.json';
 
-const allCourses: CourseData[] = [mbbs, btechBiotechnology, bPharm];
+const allCourses: CourseData[] = [mbbs, btechBiotechnology, bPharm, biomedicalEngineering];
 
 export const courseRegistry = new Map<string, CourseData>();
 allCourses.forEach(c => courseRegistry.set(c.slug, c));
@@ -31,11 +32,17 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
   let eligibility = 'Class 12 PCB (50%+)';
   let entranceExams = ['State CET', 'CUET UG'];
   let avgFees = '₹1.5L – ₹6L total';
-  let avgSalary = '₹3.5L – ₹8.0L /yr';
+  let avgSalary = '₹2.8L – ₹5.0L /yr';
   let difficulty: 'Easy' | 'Moderate' | 'Hard' | 'Very Hard' = 'Moderate';
-  let topColleges = ['vit', 'manipal'];
+  let topColleges = ['delhi-university', 'manipal'];
   let degree = 'B.Sc';
   let recognition = 'UGC / State Councils';
+
+  // Structured eligibility
+  let pcbEligibility: 'YES' | 'NO' | 'DEPENDS' = 'YES';
+  let pcmbEligibility: 'YES' | 'NO' | 'DEPENDS' = 'YES';
+  let mathRequired: 'YES' | 'NO' | 'DEPENDS' = 'NO';
+  let neetRequired: 'YES' | 'NO' | 'DEPENDS' = 'NO';
 
   let goodFor = [
     `You are deeply interested in ${foundCourseName.toLowerCase()} and applied sciences.`,
@@ -50,15 +57,16 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
   ];
 
   if (foundCategoryName === 'Medical & Clinical Careers') {
-    duration = foundCourseName === 'BDS' ? '5 Years' : '5.5 Years';
+    duration = slug === 'bds' ? '5 Years' : '5.5 Years';
     eligibility = 'Class 12 PCB (50%+) + NEET UG qualified';
     entranceExams = ['NEET UG'];
     avgFees = '₹3L – ₹15L (Govt) / ₹20L – ₹60L (Private)';
-    avgSalary = '₹5.0L – ₹12.0L /yr';
+    avgSalary = '₹5.0L – ₹9.0L /yr';
     difficulty = 'Very Hard';
     topColleges = ['aiims-delhi', 'bhu', 'cmc-vellore'];
     degree = foundCourseName;
-    recognition = foundCourseName === 'BDS' ? 'DCI (Dental Council)' : 'CCIM / Ayush Commission';
+    recognition = slug === 'bds' ? 'DCI (Dental Council)' : 'CCIM / Ayush Commission';
+    neetRequired = 'YES';
     goodFor = [
       `You are passionate about clinical patient care and treatment using ${foundCourseName}.`,
       'You are willing to invest 5+ years in rigorous study and internship training.',
@@ -70,95 +78,190 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
       'You prefer pure research laboratory work over daily patient diagnoses.'
     ];
   } else if (foundCategoryName === 'Pharmacy') {
-    duration = foundCourseName === 'Pharm D' ? '6 Years' : (foundCourseName === 'D.Pharm' ? '2 Years' : '4 Years');
+    duration = slug === 'pharm-d' ? '6 Years' : (slug === 'd-pharm' ? '2 Years' : '4 Years');
     eligibility = 'Class 12 PCB/PCM (50%+)';
     entranceExams = ['State Pharmacy CET', 'NEET UG (some states)'];
     avgFees = '₹2L – ₹10L total';
-    avgSalary = '₹3.5L – ₹8.0L /yr';
+    avgSalary = '₹2.8L – ₹5.0L /yr';
     difficulty = 'Moderate';
     topColleges = ['jamia-hamdard', 'bits-pilani', 'manipal', 'ict-mumbai'];
     degree = foundCourseName;
     recognition = 'PCI (Pharmacy Council of India)';
+    neetRequired = 'DEPENDS';
   } else if (foundCategoryName === 'Nursing') {
-    duration = foundCourseName === 'B.Sc Nursing' ? '4 Years' : '3 Years';
+    duration = slug === 'bsc-nursing' ? '4 Years' : '3 Years';
     eligibility = 'Class 12 PCB (45%+)';
     entranceExams = ['State Nursing CET'];
     avgFees = '₹1.5L – ₹5L total';
-    avgSalary = '₹3.0L – ₹6.5L /yr';
+    avgSalary = '₹2.5L – ₹4.5L /yr';
     difficulty = 'Moderate';
     topColleges = ['cmc-vellore', 'bhu', 'manipal'];
     degree = foundCourseName;
     recognition = 'INC (Indian Nursing Council)';
   } else if (foundCategoryName === 'Allied Health Sciences') {
-    duration = foundCourseName === 'BPT' ? '4.5 Years' : '3 Years';
+    duration = slug === 'bpt' ? '4.5 Years' : '3 Years';
     eligibility = 'Class 12 PCB (50%+)';
     entranceExams = ['State CET', 'University Entrance'];
     avgFees = '₹2L – ₹8L total';
-    avgSalary = '₹3.5L – ₹8.0L /yr';
+    avgSalary = '₹2.5L – ₹4.8L /yr';
     difficulty = 'Moderate';
     topColleges = ['delhi-university', 'manipal', 'cmc-vellore'];
-    degree = foundCourseName.includes('B.Sc') || foundCourseName.includes('Bachelor') ? foundCourseName : `B.Sc ${foundCourseName}`;
+    degree = slug.includes('bsc-') || slug.includes('bpt') || slug.includes('bot') || slug.includes('bmlt') || foundCourseName.includes('Bachelor') || foundCourseName.includes('B.Sc') ? foundCourseName : `Bachelor of Science in ${foundCourseName}`;
     recognition = 'State Allied Health Councils';
-  } else if (foundCategoryName === 'Biotechnology & Bioinformatics') {
-    duration = foundCourseName.includes('Integrated') ? '5 Years' : (foundCourseName.includes('B.Tech') ? '4 Years' : '3 Years');
+    if (slug === 'other-allied-health') {
+      duration = '3 - 4 Years';
+      eligibility = 'Class 12 PCB (50%+)';
+      avgSalary = '₹2.4L – ₹4.5L /yr';
+      degree = 'B.Sc (Specialization)';
+      topColleges = ['manipal', 'cmc-vellore'];
+    }
+  } else if (foundCategoryName === 'Biotechnology & Life Sciences') {
+    duration = slug.includes('integrated') ? '5 Years' : '3 Years';
     eligibility = 'Class 12 PCB/PCM (60%+)';
-    entranceExams = ['VITEEE', 'MET (Manipal)', 'State CET'];
-    avgFees = '₹3L – ₹14L total';
-    avgSalary = '₹5.0L – ₹10.0L /yr';
+    entranceExams = ['VITEEE', 'MET (Manipal)', 'State CET', 'CUET UG'];
+    avgFees = '₹2L – ₹12L total';
+    avgSalary = '₹3.0L – ₹5.5L /yr';
     difficulty = 'Hard';
     topColleges = ['vit', 'manipal', 'curaj'];
-    degree = foundCourseName.includes('B.Tech') ? 'B.Tech' : 'B.Sc';
+    degree = slug.includes('btech') ? 'B.Tech' : 'B.Sc';
     recognition = 'AICTE / UGC';
-  } else if (foundCategoryName === 'Life Sciences') {
-    duration = '3 Years';
-    eligibility = 'Class 12 PCB (50%+)';
-    entranceExams = ['CUET UG', 'State CET'];
-    avgFees = '₹1L – ₹4L total';
-    avgSalary = '₹3.0L – ₹6.0L /yr';
-    difficulty = 'Moderate';
-    topColleges = ['delhi-university', 'bhu', 'manipal'];
-    degree = `B.Sc ${foundCourseName}`;
-    recognition = 'UGC';
+  } else if (foundCategoryName === 'Biomedical Engineering & Health Technology') {
+    duration = '4 Years';
+    eligibility = 'Class 12 PCMB/PCM (PCB eligible at select institutions)';
+    entranceExams = ['VITEEE', 'MET (Manipal)', 'JEE Main', 'State CET'];
+    avgFees = '₹4L – ₹16L total';
+    avgSalary = '₹3.2L – ₹6.0L /yr';
+    difficulty = 'Hard';
+    topColleges = ['vit', 'manipal'];
+    degree = 'B.Tech';
+    recognition = 'AICTE / UGC';
+    pcbEligibility = 'DEPENDS';
+    mathRequired = 'DEPENDS';
   } else if (foundCategoryName === 'Agriculture & Food Sciences') {
     duration = '4 Years';
     eligibility = 'Class 12 PCB/PCM/Agriculture (50%+)';
     entranceExams = ['ICAR AIEEA', 'State Agriculture CET'];
     avgFees = '₹1.5L – ₹5L total';
-    avgSalary = '₹3.5L – ₹7.5L /yr';
+    avgSalary = '₹2.8L – ₹5.0L /yr';
     difficulty = 'Moderate';
     topColleges = ['bhu', 'vit'];
-    degree = foundCourseName.includes('B.Tech') ? 'B.Tech' : 'B.Sc';
+    degree = slug.includes('btech') ? 'B.Tech' : 'B.Sc';
     recognition = 'ICAR / UGC';
   } else if (foundCategoryName === 'Veterinary Sciences') {
     duration = '5.5 Years';
     eligibility = 'Class 12 PCB (50%+) + NEET UG qualified';
     entranceExams = ['NEET UG', 'State Veterinary CET'];
     avgFees = '₹1L – ₹8L total';
-    avgSalary = '₹6.0L – ₹12.0L /yr';
+    avgSalary = '₹4.5L – ₹8.0L /yr';
     difficulty = 'Hard';
     topColleges = ['bhu'];
-    degree = 'BVSc & AH';
+    degree = foundCourseName;
     recognition = 'VCI (Veterinary Council of India)';
+    neetRequired = 'YES';
   } else if (foundCategoryName === 'Psychology') {
     duration = '3 Years';
     eligibility = 'Class 12 any stream (50%+)';
     entranceExams = ['CUET UG', 'Merit-based'];
     avgFees = '₹1L – ₹5L total';
-    avgSalary = '₹3.0L – ₹7.0L /yr';
+    avgSalary = '₹2.5L – ₹4.5L /yr';
     difficulty = 'Moderate';
     topColleges = ['delhi-university', 'manipal'];
-    degree = foundCourseName.includes('BA') ? 'BA' : 'B.Sc';
+    degree = slug.startsWith('ba-') || slug.includes('applied-') ? 'BA' : 'B.Sc';
     recognition = 'UGC / RCI (Rehabilitation Council)';
+  } else if (foundCategoryName === 'Nutrition & Dietetics') {
+    duration = '3 Years';
+    eligibility = 'Class 12 PCB (50%+)';
+    entranceExams = ['CUET UG', 'Merit-based'];
+    avgFees = '₹1.5L – ₹5L total';
+    avgSalary = '₹2.4L – ₹4.2L /yr';
+    difficulty = 'Moderate';
+    topColleges = ['delhi-university', 'manipal'];
+    degree = 'B.Sc';
+    recognition = 'UGC';
+  } else if (foundCategoryName === 'Forensic Sciences') {
+    duration = '3 Years';
+    eligibility = 'Class 12 PCB/PCM (50%+)';
+    entranceExams = ['CUET UG', 'NFAT (National Forensic Admission Test)'];
+    avgFees = '₹1.5L – ₹6L total';
+    avgSalary = '₹2.8L – ₹5.0L /yr';
+    difficulty = 'Hard';
+    topColleges = ['delhi-university'];
+    degree = 'B.Sc';
+    recognition = 'UGC';
+  } else if (foundCategoryName === 'Environmental Sciences') {
+    duration = '3 Years';
+    eligibility = 'Class 12 PCB/PCM (50%+)';
+    entranceExams = ['CUET UG', 'Merit-based'];
+    avgFees = '₹1L – ₹4L total';
+    avgSalary = '₹2.5L – ₹4.5L /yr';
+    difficulty = 'Moderate';
+    topColleges = ['curaj', 'delhi-university'];
+    degree = 'B.Sc';
+    recognition = 'UGC';
+  } else if (foundCategoryName === 'Public Health') {
+    duration = '3 Years';
+    eligibility = 'Class 12 any stream (PCB preferred, 50%+)';
+    entranceExams = ['CUET UG', 'University Entrance'];
+    avgFees = '₹1.5L – ₹5L total';
+    avgSalary = '₹2.8L – ₹5.0L /yr';
+    difficulty = 'Moderate';
+    topColleges = ['manipal'];
+    degree = 'Bachelor of Public Health';
+    recognition = 'UGC';
+  } else if (foundCategoryName === 'Law') {
+    duration = '5 Years';
+    eligibility = 'Class 12 any stream (50%+)';
+    entranceExams = ['CLAT', 'AILET', 'LSAT India'];
+    avgFees = '₹4L – ₹15L total';
+    avgSalary = '₹3.5L – ₹7.5L /yr';
+    difficulty = 'Hard';
+    topColleges = ['delhi-university', 'bhu'];
+    degree = 'Integrated LLB';
+    recognition = 'BCI (Bar Council of India)';
+  } else if (foundCategoryName === 'Management') {
+    duration = '3 Years';
+    eligibility = 'Class 12 any stream (50%+)';
+    entranceExams = ['CUET UG', 'IPMAT', 'Merit-based'];
+    avgFees = '₹2L – ₹10L total';
+    avgSalary = '₹3.0L – ₹5.5L /yr';
+    difficulty = 'Moderate';
+    topColleges = ['delhi-university', 'manipal', 'vit'];
+    degree = 'BBA';
+    recognition = 'UGC';
+  } else if (foundCategoryName === 'Design') {
+    duration = '4 Years';
+    eligibility = 'Class 12 any stream (50%+)';
+    entranceExams = ['UCEED', 'NID DAT', 'NIFT Entrance'];
+    avgFees = '₹4L – ₹12L total';
+    avgSalary = '₹3.2L – ₹6.0L /yr';
+    difficulty = 'Moderate';
+    topColleges = ['vit', 'manipal'];
+    degree = 'B.Des';
+    recognition = 'UGC';
+  } else if (foundCategoryName === 'Government Career Paths') {
+    duration = 'Exam Preparation';
+    eligibility = 'Graduation in any stream (NDA allows Class 12)';
+    entranceExams = ['UPSC CSE', 'SSC CGL', 'NDA / CDSE', 'RRB NTPC', 'IBPS PO'];
+    avgFees = '₹5K – ₹50K (Exam Fees & Prep)';
+    avgSalary = '₹5.0L – ₹10.0L /yr (Govt Pay Scales)';
+    difficulty = 'Very Hard';
+    topColleges = [];
+    degree = 'Competitive Exams';
+    recognition = 'Government of India / State Governments';
   } else if (foundCategoryName === 'Computing & Tech') {
-    duration = foundCourseName.includes('M.Sc') ? '2 Years' : '3 Years';
-    eligibility = foundCourseName.includes('M.Sc') ? 'Graduation (50%+)' : 'Class 12 any stream (50%+)';
+    duration = '3 Years';
+    eligibility = 'Class 12 any stream (Math required for some programs)';
     entranceExams = ['CUET UG', 'Merit-based', 'University Entrance'];
     avgFees = '₹1.5L – ₹5L total';
-    avgSalary = '₹3.5L – ₹10.0L /yr';
+    avgSalary = '₹3.0L – ₹5.5L /yr';
     difficulty = 'Moderate';
     topColleges = ['delhi-university', 'vit', 'manipal'];
-    degree = foundCourseName === 'BCA' ? 'BCA' : (foundCourseName.includes('M.Sc') ? 'M.Sc' : 'B.Sc');
+    degree = slug === 'bca' ? 'BCA' : 'B.Sc';
     recognition = 'UGC';
+    if (slug === 'bsc-computer-science' || slug === 'bsc-data-science') {
+      pcbEligibility = 'DEPENDS';
+      mathRequired = 'DEPENDS';
+    }
   }
 
   const relatedCourseSlugs = careersData.categories
@@ -621,13 +724,13 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
     faq = [
       { question: `Is NEET compulsory for admission to ${foundCourseName}?`, answer: foundCategoryName === 'Medical & Clinical Careers' || foundCategoryName === 'Veterinary Sciences' ? 'Yes, NEET UG qualification is mandatory for all clinical programs in India including this.' : `No, NEET is not required. Admissions are based on state CETs, university-specific exams, or Class 12 board marks.` },
       { question: `What is the future growth scope of ${foundCourseName}?`, answer: 'Excellent. The Indian healthcare, biotechnology, and agricultural sectors are expanding rapidly, opening thousands of positions in clinical, research, and corporate sectors annually.' },
-      { question: `Can I practice independently after completing ${foundCourseName}?`, answer: foundCategoryName === 'Medical & Clinical Careers' || foundCategoryName === 'Veterinary Sciences' || foundCategoryName === 'Nursing' || foundCourseName === 'BPT' ? 'Yes. Upon registering with the respective national or state professional councils, you can practice independently, open your clinic, or join clinical consulting teams.' : 'Generally no. Graduates work in laboratory divisions, hospitals, management, or research institutions as specialized consultants.' }
+      { question: `Can I practice independently after completing ${foundCourseName}?`, answer: foundCategoryName === 'Medical & Clinical Careers' || foundCategoryName === 'Veterinary Sciences' || foundCategoryName === 'Nursing' || slug === 'bpt' ? 'Yes. Upon registering with the respective national or state professional councils, you can practice independently, open your clinic, or join clinical consulting teams.' : 'Generally no. Graduates work in laboratory divisions, hospitals, management, or research institutions as specialized consultants.' }
     ];
     salaryTimeline = [
-      { label: 'Fresher', range: '₹3.5L – ₹6L /yr', description: 'Junior clinician / Associate trainee roles' },
-      { label: '2 Years', range: '₹5L – ₹9L /yr', description: 'Experienced consultant or specialist' },
-      { label: '5 Years', range: '₹8L – ₹15L /yr', description: 'Senior scientist, lead practitioner, or manager' },
-      { label: '10+ Years', range: '₹15L – ₹30L+ /yr', description: 'Head, VP, or Principal Director' }
+      { label: 'Fresher', range: '₹2.5L – ₹4.2L /yr', description: 'Junior clinician / Associate trainee roles' },
+      { label: '2-3 Years', range: '₹4.0L – ₹6.5L /yr', description: 'Experienced practitioner / Specialist' },
+      { label: '5-7 Years', range: '₹6.5L – ₹10.0L /yr', description: 'Senior specialist, team lead, or manager' },
+      { label: '10+ Years (High Exp)', range: '₹10.5L – ₹16.0L+ /yr', description: 'Lead consultant / Department Manager' }
     ];
   }
 
@@ -642,7 +745,11 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
     goodFor,
     avoidIf,
     snapshot,
-    relatedCourseSlugs
+    relatedCourseSlugs,
+    pcbEligibility,
+    pcmbEligibility,
+    mathRequired,
+    neetRequired
   };
 }
 

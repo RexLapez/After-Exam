@@ -13,7 +13,7 @@ export const btechBiotechnology: CourseData = {
     duration: '4 Years',
     eligibility: 'Class 12 with PCB (or PCM), VITEEE / MET / State CET',
     difficulty: 'Hard',
-    avgSalary: '₹5.5L – ₹12.0L /yr',
+    avgSalary: '₹3.0L – ₹5.5L /yr',
     avgFees: '₹4L – ₹16L (total)',
   },
 
@@ -22,7 +22,7 @@ export const btechBiotechnology: CourseData = {
     eligibility: 'Class 12 PCB/PCM (60%+)',
     entranceExams: ['VITEEE', 'MET (Manipal)', 'State CET'],
     avgFees: '₹4L – ₹16L total',
-    avgSalary: '₹5.5L – ₹12.0L /yr',
+    avgSalary: '₹3.0L – ₹5.5L /yr',
     degreeType: 'Undergraduate Engineering',
     courseLevel: 'Bachelor\'s',
     studyMode: 'Full-time (on-campus)',
@@ -62,11 +62,11 @@ export const btechBiotechnology: CourseData = {
       children: [
         {
           id: 'research-associate',
-          title: 'Research Associate',
-          salary: '₹4–8 LPA',
+          title: 'Junior Research Associate',
+          salary: '₹3–4.5 LPA',
           children: [
-            { id: 'research-scientist', title: 'Research Scientist', salary: '₹10–20 LPA' },
-            { id: 'rd-director', title: 'R&D Director', salary: '₹25–50 LPA' },
+            { id: 'research-scientist', title: 'Senior Scientist (6+ Yrs Exp)', salary: '₹6–9.5 LPA' },
+            { id: 'rd-director', title: 'R&D Lead (12+ Yrs Exp)', salary: '₹10–15 LPA' },
           ],
         },
       ],
@@ -77,45 +77,44 @@ export const btechBiotechnology: CourseData = {
       children: [
         {
           id: 'bioinfo-analyst',
-          title: 'Bioinformatics Analyst',
-          salary: '₹5–10 LPA',
+          title: 'Junior Bioinformatics Analyst',
+          salary: '₹3.5–5 LPA',
           children: [
-            { id: 'bioinfo-scientist', title: 'Bioinformatics Scientist', salary: '₹12–25 LPA' },
+            { id: 'bioinfo-scientist', title: 'Senior Bioinformatics Specialist (7+ Yrs Exp)', salary: '₹7.5–12 LPA' },
           ],
         },
       ],
     },
     {
       id: 'pharma',
-      title: 'Pharmaceutical & Clinical',
+      title: 'Pharmaceutical & Clinical Operations',
       children: [
         {
           id: 'cra',
           title: 'Clinical Research Associate',
-          salary: '₹5–10 LPA',
+          salary: '₹3–4.8 LPA',
           children: [
-            { id: 'reg-affairs', title: 'Regulatory Affairs Manager', salary: '₹12–22 LPA' },
-            { id: 'pharma-pm', title: 'Pharma Product Manager', salary: '₹15–30 LPA' },
+            { id: 'reg-affairs', title: 'Regulatory Affairs Specialist (6+ Yrs Exp)', salary: '₹6.5–10.5 LPA' },
+            { id: 'pharma-pm', title: 'Pharma Product Specialist (10+ Yrs Exp)', salary: '₹9–14 LPA' },
           ],
         },
       ],
     },
     {
       id: 'business',
-      title: 'Business & Consulting',
+      title: 'Business & Patent Analysis',
       children: [
-        { id: 'biotech-consultant', title: 'Biotech Business Consultant', salary: '₹10–25 LPA' },
-        { id: 'patent-analyst', title: 'Biotech Patent Analyst', salary: '₹8–18 LPA' },
+        { id: 'biotech-consultant', title: 'Biotech Business Analyst', salary: '₹4–6.5 LPA' },
+        { id: 'patent-analyst', title: 'Biotech Patent Specialist (8+ Yrs Exp)', salary: '₹7–12 LPA' },
       ],
     },
   ],
 
   salaryTimeline: [
-    { label: 'Fresher', range: '₹3.5L – ₹7L /yr', description: 'Lab trainee / Junior Research Fellow' },
-    { label: '2 Years', range: '₹6L – ₹12L /yr', description: 'Research Associate / QC Analyst' },
-    { label: '5 Years', range: '₹10L – ₹22L /yr', description: 'Senior Scientist / CRA Lead' },
-    { label: '10 Years', range: '₹20L – ₹45L /yr', description: 'R&D Manager / Regulatory Head' },
-    { label: 'Leadership', range: '₹40L – ₹80L+ /yr', description: 'VP R&D / CSO at pharma/biotech firm' },
+    { label: 'Fresher', range: '₹3.0L – ₹4.5L /yr', description: 'Lab Trainee / Junior Research Assistant' },
+    { label: '2-3 Years', range: '₹4.2L – ₹6.0L /yr', description: 'Research Associate / QC Analyst' },
+    { label: '5-7 Years', range: '₹6.0L – ₹9.5L /yr', description: 'Senior Scientist / CRA Lead' },
+    { label: '10+ Years (High Exp)', range: '₹10.0L – ₹15.0L+ /yr', description: 'R&D Manager / Lead Specialist' },
   ],
 
   admissionProcess: [
@@ -195,5 +194,9 @@ export const btechBiotechnology: CourseData = {
     { question: 'What salary can I expect as a fresher?', answer: 'Freshers typically earn ₹3.5–7 LPA in India. Those pursuing an MS or PhD abroad can expect entry-level research salaries of $60K–$80K in the US/EU biotech sector.' },
   ],
 
-  relatedCourseSlugs: ['bsc-biotechnology', 'btech-bioinformatics', 'b-pharm', 'microbiology'],
+  relatedCourseSlugs: ['bsc-biotechnology', 'bioinformatics', 'b-pharm', 'microbiology'],
+  pcbEligibility: 'YES',
+  pcmbEligibility: 'YES',
+  mathRequired: 'NO',
+  neetRequired: 'NO',
 };

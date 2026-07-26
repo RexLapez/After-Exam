@@ -13,7 +13,7 @@ export const mbbs: CourseData = {
     duration: '5.5 Years (incl. 1-year internship)',
     eligibility: 'Class 12 with PCB, min 50% + NEET UG qualified',
     difficulty: 'Very Hard',
-    avgSalary: '₹8.0L – ₹24.0L /yr',
+    avgSalary: '₹6.0L – ₹10.0L /yr',
     avgFees: '₹10L – ₹75L (total)',
   },
 
@@ -22,7 +22,7 @@ export const mbbs: CourseData = {
     eligibility: 'Class 12 PCB (50%+)',
     entranceExams: ['NEET UG'],
     avgFees: '₹10L – ₹75L total',
-    avgSalary: '₹8.0L – ₹24.0L /yr',
+    avgSalary: '₹6.0L – ₹10.0L /yr',
     degreeType: 'Undergraduate Professional',
     courseLevel: 'Bachelor\'s',
     studyMode: 'Full-time (on-campus)',
@@ -62,20 +62,20 @@ export const mbbs: CourseData = {
       children: [
         {
           id: 'general-physician',
-          title: 'General Physician',
-          salary: '₹8–15 LPA',
+          title: 'Junior Resident / Medical Officer',
+          salary: '₹5.5–8.0 LPA',
           children: [
-            { id: 'md-medicine', title: 'MD Internal Medicine', salary: '₹18–35 LPA' },
-            { id: 'md-pediatrics', title: 'MD Pediatrics', salary: '₹15–30 LPA' },
+            { id: 'md-medicine', title: 'MD Internal Medicine Specialist (Post-PG)', salary: '₹11–18 LPA' },
+            { id: 'md-pediatrics', title: 'MD Pediatrics Specialist (Post-PG)', salary: '₹10–16 LPA' },
           ],
         },
         {
           id: 'surgeon',
-          title: 'Junior Surgeon',
-          salary: '₹10–18 LPA',
+          title: 'Junior Surgeon / Medical Officer',
+          salary: '₹6–9.5 LPA',
           children: [
-            { id: 'ms-surgery', title: 'MS General Surgery', salary: '₹25–50 LPA' },
-            { id: 'mch-neuro', title: 'MCh Neurosurgery', salary: '₹40–80 LPA' },
+            { id: 'ms-surgery', title: 'MS General Surgery Specialist (Post-PG)', salary: '₹13–22 LPA' },
+            { id: 'mch-neuro', title: 'MCh Super-Specialist (12+ Yrs Exp)', salary: '₹20–35 LPA' },
           ],
         },
       ],
@@ -84,26 +84,26 @@ export const mbbs: CourseData = {
       id: 'radiology',
       title: 'Diagnostics & Radiology',
       children: [
-        { id: 'md-radiology', title: 'MD Radiology', salary: '₹20–40 LPA' },
-        { id: 'md-pathology', title: 'MD Pathology', salary: '₹15–25 LPA' },
+        { id: 'md-radiology', title: 'MD Radiology Specialist (Post-PG)', salary: '₹14–24 LPA' },
+        { id: 'md-pathology', title: 'MD Pathology Specialist (Post-PG)', salary: '₹10–16 LPA' },
       ],
     },
     {
       id: 'govt',
       title: 'Government Services',
       children: [
-        { id: 'civil-surgeon', title: 'Civil Surgeon', salary: '₹12–20 LPA (Govt pay)' },
-        { id: 'pho', title: 'Public Health Officer', salary: '₹10–18 LPA' },
+        { id: 'civil-surgeon', title: 'Medical Officer / Civil Surgeon', salary: '₹8–14 LPA (Govt pay scale)' },
+        { id: 'pho', title: 'Public Health Officer', salary: '₹7–12 LPA' },
       ],
     },
   ],
 
   salaryTimeline: [
-    { label: 'Internship', range: '₹15K–25K /month', description: 'Mandatory 1-year clinical rotation' },
-    { label: 'Fresher', range: '₹6L – ₹12L /yr', description: 'Junior Resident / General Physician' },
-    { label: '3–5 Years', range: '₹12L – ₹25L /yr', description: 'Senior Resident or PG student' },
-    { label: '5–10 Years', range: '₹25L – ₹50L /yr', description: 'Consultant Specialist after PG' },
-    { label: '10+ Years', range: '₹50L – ₹1.5Cr /yr', description: 'Senior Consultant / Private Practice' },
+    { label: 'Internship', range: '₹15K–30K /month', description: 'Mandatory 1-year clinical rotation' },
+    { label: 'Fresher', range: '₹5.5L – ₹8.0L /yr', description: 'Junior Resident / Medical Officer' },
+    { label: '3–5 Years', range: '₹8.0L – ₹13.0L /yr', description: 'Senior Resident / PG Trainee' },
+    { label: '5–10 Years', range: '₹13.0L – ₹22.0L /yr', description: 'Consultant Specialist after PG' },
+    { label: '10+ Years (High Exp)', range: '₹22.0L – ₹38.0L+ /yr', description: 'Senior Consultant / Department Lead' },
   ],
 
   admissionProcess: [
@@ -197,4 +197,8 @@ export const mbbs: CourseData = {
   ],
 
   relatedCourseSlugs: ['bds', 'bams', 'bhms', 'bsc-nursing', 'bpt'],
+  pcbEligibility: 'YES',
+  pcmbEligibility: 'YES',
+  mathRequired: 'NO',
+  neetRequired: 'YES',
 };

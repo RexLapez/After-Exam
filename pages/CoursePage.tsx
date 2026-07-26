@@ -226,7 +226,13 @@ export default function CoursePage({ slug: propSlug }: { slug?: string }) {
 
           <div className="premium-divider my-16" />
 
-          <CourseQuickStats overview={course.overview} />
+          <CourseQuickStats 
+            overview={course.overview} 
+            pcbEligibility={course.pcbEligibility}
+            pcmbEligibility={course.pcmbEligibility}
+            mathRequired={course.mathRequired}
+            neetRequired={course.neetRequired}
+          />
 
           <div className="premium-divider my-16" />
 

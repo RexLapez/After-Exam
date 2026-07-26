@@ -149,10 +149,25 @@ const parseDuration = (text: string) => {
 
 const getDegreeSupporting = (degree: string) => {
   const deg = degree.toUpperCase();
-  if (deg.includes('B.TECH')) return 'Engineering degree';
-  if (deg.includes('BSC')) return 'Science degree';
-  if (deg.includes('B.PHARM') || deg.includes('BPHARM')) return 'Pharmacy degree';
-  if (deg.includes('BAMS') || deg.includes('BHMS') || deg.includes('MBBS')) return 'Medical degree';
+  if (
+    deg.includes('BAMS') || 
+    deg.includes('BHMS') || 
+    deg.includes('MBBS') || 
+    deg.includes('BDS') || 
+    deg.includes('BVSC') || 
+    deg.includes('AYURVEDIC') || 
+    deg.includes('HOMEOPATHIC') || 
+    deg.includes('MEDICINE') || 
+    deg.includes('SURGERY') || 
+    deg.includes('DENTAL') || 
+    deg.includes('UNANI') || 
+    deg.includes('NATUROPATHY') || 
+    deg.includes('VETERINARY') || 
+    deg.includes('ANIMAL HUSBANDRY')
+  ) return 'Medical degree';
+  if (deg.includes('B.PHARM') || deg.includes('BPHARM') || deg.includes('PHARMACY') || deg.includes('PHARM') || deg.includes('D.PHARM')) return 'Pharmacy degree';
+  if (deg.includes('B.TECH') || deg.includes('TECHNOLOGY') || deg.includes('ENGINEERING')) return 'Engineering degree';
+  if (deg.includes('BSC') || deg.includes('SCIENCE')) return 'Science degree';
   return 'Undergraduate degree';
 };
 

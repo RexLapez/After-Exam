@@ -36,8 +36,8 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   "Pharmacy": "Researching, dispensing, and manufacturing of pharmaceutical therapeutics.",
   "Nursing": "Critical patient support, clinic assistance, and healthcare administration.",
   "Allied Health Sciences": "Essential technologists and therapists supporting diagnostic, lab, and clinical operations.",
-  "Biotechnology & Bioinformatics": "Fusing molecular biology, genetics, and computing for advanced bio-engineering.",
-  "Life Sciences": "Academic research in biochemistry, microbiology, genetics, and ecology.",
+  "Biotechnology & Life Sciences": "Fusing biology, biochemistry, genetics, and computing for advanced bio-engineering and academic research.",
+  "Biomedical Engineering & Health Technology": "Interdisciplinary fields bridging engineering principles with medicine and medical devices.",
   "Agriculture & Food Sciences": "Modern crop technologies, sustainable agri-business, and food processing.",
   "Veterinary Sciences": "Animal medical care, surgery, and livestock health management.",
   "Psychology": "Human cognitive behavior, clinical psychology, and mental health counseling.",
@@ -50,6 +50,19 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   "Design": "User experience mapping, product graphics, and medical equipment styling.",
   "Government Career Paths": "Civil services, national defense, banking, and public sector operations.",
   "Computing & Tech": "Software programming, health informatics, and clinical computing systems."
+};
+
+const SEARCH_ALIASES: Record<string, string[]> = {
+  "btech-biotechnology": ["genetic engineering", "medical biotechnology", "industrial biotechnology", "plant biotechnology", "agricultural biotechnology"],
+  "bsc-biotechnology": ["genetic engineering", "medical biotechnology", "industrial biotechnology", "plant biotechnology", "agricultural biotechnology", "integrated msc biotechnology"],
+  "bsc-biology": ["molecular biology", "cell biology"],
+  "bsc-agriculture": ["seed technology", "sericulture", "silk technology", "poultry", "agricultural engineering"],
+  "bvsc-and-ah": ["animal husbandry"],
+  "ba-psychology": ["applied psychology"],
+  "bsc-psychology": ["applied psychology"],
+  "nutrition-and-dietetics": ["clinical nutrition"],
+  "other-allied-health": ["cardiac care", "cardiovascular", "anaesthesia", "critical care", "perfusion", "neuro", "cardiac technology", "audiology"],
+  "bca": ["m.sc health informatics", "informatics", "health informatics"]
 };
 
 const POPULAR_SEARCHES = ["BCA", "Biotechnology", "Veterinary", "Ayurveda", "B.Pharm"];
@@ -132,9 +145,13 @@ export default function PathFinder({ onBack }: NeuralPathwayProps) {
         const isCategoryMatch = category.name.toLowerCase().includes(query);
         const matchingCourses = isCategoryMatch
           ? category.courses
-          : category.courses.filter(course =>
-              course.name.toLowerCase().includes(query)
-            );
+          : category.courses.filter(course => {
+              const nameMatch = course.name.toLowerCase().includes(query);
+              const aliasMatch = SEARCH_ALIASES[course.slug]?.some(alias => 
+                alias.toLowerCase().includes(query)
+              );
+              return nameMatch || !!aliasMatch;
+            });
 
         return {
           ...category,
@@ -209,7 +226,11 @@ export default function PathFinder({ onBack }: NeuralPathwayProps) {
         matchedCategories.push(cat.name);
       }
       cat.courses.forEach(course => {
-        if (course.name.toLowerCase().includes(query) || course.slug.toLowerCase().includes(query)) {
+        const nameMatch = course.name.toLowerCase().includes(query) || course.slug.toLowerCase().includes(query);
+        const aliasMatch = SEARCH_ALIASES[course.slug]?.some(alias => 
+          alias.toLowerCase().includes(query)
+        );
+        if (nameMatch || aliasMatch) {
           matchedCourses.push(course);
         }
       });

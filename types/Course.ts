@@ -108,4 +108,9 @@ export interface CourseData {
   futureScope: FutureCategory[];
   faq: FAQ[];
   relatedCourseSlugs: string[];
+
+  pcbEligibility?: 'YES' | 'NO' | 'DEPENDS';
+  pcmbEligibility?: 'YES' | 'NO' | 'DEPENDS';
+  mathRequired?: 'YES' | 'NO' | 'DEPENDS';
+  neetRequired?: 'YES' | 'NO' | 'DEPENDS';
 }

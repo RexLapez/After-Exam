@@ -13,7 +13,7 @@ export const bPharm: CourseData = {
     duration: '4 Years',
     eligibility: 'Class 12 with PCB/PCM, 50%+ aggregate',
     difficulty: 'Moderate',
-    avgSalary: '₹3.5L – ₹8.0L /yr',
+    avgSalary: '₹2.8L – ₹5.0L /yr',
     avgFees: '₹2L – ₹10L (total)',
   },
 
@@ -22,7 +22,7 @@ export const bPharm: CourseData = {
     eligibility: 'Class 12 PCB/PCM (50%+)',
     entranceExams: ['State Pharmacy CET', 'NEET UG (some states)', 'GPAT (PG)'],
     avgFees: '₹2L – ₹10L total',
-    avgSalary: '₹3.5L – ₹8.0L /yr',
+    avgSalary: '₹2.8L – ₹5.0L /yr',
     degreeType: 'Undergraduate Professional',
     courseLevel: 'Bachelor\'s',
     studyMode: 'Full-time (on-campus)',
@@ -48,7 +48,7 @@ export const bPharm: CourseData = {
   ],
 
   avoidIf: [
-    'You want to treat patients directly (consider MBBS or BPT)',
+    'You want to treat patients directly (consider MBBS or Physiotherapy)',
     'You dislike organic chemistry and formulation math',
     'You expect very high starting salaries (> ₹10 LPA)',
     'You want a purely creative or non-technical career',
@@ -63,18 +63,18 @@ export const bPharm: CourseData = {
         {
           id: 'qc-analyst',
           title: 'QC / QA Analyst',
-          salary: '₹3–6 LPA',
+          salary: '₹2.5–4 LPA',
           children: [
-            { id: 'qa-manager', title: 'QA Manager', salary: '₹10–18 LPA' },
-            { id: 'regulatory', title: 'Regulatory Affairs Head', salary: '₹15–30 LPA' },
+            { id: 'qa-manager', title: 'QA Senior Analyst (5+ Yrs Exp)', salary: '₹5–8 LPA' },
+            { id: 'regulatory', title: 'Regulatory Specialist (10+ Yrs Exp)', salary: '₹8–13 LPA' },
           ],
         },
         {
           id: 'production',
           title: 'Production Executive',
-          salary: '₹3.5–7 LPA',
+          salary: '₹2.5–4.2 LPA',
           children: [
-            { id: 'plant-manager', title: 'Plant Manager', salary: '₹12–25 LPA' },
+            { id: 'plant-manager', title: 'Production Supervisor (8+ Yrs Exp)', salary: '₹6.5–11 LPA' },
           ],
         },
       ],
@@ -86,17 +86,17 @@ export const bPharm: CourseData = {
         {
           id: 'cra',
           title: 'Clinical Research Associate',
-          salary: '₹5–9 LPA',
+          salary: '₹3–4.8 LPA',
           children: [
-            { id: 'cra-lead', title: 'CRA Lead / Project Manager', salary: '₹12–22 LPA' },
+            { id: 'cra-lead', title: 'CRA Team Lead (8+ Yrs Exp)', salary: '₹7–11 LPA' },
           ],
         },
         {
           id: 'formulation',
-          title: 'Formulation Scientist',
-          salary: '₹5–10 LPA',
+          title: 'Formulation Junior Scientist',
+          salary: '₹3.2–5 LPA',
           children: [
-            { id: 'rd-lead', title: 'R&D Lead', salary: '₹15–30 LPA' },
+            { id: 'rd-lead', title: 'Formulation Lead (9+ Yrs Exp)', salary: '₹8–13 LPA' },
           ],
         },
       ],
@@ -105,26 +105,25 @@ export const bPharm: CourseData = {
       id: 'retail',
       title: 'Retail & Community Pharmacy',
       children: [
-        { id: 'community-pharmacist', title: 'Community Pharmacist', salary: '₹3–5 LPA' },
-        { id: 'pharmacy-owner', title: 'Pharmacy Chain Owner', salary: '₹10–40 LPA+' },
+        { id: 'community-pharmacist', title: 'Community Pharmacist', salary: '₹2.4–3.8 LPA' },
+        { id: 'pharmacy-owner', title: 'Pharmacy Store Owner (Entrepreneur)', salary: '₹5–12 LPA' },
       ],
     },
     {
       id: 'govt',
       title: 'Government Services',
       children: [
-        { id: 'drug-inspector', title: 'Drug Inspector', salary: '₹6–12 LPA (Govt pay)' },
-        { id: 'govt-pharmacist', title: 'Government Pharmacist', salary: '₹4–8 LPA' },
+        { id: 'drug-inspector', title: 'Drug Inspector', salary: '₹5–9 LPA (Govt pay scale)' },
+        { id: 'govt-pharmacist', title: 'Government Pharmacist', salary: '₹3.5–6.5 LPA' },
       ],
     },
   ],
 
   salaryTimeline: [
-    { label: 'Fresher', range: '₹2.5L – ₹5L /yr', description: 'QC Analyst / Medical Representative' },
-    { label: '2 Years', range: '₹4L – ₹8L /yr', description: 'Senior Analyst / CRA' },
-    { label: '5 Years', range: '₹8L – ₹15L /yr', description: 'Manager / Regulatory Specialist' },
-    { label: '10 Years', range: '₹15L – ₹30L /yr', description: 'Head of QA / R&D Manager' },
-    { label: 'Leadership', range: '₹30L – ₹60L+ /yr', description: 'VP Operations / Country Head Regulatory' },
+    { label: 'Fresher', range: '₹2.4L – ₹3.8L /yr', description: 'QC Chemist / Medical Representative / Trainee' },
+    { label: '2-3 Years', range: '₹3.5L – ₹5.2L /yr', description: 'Senior Analyst / Associate CRA' },
+    { label: '5-7 Years', range: '₹5.2L – ₹8.5L /yr', description: 'Quality / Regulatory Specialist' },
+    { label: '10+ Years (High Exp)', range: '₹9.0L – ₹14.0L+ /yr', description: 'Assistant Manager / Lead Pharmacist' },
   ],
 
   admissionProcess: [
@@ -206,4 +205,8 @@ export const bPharm: CourseData = {
   ],
 
   relatedCourseSlugs: ['pharm-d', 'd-pharm', 'bsc-biotechnology', 'mbbs'],
+  pcbEligibility: 'YES',
+  pcmbEligibility: 'YES',
+  mathRequired: 'NO',
+  neetRequired: 'DEPENDS',
 };

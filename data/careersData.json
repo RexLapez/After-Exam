@@ -6,123 +6,116 @@
       "name": "Medical & Clinical Careers",
       "emoji": "🩺",
       "courses": [
-        { "name": "MBBS", "slug": "mbbs" },
-        { "name": "BDS", "slug": "bds" },
-        { "name": "BAMS", "slug": "bams" },
-        { "name": "BHMS", "slug": "bhms" },
-        { "name": "BUMS", "slug": "bums" },
-        { "name": "BNYS", "slug": "bnys" }
+        { "name": "Bachelor of Medicine, Bachelor of Surgery (MBBS)", "slug": "mbbs" },
+        { "name": "Bachelor of Dental Surgery", "slug": "bds" },
+        { "name": "Bachelor of Ayurvedic Medicine and Surgery", "slug": "bams" },
+        { "name": "Bachelor of Homeopathic Medicine and Surgery", "slug": "bhms" },
+        { "name": "Bachelor of Unani Medicine and Surgery", "slug": "bums" },
+        { "name": "Bachelor of Siddha Medicine and Surgery", "slug": "bsms" },
+        { "name": "Bachelor of Naturopathy and Yogic Sciences", "slug": "bnys" }
       ]
     },
     {
       "name": "Pharmacy",
       "emoji": "💊",
       "courses": [
-        { "name": "B.Pharm", "slug": "b-pharm" },
-        { "name": "Pharm D", "slug": "pharm-d" },
-        { "name": "D.Pharm", "slug": "d-pharm" }
+        { "name": "Bachelor of Pharmacy", "slug": "b-pharm" },
+        { "name": "Doctor of Pharmacy", "slug": "pharm-d" },
+        { "name": "Diploma in Pharmacy", "slug": "d-pharm" }
       ]
     },
     {
       "name": "Nursing",
       "emoji": "🩹",
       "courses": [
-        { "name": "B.Sc Nursing", "slug": "bsc-nursing" },
-        { "name": "GNM", "slug": "gnm" },
-        { "name": "ANM", "slug": "anm" }
+        { "name": "Bachelor of Science in Nursing", "slug": "bsc-nursing" },
+        { "name": "General Nursing and Midwifery", "slug": "gnm" }
       ]
     },
     {
       "name": "Allied Health Sciences",
       "emoji": "🏥",
       "courses": [
-        { "name": "BPT", "slug": "bpt" },
-        { "name": "BOT", "slug": "bot" },
-        { "name": "BMLT", "slug": "bmlt" },
-        { "name": "Radiology Technology", "slug": "radiology-technology" },
-        { "name": "Optometry", "slug": "optometry" },
-        { "name": "Audiology", "slug": "audiology" },
-        { "name": "Operation Theatre Technology", "slug": "operation-theatre-technology" },
-        { "name": "Cardiac Technology", "slug": "cardiac-technology" },
-        { "name": "Dialysis Technology", "slug": "dialysis-technology" },
-        { "name": "Emergency Medical Technology", "slug": "emergency-medical-technology" },
-        { "name": "Respiratory Therapy", "slug": "respiratory-therapy" }
+        { "name": "Bachelor of Physiotherapy", "slug": "bpt" },
+        { "name": "Bachelor of Occupational Therapy", "slug": "bot" },
+        { "name": "Bachelor of Medical Laboratory Technology", "slug": "bmlt" },
+        { "name": "Bachelor of Science in Radiology Technology", "slug": "radiology-technology" },
+        { "name": "Bachelor of Science in Optometry", "slug": "optometry" },
+        { "name": "Bachelor of Science in Operation Theatre Technology", "slug": "operation-theatre-technology" },
+        { "name": "Bachelor of Science in Dialysis Technology", "slug": "dialysis-technology" },
+        { "name": "Bachelor of Science in Respiratory Therapy", "slug": "respiratory-therapy" },
+        { "name": "Emergency & Trauma Care Technology", "slug": "emergency-medical-technology" },
+        { "name": "Other Allied Health Specializations", "slug": "other-allied-health" }
       ]
     },
     {
-      "name": "Biotechnology & Bioinformatics",
+      "name": "Biotechnology & Life Sciences",
       "emoji": "🧬",
       "courses": [
-        { "name": "B.Tech Biotechnology", "slug": "btech-biotechnology" },
-        { "name": "B.Sc Biotechnology", "slug": "bsc-biotechnology" },
-        { "name": "B.Tech Bioinformatics", "slug": "btech-bioinformatics" },
-        { "name": "B.Sc Bioinformatics", "slug": "bsc-bioinformatics" },
-        { "name": "Integrated MSc Biotechnology", "slug": "integrated-msc-biotechnology" }
+        { "name": "Bachelor of Science in Biotechnology", "slug": "bsc-biotechnology" },
+        { "name": "Bachelor of Technology in Biotechnology", "slug": "btech-biotechnology" },
+        { "name": "Bachelor of Science in Microbiology", "slug": "microbiology" },
+        { "name": "Bachelor of Science in Biochemistry", "slug": "biochemistry" },
+        { "name": "Bioinformatics", "slug": "bioinformatics" },
+        { "name": "Bachelor of Science in Biological Sciences", "slug": "bsc-biology" },
+        { "name": "Bachelor of Science in Botany", "slug": "botany" },
+        { "name": "Bachelor of Science in Zoology", "slug": "zoology" },
+        { "name": "Bachelor of Science in Biomedical Science", "slug": "biomedical-science" }
       ]
     },
     {
-      "name": "Life Sciences",
-      "emoji": "🔬",
+      "name": "Biomedical Engineering & Health Technology",
+      "emoji": "⚙️",
       "courses": [
-        { "name": "Microbiology", "slug": "microbiology" },
-        { "name": "Biochemistry", "slug": "biochemistry" },
-        { "name": "Genetics", "slug": "genetics" },
-        { "name": "Biomedical Science", "slug": "biomedical-science" },
-        { "name": "Botany", "slug": "botany" },
-        { "name": "Zoology", "slug": "zoology" },
-        { "name": "Molecular Biology", "slug": "molecular-biology" }
+        { "name": "Biomedical Engineering", "slug": "biomedical-engineering" }
       ]
     },
     {
       "name": "Agriculture & Food Sciences",
       "emoji": "🌾",
       "courses": [
-        { "name": "B.Sc Agriculture", "slug": "bsc-agriculture" },
-        { "name": "Agricultural Engineering", "slug": "agricultural-engineering" },
-        { "name": "Food Technology", "slug": "food-technology" },
-        { "name": "Horticulture", "slug": "horticulture" },
-        { "name": "Forestry", "slug": "forestry" },
-        { "name": "Dairy Technology", "slug": "dairy-technology" },
-        { "name": "Fisheries", "slug": "fisheries" }
+        { "name": "Bachelor of Science in Agriculture", "slug": "bsc-agriculture" },
+        { "name": "Bachelor of Science in Horticulture", "slug": "horticulture" },
+        { "name": "Bachelor of Science in Forestry", "slug": "forestry" },
+        { "name": "Bachelor of Science in Food Technology", "slug": "food-technology" },
+        { "name": "Bachelor of Fisheries Science", "slug": "fisheries" },
+        { "name": "Bachelor of Technology in Dairy Technology", "slug": "dairy-technology" }
       ]
     },
     {
       "name": "Veterinary Sciences",
       "emoji": "🐄",
       "courses": [
-        { "name": "BVSc & AH", "slug": "bvsc-and-ah" },
-        { "name": "Animal Husbandry", "slug": "animal-husbandry" }
+        { "name": "Bachelor of Veterinary Science and Animal Husbandry", "slug": "bvsc-and-ah" }
       ]
     },
     {
       "name": "Psychology",
       "emoji": "🧠",
       "courses": [
-        { "name": "BA Psychology", "slug": "ba-psychology" },
-        { "name": "B.Sc Psychology", "slug": "bsc-psychology" },
-        { "name": "Applied Psychology", "slug": "applied-psychology" }
+        { "name": "Bachelor of Arts in Psychology", "slug": "ba-psychology" },
+        { "name": "Bachelor of Science in Psychology", "slug": "bsc-psychology" }
       ]
     },
     {
       "name": "Nutrition & Dietetics",
       "emoji": "🥗",
       "courses": [
-        { "name": "Clinical Nutrition", "slug": "clinical-nutrition" },
-        { "name": "Nutrition & Dietetics", "slug": "nutrition-and-dietetics" }
+        { "name": "Bachelor of Science in Nutrition and Dietetics", "slug": "nutrition-and-dietetics" }
       ]
     },
     {
       "name": "Forensic Sciences",
       "emoji": "🧪",
       "courses": [
-        { "name": "B.Sc Forensic Science", "slug": "bsc-forensic-science" }
+        { "name": "Bachelor of Science in Forensic Science", "slug": "bsc-forensic-science" }
       ]
     },
     {
       "name": "Environmental Sciences",
       "emoji": "🌍",
       "courses": [
-        { "name": "Environmental Science", "slug": "environmental-science" }
+        { "name": "Bachelor of Science in Environmental Science", "slug": "environmental-science" }
       ]
     },
     {
@@ -136,14 +129,14 @@
       "name": "Law",
       "emoji": "⚖",
       "courses": [
-        { "name": "Integrated LLB", "slug": "integrated-llb" }
+        { "name": "Integrated Bachelor of Laws (LLB)", "slug": "integrated-llb" }
       ]
     },
     {
       "name": "Management",
       "emoji": "📊",
       "courses": [
-        { "name": "BBA", "slug": "bba" }
+        { "name": "Bachelor of Business Administration", "slug": "bba" }
       ]
     },
     {
@@ -159,7 +152,7 @@
       "courses": [
         { "name": "Defence", "slug": "defence" },
         { "name": "Civil Services", "slug": "civil-services" },
-        { "name": "SSC", "slug": "ssc" },
+        { "name": "Staff Selection Commission (SSC)", "slug": "ssc" },
         { "name": "Railways", "slug": "railways" },
         { "name": "Banking", "slug": "banking" }
       ]
@@ -168,9 +161,9 @@
       "name": "Computing & Tech",
       "emoji": "💻",
       "courses": [
-        { "name": "BCA", "slug": "bca" },
-        { "name": "B.Sc Computer Science", "slug": "bsc-computer-science" },
-        { "name": "M.Sc Health Informatics", "slug": "msc-health-informatics" }
+        { "name": "Bachelor of Computer Applications", "slug": "bca" },
+        { "name": "Bachelor of Science in Computer Science", "slug": "bsc-computer-science" },
+        { "name": "Bachelor of Science in Data Science", "slug": "bsc-data-science" }
       ]
     }
   ]
