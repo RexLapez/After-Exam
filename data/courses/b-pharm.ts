@@ -20,7 +20,7 @@ export const bPharm: CourseData = {
   overview: {
     duration: '4 Years',
     eligibility: 'Class 12 PCB/PCM (50%+)',
-    entranceExams: ['State Pharmacy CET', 'NEET UG (some states)', 'GPAT (PG)'],
+    entranceExams: ['State CETs (MHT-CET, WBJEE, KCET, etc.)', 'Direct Merit-Based Admission'],
     avgFees: '₹2L – ₹10L total',
     avgSalary: '₹2.8L – ₹5.0L /yr',
     degreeType: 'Undergraduate Professional',
@@ -198,7 +198,7 @@ export const bPharm: CourseData = {
 
   faq: [
     { question: 'What is the difference between B.Pharm and D.Pharm?', answer: 'B.Pharm is a 4-year degree that qualifies you for industry, research, and higher study roles. D.Pharm is a 2-year diploma focused on retail pharmacy practice. B.Pharm opens significantly more career doors.' },
-    { question: 'Is NEET required for B.Pharm admission?', answer: 'In most states, no. B.Pharm admissions are through state pharmacy entrance exams or merit-based. However, a few states like UP accept NEET scores for pharmacy seats.' },
+    { question: 'Is NEET required for B.Pharm admission?', answer: 'No, NEET is not required for B.Pharm admissions across the vast majority of India. Admissions are conducted through state-level CETs (such as MHT-CET, WBJEE, KCET) or Class 12 merit marks.' },
     { question: 'Can I open my own medical store after B.Pharm?', answer: 'Yes. With a B.Pharm degree and registration with the State Pharmacy Council, you can obtain a Drug License to operate a retail pharmacy.' },
     { question: 'What is GPAT?', answer: 'GPAT (Graduate Pharmacy Aptitude Test) is the national entrance exam for M.Pharm admissions. A good GPAT score can also get you AICTE fellowships during M.Pharm.' },
     { question: 'Can I transition to IT or data roles from pharmacy?', answer: 'Yes. Pharmacovigilance, clinical data management, and pharmaceutical informatics are growing fields that combine pharma knowledge with tech skills.' },
@@ -208,5 +208,5 @@ export const bPharm: CourseData = {
   pcbEligibility: 'YES',
   pcmbEligibility: 'YES',
   mathRequired: 'NO',
-  neetRequired: 'DEPENDS',
+  neetRequired: 'NO',
 };

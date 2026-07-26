@@ -191,7 +191,7 @@ export const btechBiotechnology: CourseData = {
     { question: 'Can PCB students join B.Tech Biotechnology?', answer: 'Yes, absolutely. Many premium private universities (such as VIT and Manipal) and state-level engineering colleges offer direct pathways for Class 12 Biology (PCB) students. They do not require JEE Main or Class 12 Mathematics.' },
     { question: 'What is the difference between B.Sc and B.Tech Biotechnology?', answer: 'B.Tech focuses heavily on bioprocess engineering, bioinformatics, and computing, leading to stronger placements. B.Sc is more academic and research-oriented, usually requiring an M.Sc afterwards.' },
     { question: 'What entrance exams are needed?', answer: 'PCB students should target VITEEE (VIT Vellore), MET (Manipal), and state-level engineering CETs (like MHT-CET, KCET) which feature biology-eligible seat streams.' },
-    { question: 'What salary can I expect as a fresher?', answer: 'Freshers typically earn ₹3.5–7 LPA in India. Those pursuing an MS or PhD abroad can expect entry-level research salaries of $60K–$80K in the US/EU biotech sector.' },
+    { question: 'What salary can I expect as a fresher?', answer: 'Freshers across India typically start at ₹3.0L–5.5L /yr. Higher starting packages of ₹3.5–7 LPA are achievable specifically at premium private campuses with dedicated biotech placements (such as VIT Vellore and Manipal), while core R&D roles abroad pay $60K–$80K post-MS/PhD.' },
   ],
 
   relatedCourseSlugs: ['bsc-biotechnology', 'bioinformatics', 'b-pharm', 'microbiology'],

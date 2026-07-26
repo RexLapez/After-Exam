@@ -14,14 +14,14 @@ export const mbbs: CourseData = {
     eligibility: 'Class 12 with PCB, min 50% + NEET UG qualified',
     difficulty: 'Very Hard',
     avgSalary: '₹6.0L – ₹10.0L /yr',
-    avgFees: '₹10L – ₹75L (total)',
+    avgFees: 'Govt: ₹1L–5L | Pvt: ₹15L–1Cr+',
   },
 
   overview: {
     duration: '5.5 Years',
     eligibility: 'Class 12 PCB (50%+)',
     entranceExams: ['NEET UG'],
-    avgFees: '₹10L – ₹75L total',
+    avgFees: 'Govt: ₹1L–5L | Pvt: ₹15L–1Cr+',
     avgSalary: '₹6.0L – ₹10.0L /yr',
     degreeType: 'Undergraduate Professional',
     courseLevel: 'Bachelor\'s',
@@ -190,8 +190,8 @@ export const mbbs: CourseData = {
 
   faq: [
     { question: 'Is NEET the only way to get into MBBS?', answer: 'Yes. As of 2024, NEET UG is the sole entrance exam for all MBBS admissions in India — government, private, and deemed universities. There is no other pathway.' },
-    { question: 'What is the NEXT exam replacing NEET PG?', answer: 'NExT (National Exit Test) is being introduced to replace the MBBS final year exam and NEET PG simultaneously. It will serve as both a licensing exam and a PG entrance test.' },
-    { question: 'How much does MBBS cost in a government college?', answer: 'Government MBBS tuition ranges from ₹1,500/year (AIIMS) to about ₹50,000/year in state government colleges. Total 5.5-year cost is typically under ₹5 lakh.' },
+    { question: 'What is the status of the NExT exam replacing NEET PG?', answer: 'The National Medical Commission (NMC) has deferred the implementation of NExT (National Exit Test) until at least the 2028–29 academic cycle. NEET PG remains the sole entrance examination for postgraduate medical admissions for now.' },
+    { question: 'How much does MBBS cost in India?', answer: 'Government colleges are highly affordable (AIIMS Delhi fees are ~₹6,000–7,500 total for 5.5 years; state government colleges run ₹1L–5L total). In contrast, private and deemed university MBBS seats range from ₹15L to ₹1Cr+ total.' },
     { question: 'Can I practice abroad after Indian MBBS?', answer: 'Yes, but you must clear the licensing exam of the target country — USMLE for USA, PLAB for UK, AMC for Australia. The process takes 1–3 years of additional preparation.' },
     { question: 'Is MBBS worth it if I don\'t get a government seat?', answer: 'Private MBBS costs ₹50L–1Cr+. While the degree is identical, the ROI depends on your PG prospects. Many students combine private MBBS with strong NEET PG prep to crack government PG seats.' },
   ],

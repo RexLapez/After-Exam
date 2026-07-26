@@ -10,6 +10,98 @@ const allCourses: CourseData[] = [mbbs, btechBiotechnology, bPharm, biomedicalEn
 export const courseRegistry = new Map<string, CourseData>();
 allCourses.forEach(c => courseRegistry.set(c.slug, c));
 
+interface JobTitleConfig {
+  entry: string;
+  mid: string;
+  senior: string;
+  lead?: string;
+  specializations?: string[];
+  confidence?: 'High' | 'Medium' | 'Low';
+}
+
+const COURSE_JOB_TITLES: Record<string, JobTitleConfig> = {
+  'dialysis-technology': {
+    entry: 'Junior Dialysis Technician',
+    mid: 'Dialysis Technician',
+    senior: 'Dialysis Unit Supervisor',
+    lead: 'Dialysis Center Manager',
+    confidence: 'High'
+  },
+  'bmlt': {
+    entry: 'Medical Lab Technician',
+    mid: 'Senior Lab Technologist',
+    senior: 'Lab Supervisor / Manager',
+    specializations: ['Pathology Technician', 'Blood Bank / Phlebotomy Technician'],
+    confidence: 'High'
+  },
+  'radiology-technology': {
+    entry: 'Radiographer (General X-Ray)',
+    mid: 'CT/MRI Technologist',
+    senior: 'Senior Radiographer / Modality Specialist',
+    lead: 'Imaging Department Manager',
+    specializations: ['CT Technologist', 'MRI Technologist', 'PET-CT / Nuclear Medicine Technologist', 'Radiation Therapy Technologist', 'Interventional Radiology Technologist'],
+    confidence: 'High'
+  },
+  'operation-theatre-technology': {
+    // DATA AUDIT NOTE: Medium confidence job title mapping
+    entry: 'OT Technician',
+    mid: 'Surgical Technologist',
+    senior: 'OT In-charge / OT Lead',
+    lead: 'OT Manager',
+    confidence: 'Medium'
+  },
+  'bpt': {
+    entry: 'Junior Physiotherapist',
+    mid: 'Physiotherapist',
+    senior: 'Senior Physiotherapist / Clinical Lead',
+    lead: 'Clinic Owner or Sports-Team Physiotherapist',
+    confidence: 'High'
+  },
+  'bot': {
+    // DATA AUDIT NOTE: Medium confidence mapping, mirrors Physiotherapy pattern
+    entry: 'Junior Occupational Therapist',
+    mid: 'Occupational Therapist',
+    senior: 'Senior OT / Rehabilitation Specialist',
+    lead: 'OT Department Head',
+    confidence: 'Medium'
+  },
+  'optometry': {
+    // DATA AUDIT NOTE: Medium confidence mapping
+    entry: 'Optometrist',
+    mid: 'Senior / Clinical Optometrist',
+    senior: 'Store Manager or Independent Practice Owner',
+    confidence: 'Medium'
+  },
+  'respiratory-therapy': {
+    // DATA AUDIT NOTE: Low confidence mapping, needs verification
+    entry: 'Respiratory Therapist',
+    mid: 'Senior Respiratory Therapist / ICU RT Specialist',
+    senior: 'Respiratory Care Department Lead',
+    confidence: 'Low'
+  },
+  'emergency-medical-technology': {
+    // DATA AUDIT NOTE: Low confidence mapping, needs verification
+    entry: 'Emergency Medical Technician (EMT)',
+    mid: 'Senior Paramedic',
+    senior: 'Emergency Response Coordinator / Ambulance Service Manager',
+    confidence: 'Low'
+  }
+};
+
+function getStrippedCourseName(name: string): string {
+  return name
+    .replace(/^Bachelor of Science in /i, '')
+    .replace(/^Bachelor of Science /i, '')
+    .replace(/^Bachelor of Technology in /i, '')
+    .replace(/^Bachelor of Arts in /i, '')
+    .replace(/^Bachelor of /i, '')
+    .replace(/^Diploma in /i, '')
+    .replace(/^B\.Sc\s+/i, '')
+    .replace(/^B\.Tech\s+/i, '')
+    .replace(/^BA\s+/i, '')
+    .trim();
+}
+
 function generateFallbackCourse(slug: string): CourseData | undefined {
   let foundCourseName = '';
   let foundCategoryName = '';
@@ -61,12 +153,25 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
     eligibility = 'Class 12 PCB (50%+) + NEET UG qualified';
     entranceExams = ['NEET UG'];
     avgFees = '₹3L – ₹15L (Govt) / ₹20L – ₹60L (Private)';
-    avgSalary = '₹5.0L – ₹9.0L /yr';
     difficulty = 'Very Hard';
     topColleges = ['aiims-delhi', 'bhu', 'cmc-vellore'];
     degree = foundCourseName;
     recognition = slug === 'bds' ? 'DCI (Dental Council)' : 'CCIM / Ayush Commission';
     neetRequired = 'YES';
+
+    if (slug === 'bds') {
+      avgSalary = 'Pvt: ₹2.4L–4.8L/yr | Govt: ₹7L–10L/yr';
+    } else if (slug === 'bams') {
+      avgSalary = 'Pvt: ₹3.0L–6.0L/yr | Govt (AYUSH MO): ₹8.4L–10.2L/yr';
+    } else if (slug === 'bhms') {
+      avgSalary = 'Pvt: ₹2.5L–4.2L/yr | Govt: ₹6.0L–9.0L/yr';
+    } else if (slug === 'bums' || slug === 'bsms' || slug === 'bnys') {
+      // DATA AUDIT NOTE: Lower confidence data for BUMS/BSMS/BNYS. Using BAMS/BHMS baseline until independently confirmed.
+      avgSalary = 'Pvt: ₹2.5L–5.0L/yr | Govt: ₹6.0L–9.0L/yr';
+    } else {
+      avgSalary = 'Pvt: ₹2.5L–5.0L/yr | Govt: ₹6.0L–9.0L/yr';
+    }
+
     goodFor = [
       `You are passionate about clinical patient care and treatment using ${foundCourseName}.`,
       'You are willing to invest 5+ years in rigorous study and internship training.',
@@ -74,31 +179,33 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
     ];
     avoidIf = [
       'You cannot cope with high-pressure clinical exams and long patient-ward duties.',
-      'You expect to start earning high salaries within 3 years of graduating.',
+      'You expect to start earning high salaries immediately in private practice (starting private salaries are modest compared to competitive government posts).',
       'You prefer pure research laboratory work over daily patient diagnoses.'
     ];
   } else if (foundCategoryName === 'Pharmacy') {
     duration = slug === 'pharm-d' ? '6 Years' : (slug === 'd-pharm' ? '2 Years' : '4 Years');
     eligibility = 'Class 12 PCB/PCM (50%+)';
-    entranceExams = ['State Pharmacy CET', 'NEET UG (some states)'];
+    entranceExams = ['State CETs (MHT-CET, WBJEE, KCET, etc.)', 'Direct Merit-Based Admission'];
     avgFees = '₹2L – ₹10L total';
     avgSalary = '₹2.8L – ₹5.0L /yr';
     difficulty = 'Moderate';
     topColleges = ['jamia-hamdard', 'bits-pilani', 'manipal', 'ict-mumbai'];
     degree = foundCourseName;
     recognition = 'PCI (Pharmacy Council of India)';
-    neetRequired = 'DEPENDS';
+    neetRequired = 'NO';
   } else if (foundCategoryName === 'Nursing') {
+    // DATA AUDIT NOTE: Wide outcome gap in nursing — private hospital freshers start at ₹1.8L–3.6L/yr, whereas AIIMS/Central Govt Nursing Officers start at ₹5.3L–8L/yr.
     duration = slug === 'bsc-nursing' ? '4 Years' : '3 Years';
     eligibility = 'Class 12 PCB (45%+)';
-    entranceExams = ['State Nursing CET'];
+    entranceExams = ['State Nursing CET', 'AIIMS Nursing Test'];
     avgFees = '₹1.5L – ₹5L total';
-    avgSalary = '₹2.5L – ₹4.5L /yr';
+    avgSalary = 'Pvt: ₹2.2L–4.0L/yr | Govt (AIIMS): ₹5.3L–8.0L/yr';
     difficulty = 'Moderate';
     topColleges = ['cmc-vellore', 'bhu', 'manipal'];
     degree = foundCourseName;
     recognition = 'INC (Indian Nursing Council)';
   } else if (foundCategoryName === 'Allied Health Sciences') {
+    // DATA AUDIT NOTE: Cardiac and Radiology imaging technologists skew higher than general BMLT and physiotherapy roles at experienced levels.
     duration = slug === 'bpt' ? '4.5 Years' : '3 Years';
     eligibility = 'Class 12 PCB (50%+)';
     entranceExams = ['State CET', 'University Entrance'];
@@ -213,11 +320,21 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
     eligibility = 'Class 12 any stream (50%+)';
     entranceExams = ['CLAT', 'AILET', 'LSAT India'];
     avgFees = '₹4L – ₹15L total';
-    avgSalary = '₹3.5L – ₹7.5L /yr';
+    avgSalary = '₹3.5L – ₹7.5L /yr (Corporate / NLU Tier)';
     difficulty = 'Hard';
     topColleges = ['delhi-university', 'bhu'];
     degree = 'Integrated LLB';
     recognition = 'BCI (Bar Council of India)';
+    goodFor = [
+      'You have strong analytical reasoning, reading endurance, and articulation skills.',
+      'You want to pursue corporate law, IP rights, or legal advisory roles.',
+      'You are interested in public advocacy, judiciary exams, or policy research.'
+    ];
+    avoidIf = [
+      'You expect high starting salaries in solo litigation (litigation freshers often earn near-stipend rates for 1–2 years while building practice; NLU corporate roles skew the average).',
+      'You dislike reading dense legal case files, statutes, and constitutional briefs.',
+      'You prefer predictable 9-to-5 desk work without argumentative drafting.'
+    ];
   } else if (foundCategoryName === 'Management') {
     duration = '3 Years';
     eligibility = 'Class 12 any stream (50%+)';
@@ -241,13 +358,37 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
   } else if (foundCategoryName === 'Government Career Paths') {
     duration = 'Exam Preparation';
     eligibility = 'Graduation in any stream (NDA allows Class 12)';
-    entranceExams = ['UPSC CSE', 'SSC CGL', 'NDA / CDSE', 'RRB NTPC', 'IBPS PO'];
-    avgFees = '₹5K – ₹50K (Exam Fees & Prep)';
-    avgSalary = '₹5.0L – ₹10.0L /yr (Govt Pay Scales)';
     difficulty = 'Very Hard';
     topColleges = [];
     degree = 'Competitive Exams';
     recognition = 'Government of India / State Governments';
+
+    if (slug === 'ssc') {
+      entranceExams = ['SSC CGL', 'SSC CHSL', 'SSC MTS'];
+      avgSalary = '₹2.5L – ₹4.5L /yr';
+      avgFees = '₹1K – ₹15K (Exam Fees & Prep)';
+    } else if (slug === 'railways') {
+      entranceExams = ['RRB NTPC', 'RRB Group D'];
+      avgSalary = '₹2.0L – ₹3.5L /yr';
+      avgFees = '₹1K – ₹10K (Exam Fees & Prep)';
+    } else if (slug === 'banking') {
+      entranceExams = ['IBPS PO', 'IBPS Clerk', 'SBI PO'];
+      avgSalary = '₹3.5L – ₹5.0L /yr (PO Entry)';
+      avgFees = '₹2K – ₹20K (Exam Fees & Prep)';
+    } else if (slug === 'defence') {
+      entranceExams = ['NDA (Class 12)', 'CDSE', 'AFCAT'];
+      avgSalary = '₹6.0L – ₹9.0L /yr (Commissioned Officer)';
+      avgFees = '₹0 (Free Academy Training)';
+    } else if (slug === 'civil-services') {
+      // DATA AUDIT NOTE: Civil Services (UPSC CSE) entry salary (₹8L-12L+) represents only the small fraction of aspirants who clear the exam. Most aspirants land in SSC/Railway-tier outcomes.
+      entranceExams = ['UPSC CSE (Civil Services)'];
+      avgSalary = '₹8.0L – ₹12.0L+ /yr (IAS/IPS Entry)';
+      avgFees = '₹10K – ₹1.5L (Coaching & Prep)';
+    } else {
+      entranceExams = ['UPSC CSE', 'SSC CGL', 'NDA / CDSE', 'RRB NTPC', 'IBPS PO'];
+      avgSalary = '₹3.0L – ₹7.0L /yr (Varies by Track)';
+      avgFees = '₹5K – ₹50K (Exam Fees & Prep)';
+    }
   } else if (foundCategoryName === 'Computing & Tech') {
     duration = '3 Years';
     eligibility = 'Class 12 any stream (Math required for some programs)';
@@ -639,30 +780,77 @@ function generateFallbackCourse(slug: string): CourseData | undefined {
         { label: 'Higher Study Requirement', rating: 4.7, description: 'PG specializations/diplomas are highly recommended for practice.' }
       ]
     };
-    careerRoadmap = [
-      {
-        id: 'entry',
-        title: `Junior ${foundCourseName} Professional`,
-        description: 'Entry-level work in clinical, research, or administrative environments.',
-        salary: '₹3L – ₹6L LPA',
-        children: [
-          {
-            id: 'mid',
-            title: `Senior ${foundCourseName} Specialist`,
-            description: 'Independent consultant, project leader, or quality analyst.',
-            salary: '₹7L – ₹15L LPA',
-            children: [
-              {
-                id: 'lead',
-                title: 'Principal / VP / Director',
-                description: 'Leadership positions managing whole projects, clinics, or research divisions.',
-                salary: '₹18L – ₹35L+ LPA'
-              }
-            ]
-          }
-        ]
-      }
-    ];
+    const titles = COURSE_JOB_TITLES[slug];
+    if (slug === 'other-allied-health') {
+      careerRoadmap = [
+        {
+          id: 'entry',
+          title: 'Specialized Allied Health Technologist (Varies by Specialization)',
+          description: 'Entry-level clinical technologist role in specialized diagnostic, surgical, or therapeutic units.',
+          salary: '₹2.4L – ₹4.5L LPA',
+          children: [
+            {
+              id: 'senior',
+              title: 'Senior Technologist / Department In-Charge',
+              description: 'Lead technologist supervising specialty procedures, equipment protocols, and clinical units.',
+              salary: '₹5L – ₹9.5L LPA'
+            }
+          ]
+        }
+      ];
+    } else if (titles) {
+      careerRoadmap = [
+        {
+          id: 'entry',
+          title: titles.entry,
+          description: 'Entry-level clinical or laboratory practice under senior supervision.',
+          salary: '₹2.5L – ₹4.5L LPA',
+          children: [
+            {
+              id: 'mid',
+              title: titles.mid,
+              description: 'Independent clinical practitioner or specialized technologist.',
+              salary: '₹4.5L – ₹8.5L LPA',
+              children: [
+                {
+                  id: 'senior',
+                  title: titles.senior + (titles.lead ? ` / ${titles.lead}` : ''),
+                  description: 'Senior lead practitioner, department in-charge, or practice owner.',
+                  salary: '₹8.5L – ₹15L+ LPA'
+                }
+              ]
+            }
+          ]
+        }
+      ];
+    } else {
+      // DATA AUDIT NOTE: Category/slug using stripped-template fallback — needs real job-title research before launch.
+      const strippedName = getStrippedCourseName(foundCourseName);
+      careerRoadmap = [
+        {
+          id: 'entry',
+          title: `Junior ${strippedName} Professional`,
+          description: 'Entry-level work in clinical, research, or administrative environments.',
+          salary: '₹2.5L – ₹4.8L LPA',
+          children: [
+            {
+              id: 'mid',
+              title: `Senior ${strippedName} Specialist`,
+              description: 'Independent consultant, project leader, or quality analyst.',
+              salary: '₹4.8L – ₹9.0L LPA',
+              children: [
+                {
+                  id: 'lead',
+                  title: `Lead ${strippedName} Manager / Director`,
+                  description: 'Leadership positions managing whole projects, departments, or research divisions.',
+                  salary: '₹9.0L – ₹16L+ LPA'
+                }
+              ]
+            }
+          ]
+        }
+      ];
+    }
 
     admissionProcess = [
       { step: 1, title: 'Complete Class 12', description: 'Score minimum 50%–60% aggregate with Physics, Chemistry, and Biology (PCB).', icon: '📚' },

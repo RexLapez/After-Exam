@@ -128,6 +128,17 @@ export default function CoursePage({ slug: propSlug }: { slug?: string }) {
   const course = getCourseBySlug(slug);
 
   useEffect(() => {
+    // Ensure window scrolls instantly to top whenever course page mounts or slug changes
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    scrollToTop();
+    const rafId = requestAnimationFrame(scrollToTop);
+    const timerId = setTimeout(scrollToTop, 50);
+
     if (course) {
       const titleText = `${course.title} After 12th PCB | Colleges, Fees, Salary & Career Guide | AfterExam`;
       const entranceReq = course.overview.entranceExams.length > 0 
@@ -156,6 +167,9 @@ export default function CoursePage({ slug: propSlug }: { slug?: string }) {
     }
 
     return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(timerId);
+
       // Revert to Explore Page Defaults on unmount
       document.title = 'AFTER EXAM | After Exam Pathfinder';
       updateMetaTag('description', 'Explore interactive neural career pathways mapped out specifically for science (PCB) students.');
@@ -174,7 +188,7 @@ export default function CoursePage({ slug: propSlug }: { slug?: string }) {
       const existing = document.querySelectorAll('script[type="application/ld+json"].dynamic-seo');
       existing.forEach(el => el.remove());
     };
-  }, [course]);
+  }, [slug, course]);
 
   if (!course) {
     return (
