@@ -4,7 +4,7 @@
 
 AFTER EXAM is a premium, interactive career guidance platform for students who didn't qualify NEET or JEE. It maps out high-paying alternative career paths in Health Sciences, Biotechnology, and Computing through a stunning neural-network-style PathFinder visualization.
 
-## ✨ Features
+## Features
 
 - **Interactive PathFinder** — A React-powered neural pathway engine that guides students through Streams → Domains → Degrees → Career Outcomes with smooth animations and detailed career profiles.
 - **50+ Course Detail Pages** — Rich career profiles (`/courses/[slug]`) explaining degrees, duration, eligibility, semester roadmap, good for / avoid if pointers, salary timelines in Indian Rupees, and FAQs, complete with a dynamic fallback generator.
@@ -14,7 +14,7 @@ AFTER EXAM is a premium, interactive career guidance platform for students who d
 - **Community Q&A** — Student discussion forum with upvoting, categories, real-time Supabase interactions, and robust client-side fallbacks for offline safety.
 - **Night Sky Theme** — Twinkling stars, shooting star animations, glassmorphic UI design throughout.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -25,7 +25,7 @@ AFTER EXAM is a premium, interactive career guidance platform for students who d
 | Icons | Lucide React |
 | Database | Supabase (Auth & Realtime Database) |
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 AfterExam/
@@ -43,7 +43,7 @@ AfterExam/
 └── package.json
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ```bash
 # Install dependencies
@@ -56,7 +56,7 @@ npm run dev
 npm run build
 ```
 
-## 📄 Pages
+## Pages
 
 | Page | URL | Description |
 |------|-----|-------------|
@@ -65,6 +65,6 @@ npm run build
 | Community | `/community` | Student Q&A discussion forum with local mock safety fallbacks |
 | Course Profile | `/courses/[slug]` | Premium career profile page (e.g. `/courses/mbbs`, `/courses/bams`) |
 
-## 📜 License
+## License
 
 © 2026 AFTER EXAM. All rights reserved.
