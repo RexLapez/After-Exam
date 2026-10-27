@@ -1,4 +1,4 @@
-# AFTER EXAM — Career PathFinder
+# AFTER EXAM: Career PathFinder
 
 > **One exam measured your score. It didn't measure your future.**
 
